@@ -1,30 +1,187 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ==========================================================================
+   GLIST CONSULTANTS — DESIGN TOKENS (Tailwind v4, CSS-first)
+   Every token below becomes a utility automatically:
+     --color-night      ->  bg-night  text-night  border-night ...
+     --color-brand-soft ->  bg-brand-soft  text-brand-soft ...
+     --text-display     ->  text-display
+   ========================================================================== */
+
+@theme {
+  /* Reset Tailwind's default palette so only brand colours exist */
+  --color-*: initial;
+
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  /* Dark base (hero, nav, CTA, footer) */
+  --color-night: #002025;
+  --color-night-card: #0b3a41;
+  --color-night-deep: #001519;
+
+  /* Brand */
+  --color-brand: #1f6fd6;
+  --color-brand-soft: #4a90e2; /* links + outline buttons on dark */
+  --color-gold: #d9a62e;
+
+  /* Action */
+  --color-cta: #d62828;
+  --color-cta-hover: #b01e1e;
+  --color-whatsapp: #25d366;
+
+  /* Light surfaces */
+  --color-paper: #ffffff;
+  --color-sand: #f5f3ee; /* alt section */
+  --color-mist: #f2f5fa; /* cool section */
+
+  /* Text on light */
+  --color-ink: #0f2a52;
+  --color-ink-muted: #4a5a72;
+
+  /* Status */
+  --color-alert: #d62828;
+  --color-alert-bg: #fef2f2;
+
+  /* Fluid type scale */
+  --text-display: clamp(2.75rem, 1.4rem + 5.6vw, 6.75rem);
+  --text-display--line-height: 1;
+  --text-display--letter-spacing: -0.03em;
+  --text-h1: clamp(2.25rem, 1.3rem + 3.6vw, 4.75rem);
+  --text-h1--line-height: 1.05;
+  --text-h1--letter-spacing: -0.025em;
+  --text-h2: clamp(1.875rem, 1.2rem + 2.6vw, 3.5rem);
+  --text-h2--line-height: 1.1;
+  --text-h2--letter-spacing: -0.02em;
+  --text-h3: clamp(1.375rem, 1.1rem + 1vw, 2rem);
+  --text-h3--line-height: 1.2;
+  --text-lead: clamp(1.0625rem, 1rem + 0.35vw, 1.3125rem);
+  --text-lead--line-height: 1.6;
+
+  /* Shape + depth */
+  --radius-card: 1.25rem;
+  --radius-pill: 999px;
+  --shadow-card: 0 1px 2px rgb(15 42 82 / 0.06), 0 12px 32px -12px rgb(15 42 82 / 0.18);
+  --shadow-lift: 0 2px 4px rgb(0 21 25 / 0.2), 0 24px 48px -16px rgb(0 21 25 / 0.5);
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
 }
 
+/* Fonts are injected as CSS variables by next/font in layout.tsx,
+   so these must resolve at the element (hence `inline`). */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-hand: var(--font-caveat), cursive;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ---------- Layout helpers ---------- */
+
+:root {
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --header-h: 5rem;
+}
+
+/* Centered page container: <div class="wrap"> */
+@utility wrap {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Wider container for full-bleed layouts: <div class="wrap-wide"> */
+@utility wrap-wide {
+  width: 100%;
+  max-width: 100rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Vertical section rhythm */
+@utility section-y {
+  padding-block: clamp(4.5rem, 9vw, 9rem);
+}
+
+/* Eye kicker: small caps label with a gold dot */
+@utility eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  &::before {
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    background: var(--color-gold);
   }
 }
 
-html {
-  scroll-behavior: initial; /* Lenis handles smooth scrolling */
+/* ---------- Base ---------- */
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: auto; /* Lenis owns smooth scrolling */
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip; /* animations that bleed off-screen never cause sideways scroll */
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    text-wrap: balance;
+  }
+
+  p { text-wrap: pretty; }
+
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-night-deep);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-soft);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  button { cursor: pointer; }
+  img, svg, video { display: block; max-width: 100%; }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+/* ---------- Lenis (recommended CSS) ---------- */
+
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
