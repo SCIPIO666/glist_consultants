@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Fraunces, Plus_Jakarta_Sans, Caveat } from "next/font/google";
 import "./globals.css";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
+import { SiteShell } from "@/components/layout/SiteShell";
 import { site } from "@/lib/site";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -53,7 +54,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${jakarta.variable} ${fraunces.variable} ${caveat.variable}`}>
       <body>
-        <SmoothScroll>{children}</SmoothScroll>
+        <SmoothScroll>
+          <SiteShell>{children}</SiteShell>
+        </SmoothScroll>
       </body>
     </html>
   );

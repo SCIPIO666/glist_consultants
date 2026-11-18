@@ -79,6 +79,9 @@
   --font-hand: var(--font-caveat), cursive;
 }
 
+/* Pinned reveal footer only where the footer fits inside one screen */
+@custom-variant reveal (@media (min-width: 1024px) and (min-height: 760px));
+
 /* ---------- Layout helpers ---------- */
 
 :root {

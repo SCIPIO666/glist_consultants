@@ -26,8 +26,8 @@ export default function Home() {
   return (
     <main>
       <section className="bg-night text-white">
-        <div className="wrap section-y">
-          <p className="eyebrow text-gold">Milestone 1 · Foundation</p>
+        <div className="wrap section-y pt-40">
+          <p className="eyebrow text-gold">Milestone 2 · Shell</p>
           <h1 className="mt-6 text-display">
             {site.name}
             <span className="block font-display italic text-brand-soft">{site.tagline}</span>
