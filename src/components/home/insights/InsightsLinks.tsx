@@ -26,7 +26,7 @@ export function InsightsLinks() {
       <div aria-hidden className="absolute inset-0 -z-10 bg-night-deep/80" />
 
       <div className="wrap-wide flex min-h-svh flex-col justify-center gap-10 py-[clamp(4.5rem,10svh,7rem)]">
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+        <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
             <Reveal y={20}>
               <Eyebrow className="text-gold">{copy.eyebrow}</Eyebrow>
@@ -52,7 +52,7 @@ export function InsightsLinks() {
           target="children"
           y={50}
           stagger={0.12}
-          className="flex flex-col gap-3 lg:h-[clamp(22rem,52svh,30rem)] lg:flex-row lg:gap-3"
+          className="grid gap-3 sm:grid-cols-2 lg:flex lg:h-[clamp(22rem,52svh,30rem)] lg:flex-row lg:gap-3"
         >
           {copy.topics.map((t, i) => (
             <li
@@ -72,7 +72,7 @@ export function InsightsLinks() {
                 </span>
 
                 <div>
-                  <h3 className="text-h3 lg:whitespace-nowrap">{t.title}</h3>
+                  <h3 className="text-h3 xl:whitespace-nowrap">{t.title}</h3>
                   <p className="mt-3 max-w-xs text-sm opacity-90 sm:text-base lg:max-h-0 lg:overflow-hidden lg:opacity-0 lg:transition-[max-height,opacity] lg:duration-700 lg:ease-out-expo lg:group-hover:max-h-32 lg:group-hover:opacity-90 lg:group-focus-visible:max-h-32 lg:group-focus-visible:opacity-90">
                     {t.blurb}
                   </p>

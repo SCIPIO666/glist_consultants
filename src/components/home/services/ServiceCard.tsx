@@ -20,7 +20,7 @@ export function ServiceCard({ service, index, total, ctaLabel }: Props) {
     <article
       data-svc-card
       style={{ zIndex: index + 1 }}
-      className="absolute inset-0 overflow-hidden rounded-card border border-white/10 bg-night-card shadow-lift motion-reduce:relative motion-reduce:mb-5 motion-reduce:h-[26rem]"
+      className="absolute inset-0 overflow-hidden rounded-card border border-white/10 bg-night-card shadow-lift flat:relative flat:mb-5 flat:h-[26rem]"
     >
       <Image
         src={service.image}
@@ -46,8 +46,8 @@ export function ServiceCard({ service, index, total, ctaLabel }: Props) {
 
         <div>
           <h3 className="text-h3">{service.title}</h3>
-          <p className="mt-2 max-w-sm text-sm text-white/80 sm:text-base">{service.short}</p>
-          <Button href={`/services#${service.slug}`} variant="ghost-light" arrow className="mt-5">
+          <p className="mt-2 line-clamp-2 max-w-sm text-sm text-white/80 sm:line-clamp-none sm:text-base">{service.short}</p>
+          <Button href={`/services#${service.slug}`} variant="ghost-light" arrow className="mt-4 sm:mt-5">
             {ctaLabel}
           </Button>
         </div>

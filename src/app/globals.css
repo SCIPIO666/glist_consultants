@@ -82,6 +82,14 @@
 /* Pinned reveal footer only where the footer fits inside one screen */
 @custom-variant reveal (@media (min-width: 1024px) and (min-height: 760px));
 
+/* Pinned scroll scenes (services stack, reviews stack) need a tall screen.
+   They fall back to a plain stacked list for reduced-motion users and for short
+   viewports such as phones held sideways. Keep in sync with mq.pin in lib/gsap.ts. */
+@custom-variant flat (@media (prefers-reduced-motion: reduce), (max-height: 559px));
+
+/* Short phones (iPhone SE class): used to trim optional copy on pinned screens */
+@custom-variant short (@media (max-height: 40rem));
+
 /* ---------- Layout helpers ---------- */
 
 :root {

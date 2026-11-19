@@ -25,7 +25,6 @@ const DIM = [0, 0.25, 0.45, 0.6]; // how dark a buried card gets, by depth
  */
 export function ServicesStack() {
   const root = useRef<HTMLElement>(null);
-  const counter = useRef<HTMLSpanElement>(null);
 
   useGSAP(
     () => {
@@ -34,7 +33,7 @@ export function ServicesStack() {
       const cards = gsap.utils.toArray<HTMLElement>("[data-svc-card]", el);
       const mm = gsap.matchMedia();
 
-      mm.add(mq.motionOk, () => {
+      mm.add(mq.pin, () => {
         const pose = (d: number) => ({ y: -DEPTH_STEP * d, scale: 1 - 0.04 * d });
 
         gsap.set(cards, { transformOrigin: "50% 0%" });
@@ -45,7 +44,9 @@ export function ServicesStack() {
           if (idx === active) return;
           active = idx;
           cards.forEach((c, i) => c.toggleAttribute("inert", i !== idx));
-          if (counter.current) counter.current.textContent = String(idx + 1).padStart(2, "0");
+          el.querySelectorAll("[data-svc-counter]").forEach((node) => {
+            node.textContent = String(idx + 1).padStart(2, "0");
+          });
         };
         setActive(0);
 
@@ -96,21 +97,27 @@ export function ServicesStack() {
       ref={root}
       aria-labelledby="services-title"
       style={style}
-      className="relative h-[var(--stack-h)] bg-night text-white motion-reduce:h-auto"
+      className="relative h-[var(--stack-h)] bg-night text-white flat:h-auto"
     >
-      <div className="sticky top-0 h-svh overflow-hidden motion-reduce:static motion-reduce:h-auto motion-reduce:overflow-visible">
+      <div className="sticky top-0 h-svh overflow-hidden flat:static flat:h-auto flat:overflow-visible">
         <DonutBackdrop />
 
-        <div className="wrap-wide relative z-10 flex h-full flex-col gap-4 pb-5 pt-[calc(var(--header-h)+0.5rem)] lg:grid lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-14 lg:pb-0 lg:pt-[var(--header-h)] motion-reduce:py-24">
+        <div className="wrap-wide relative z-10 flex h-full flex-col gap-4 pb-4 pt-[calc(var(--header-h)+0.25rem)] lg:grid lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-14 lg:pb-0 lg:pt-[var(--header-h)] flat:py-24">
           {/* Fixed left side */}
           <div className="lg:max-w-[34rem]">
-            <Reveal y={20}>
-              <Eyebrow className="text-gold">{copy.eyebrow}</Eyebrow>
-            </Reveal>
-            <Reveal y={40} delay={0.1} className="mt-3 lg:mt-5">
+            <div className="flex items-center justify-between gap-4">
+              <Reveal y={20}>
+                <Eyebrow className="text-gold">{copy.eyebrow}</Eyebrow>
+              </Reveal>
+              {/* Phone/tablet counter sits beside the eyebrow; the desktop one sits under the buttons */}
+              <p aria-hidden className="text-sm tabular-nums tracking-widest text-white/60 lg:hidden flat:hidden">
+                <span data-svc-counter>01</span> / {String(n).padStart(2, "0")}
+              </p>
+            </div>
+            <Reveal y={40} delay={0.1} className="mt-2 lg:mt-5">
               <h2
                 id="services-title"
-                className="text-[clamp(1.9rem,0.9rem+3.7vw,4.5rem)] font-medium leading-[1.05] tracking-[-0.025em]"
+                className="text-[clamp(1.65rem,0.9rem+3.7vw,4.5rem)] font-medium leading-[1.05] tracking-[-0.025em]"
               >
                 {copy.titleBefore}{" "}
                 <Circled shape="squiggle" colorClass="text-gold">
@@ -130,24 +137,24 @@ export function ServicesStack() {
               </Button>
             </div>
 
-            <p aria-hidden className="mt-3 text-sm tabular-nums tracking-widest text-white/60 lg:mt-8 motion-reduce:hidden">
-              <span ref={counter}>01</span> / {String(n).padStart(2, "0")}
+            <p aria-hidden className="mt-8 hidden text-sm tabular-nums tracking-widest text-white/60 lg:block flat:hidden">
+              <span data-svc-counter>01</span> / {String(n).padStart(2, "0")}
             </p>
           </div>
 
           {/* Card stack */}
-          <div className="relative h-[min(30rem,50svh)] w-full lg:ml-auto lg:h-[min(36rem,66svh)] lg:max-w-[34rem] motion-reduce:h-auto">
+          <div className="relative max-h-[30rem] min-h-[15rem] w-full flex-1 lg:ml-auto lg:h-[min(36rem,66svh)] lg:max-h-none lg:max-w-[34rem] lg:flex-none flat:h-auto flat:max-h-none flat:min-h-0 flat:flex-none">
             {services.map((s, i) => (
               <ServiceCard key={s.slug} service={s} index={i} total={n} ctaLabel={copy.cardCta} />
             ))}
           </div>
 
           {/* Mobile CTA (the desktop one sits under the title) */}
-          <div className="flex gap-3 lg:hidden">
-            <Button href={copy.primaryCta.href} arrow>
+          <div className="flex flex-wrap gap-2 lg:hidden">
+            <Button href={copy.primaryCta.href} size="sm">
               {copy.primaryCta.label}
             </Button>
-            <Button href={copy.secondaryCta.href} variant="ghost-light">
+            <Button href={copy.secondaryCta.href} variant="ghost-light" size="sm">
               {copy.secondaryCta.label}
             </Button>
           </div>

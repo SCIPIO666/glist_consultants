@@ -30,7 +30,7 @@ export function WhyReviews() {
       const cards = gsap.utils.toArray<HTMLElement>("[data-review-card]", el);
       const mm = gsap.matchMedia();
 
-      mm.add(mq.motionOk, () => {
+      mm.add(mq.pin, () => {
         const tl = gsap.timeline({
           defaults: { ease: "power2.inOut" },
           scrollTrigger: { trigger: el, start: "top top", end: "bottom bottom", scrub: true },
@@ -48,7 +48,6 @@ export function WhyReviews() {
   const style = {
     "--stack-h": `calc(100svh + ${SCROLL_PER_CARD * (n - 1) + HOLD}svh)`,
     "--card-h": "16.5rem",
-    "--offset": "3.5rem",
     "--n": n,
   } as CSSProperties;
 
@@ -57,19 +56,19 @@ export function WhyReviews() {
       ref={root}
       aria-labelledby="reviews-title"
       style={style}
-      className="relative h-[var(--stack-h)] bg-sand text-ink motion-reduce:h-auto"
+      className="relative h-[var(--stack-h)] bg-sand text-ink [--offset:2.25rem] sm:[--offset:3.5rem] flat:h-auto"
     >
-      <div className="sticky top-0 h-svh overflow-hidden motion-reduce:static motion-reduce:h-auto motion-reduce:overflow-visible">
-        <div className="wrap-wide relative flex h-full flex-col justify-center gap-6 pt-[calc(var(--header-h)+0.5rem)] pb-6 lg:grid lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-16 lg:pb-0 lg:pt-[var(--header-h)] motion-reduce:py-24">
+      <div className="sticky top-0 h-svh overflow-hidden flat:static flat:h-auto flat:overflow-visible">
+        <div className="wrap-wide relative flex h-full flex-col gap-4 pt-[calc(var(--header-h)+0.25rem)] pb-4 sm:gap-6 sm:pb-6 lg:grid lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-16 lg:pb-0 lg:pt-[var(--header-h)] flat:py-24">
           {/* Left: fixed */}
           <div className="lg:max-w-[34rem]">
-            <Reveal y={20}>
+            <Reveal y={20} className="short:max-lg:hidden">
               <Eyebrow className="text-brand">{copy.eyebrow}</Eyebrow>
             </Reveal>
-            <Reveal y={40} delay={0.1} className="mt-3 lg:mt-5">
+            <Reveal y={40} delay={0.1} className="mt-2 lg:mt-5">
               <h2
                 id="reviews-title"
-                className="text-[clamp(1.9rem,0.9rem+3.7vw,4.5rem)] font-medium leading-[1.05] tracking-[-0.025em]"
+                className="text-[clamp(1.65rem,0.9rem+3.7vw,4.5rem)] font-medium leading-[1.05] tracking-[-0.025em]"
               >
                 {copy.titleBefore}{" "}
                 <Circled shape="circle" colorClass="text-cta">
@@ -87,7 +86,7 @@ export function WhyReviews() {
           </div>
 
           {/* Right: the stack. Height = one card + one strip per extra card. */}
-          <div className="relative h-[calc(var(--card-h)+var(--offset)*(var(--n)-1))] w-full lg:ml-auto lg:max-w-[36rem] motion-reduce:h-auto">
+          <div className="relative max-h-[28rem] min-h-[17rem] w-full flex-1 lg:ml-auto lg:h-[calc(var(--card-h)+var(--offset)*(var(--n)-1))] lg:max-h-none lg:max-w-[36rem] lg:flex-none flat:h-auto flat:max-h-none flat:min-h-0 flat:flex-none">
             {copy.items.map((r, i) => (
               <ReviewCard key={r.name} review={r} index={i} />
             ))}

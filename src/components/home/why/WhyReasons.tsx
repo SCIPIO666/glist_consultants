@@ -25,7 +25,25 @@ export function WhyReasons() {
       if (!el) return;
       const mm = gsap.matchMedia();
 
-      mm.add(mq.motionOk, () => {
+      // Phones/tablets: the cards stack in one column and the section is far taller than the
+      // screen, so each card reveals itself as IT reaches the viewport (not all at once, off-screen).
+      mm.add(`${mq.motionOk} and ${mq.mobile}`, () => {
+        gsap.utils.toArray<HTMLElement>("[data-why-card]", el).forEach((card) => {
+          gsap.fromTo(
+            card,
+            { y: 48, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.9,
+              ease: "expo.out",
+              scrollTrigger: { trigger: card, start: "top 90%", toggleActions: "play none none reverse" },
+            },
+          );
+        });
+      });
+
+      mm.add(`${mq.motionOk} and ${mq.desktop}`, () => {
         const cards = gsap.utils.toArray<HTMLElement>("[data-why-card]", el);
         const lines = gsap.utils.toArray<HTMLElement>("[data-why-line]", el);
         gsap.set(lines, { transformOrigin: "50% 0%" });

@@ -4,7 +4,7 @@ import { cn } from "@/lib/cn";
 import { ArrowRight } from "./icons";
 
 type Variant = "cta" | "whatsapp" | "outline-light" | "outline-dark" | "ghost-light";
-type Size = "md" | "lg";
+type Size = "sm" | "md" | "lg";
 
 const variants: Record<Variant, string> = {
   cta: "bg-cta text-white hover:bg-cta-hover",
@@ -15,6 +15,7 @@ const variants: Record<Variant, string> = {
 };
 
 const sizes: Record<Size, string> = {
+  sm: "h-10 px-4 text-sm",
   md: "h-11 px-5 text-sm",
   lg: "h-14 px-7 text-base",
 };

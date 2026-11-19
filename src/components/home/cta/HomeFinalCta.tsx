@@ -51,7 +51,7 @@ export function HomeFinalCta() {
             <p className="text-lead font-semibold">{copy.closing}</p>
           </Reveal>
 
-          <Reveal y={30} delay={0.3} className="flex flex-wrap items-center gap-3">
+          <Reveal y={30} delay={0.3} className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center">
             <Button href={copy.primary.href} size="lg" arrow>
               {copy.primary.label}
             </Button>
@@ -65,13 +65,13 @@ export function HomeFinalCta() {
             </Button>
           </Reveal>
 
-          <Reveal y={20} delay={0.4} className="flex flex-wrap gap-x-8 gap-y-3 text-white/80">
+          <Reveal y={20} delay={0.4} className="flex min-w-0 max-w-full flex-wrap gap-x-8 gap-y-3 text-white/80">
             <a href={`tel:${site.phone.tel}`} className="inline-flex items-center gap-2 hover:text-white">
               <Phone />
               {site.phone.display}
             </a>
-            <a href={`mailto:${site.email}`} className="inline-flex items-center gap-2 hover:text-white">
-              <Mail />
+            <a href={`mailto:${site.email}`} className="inline-flex min-w-0 items-center gap-2 break-all hover:text-white">
+              <Mail className="shrink-0" />
               {site.email}
             </a>
           </Reveal>

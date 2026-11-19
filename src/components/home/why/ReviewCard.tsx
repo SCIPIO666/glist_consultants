@@ -15,14 +15,14 @@ export function ReviewCard({ review, index }: { review: Review; index: number })
       data-review-card
       style={{ zIndex: index + 1, "--i": index } as CSSProperties}
       className={cn(
-        "absolute inset-x-0 top-[calc(var(--offset)*var(--i))] h-[var(--card-h)] overflow-hidden rounded-card border border-ink/10 bg-white shadow-card",
-        "motion-reduce:relative motion-reduce:top-auto motion-reduce:mb-5 motion-reduce:h-auto",
+        "absolute inset-x-0 top-[calc(var(--offset)*var(--i))] h-[calc(100%-var(--offset)*(var(--n)-1))] overflow-hidden lg:h-[var(--card-h)] rounded-card border border-ink/10 bg-white shadow-card",
+        "flat:relative flat:top-auto flat:mb-5 flat:h-auto",
       )}
     >
-      <div className="flex h-[var(--offset)] items-center justify-between gap-3 border-b border-ink/10 px-5 sm:px-7">
+      <div className="flex h-[var(--offset)] items-center justify-between gap-3 border-b border-ink/10 px-4 sm:px-7">
         <div className="flex gap-1 text-gold" role="img" aria-label={`${review.stars} out of 5 stars`}>
           {Array.from({ length: 5 }).map((_, i) => (
-            <svg key={i} viewBox="0 0 24 24" aria-hidden className={cn("size-5", i >= review.stars && "opacity-25")}>
+            <svg key={i} viewBox="0 0 24 24" aria-hidden className={cn("size-4 sm:size-5", i >= review.stars && "opacity-25")}>
               <polygon points={STAR} fill="currentColor" stroke="currentColor" strokeWidth={1.2} strokeLinejoin="round" />
             </svg>
           ))}
@@ -30,18 +30,18 @@ export function ReviewCard({ review, index }: { review: Review; index: number })
         <span className="truncate text-xs font-semibold uppercase tracking-[0.12em] text-brand">{review.service}</span>
       </div>
 
-      <div className="flex h-[calc(100%-var(--offset))] flex-col justify-between gap-4 p-5 sm:p-7 motion-reduce:h-auto">
-        <blockquote className="font-display text-[clamp(1.05rem,0.95rem+0.5vw,1.3rem)] leading-snug text-ink">
+      <div className="flex h-[calc(100%-var(--offset))] flex-col justify-between gap-2 p-4 sm:gap-4 sm:p-7 flat:h-auto">
+        <blockquote className="font-display text-[0.95rem] leading-snug text-ink sm:text-[clamp(1.05rem,0.95rem+0.5vw,1.3rem)]">
           &ldquo;{review.quote}&rdquo;
         </blockquote>
         <footer className="flex items-center gap-3">
           <span
             aria-hidden
-            className="grid size-10 shrink-0 place-items-center rounded-full bg-night font-display text-base font-semibold text-gold"
+            className="grid size-8 shrink-0 place-items-center rounded-full bg-night font-display text-sm sm:size-10 sm:text-base font-semibold text-gold"
           >
             {review.name.charAt(0)}
           </span>
-          <p className="text-sm leading-tight">
+          <p className="min-w-0 text-sm leading-tight">
             <span className="block font-semibold">{review.name}</span>
             <span className="text-ink-muted">
               {review.role}, {review.location}

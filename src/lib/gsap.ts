@@ -28,6 +28,8 @@ export const motion = {
 export const mq = {
   motionOk: "(prefers-reduced-motion: no-preference)",
   reduced: "(prefers-reduced-motion: reduce)",
+  /** Pinned scroll scenes: motion allowed AND tall enough. Keep in sync with the `flat` variant in globals.css. */
+  pin: "(prefers-reduced-motion: no-preference) and (min-height: 560px)",
   desktop: "(min-width: 1024px)",
   mobile: "(max-width: 1023px)",
 } as const;
