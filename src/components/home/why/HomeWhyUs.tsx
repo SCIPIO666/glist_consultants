@@ -11,15 +11,15 @@ export function HomeWhyUs() {
   return (
     <>
       {/* Mist circles rise over the dark services stack into the light reasons screen */}
-      <CircleBand colorClass="text-mist" className="bg-night" reveal />
+      {/* <CircleBand colorClass="text-mist" className="bg-night" reveal /> */}
       <WhyReasons />
 
       {/* Night circles rise over the mist reasons screen into the dark stats screen */}
-      <CircleBand colorClass="text-night" className="bg-mist" reveal />
+      {/* <CircleBand colorClass="text-night" className="bg-mist" reveal /> */}
       <WhyStats />
 
       {/* Sand circles rise over the dark stats screen into the light reviews stack */}
-      <CircleBand colorClass="text-sand" className="bg-night" reveal />
+      {/* <CircleBand colorClass="text-sand" className="bg-night" reveal /> */}
       <WhyReviews />
     </>
   );

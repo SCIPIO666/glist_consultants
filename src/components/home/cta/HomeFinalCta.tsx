@@ -15,7 +15,7 @@ import { site, whatsappUrl } from "@/lib/site";
 export function HomeFinalCta() {
   return (
     <>
-      <CircleBand colorClass="text-night" className="bg-night-deep" reveal />
+      {/* <CircleBand colorClass="text-night" className="bg-night-deep" reveal /> */}
       <section aria-labelledby="final-cta-title" className="relative isolate overflow-hidden bg-night text-white">
         <Image
           src={copy.bgImage}

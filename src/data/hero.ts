@@ -8,9 +8,9 @@ const alt2 = "/pages/home/hero/alt2";
 export const hero = {
   eyebrow: "Accountancy | Taxation | Advisory",
   /** One entry per line; the second line is styled as the accent. */
-  titleLines: ["Guiding success,", "illuminating paths."],
+  titleLines: ["Guiding ", "Success"],
   lead:
-    "Tax compliance, payroll, registrations, bookkeeping and rental property management for individuals, entrepreneurs and growing businesses in Kenya.",
+    "Taxes, payroll, registrations, bookkeeping & property management in Kenya.",
   primaryCta: { label: "Book a consultation", href: "/contact" },
   whatsappMessage: "Hello Glist Consultants, I would like to book a consultation.",
 } as const;

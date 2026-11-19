@@ -3,11 +3,11 @@
  * Contact details are read from lib/site.ts so they are edited in one place.
  */
 export const finalCta = {
-  eyebrow: "Ready when you are",
-  titleBefore: "Let us handle the",
-  titleMark: "numbers.",
+  eyebrow: "Book a consultation today",
+  titleBefore: "Leave the numbers",
+  titleMark: "to us.",
   titleAfter: "You focus on growth.",
-  text: "Whether you need assistance with tax compliance, payroll, business registration, bookkeeping, financial planning or rental property management, Glist Consultants is ready to help.",
+  text: "For assistance with tax compliance, payroll, business registration, bookkeeping, financial planning and property management, Glist Consultants is ready to help.",
   closing: "Get in touch with our team today and let us help you find the right solution.",
   primary: { label: "Book a consultation", href: "/contact" },
   whatsappLabel: "Chat on WhatsApp",

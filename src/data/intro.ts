@@ -14,17 +14,17 @@ export const introOpening = {
  * Keep starred phrases short (one or two words) so they never wrap badly.
  */
 export const introDescription =
-  "Glist Consultants is a business, financial and property consultancy. We give individuals, entrepreneurs and growing companies *reliable*, practical support with tax, payroll, registrations, books and rental properties, so you stay *compliant*, decide with confidence and focus on *growth*.";
+  "Glist Consultants is a  financial expertise company. We give individuals, entrepreneurs and growing businesses *reliable*, practical support with tax, payroll, registrations, books and property management, so you stay *compliant*, decide with confidence and focus on *growth*.";
 
 export const introGraph = {
   /** Two lines. The second line gets the hand-drawn underline. */
   taglineTop: "Get the numbers right,",
   taglineAccent: "and growth follows.",
   /** Small caption under the chart. Keep it honest: this chart is an illustration, not real data. */
-  caption: "Illustration: a business with clean books and on-time compliance",
+  caption: "YOY growth",
   srSummary: "Illustrative chart: business revenue rises steadily over five years, dips once, then climbs sharply.",
   /** Bottom to top. */
-  yLabels: ["0", "500K", "1M", "1.5M", "2M"],
+  yLabels: ["0", "1M", "2M", "3M", "4M"],
   yTitle: "Annual revenue (KSh)",
   /** Left to right. */
   xLabels: ["Year 1", "Year 2", "Year 3", "Year 4", "Year 5"],
@@ -52,8 +52,8 @@ export const introClose = {
   /** No eyebrow on this screen, by design. */
   title: "For people building something that lasts.",
   paragraphs: [
-    "Glist brings tax compliance, payroll, registrations, bookkeeping, stock taking, personal financial advice and rental property management under one roof, so individuals, entrepreneurs and established businesses can decide with confidence.",
-    "Let us handle the numbers. You focus on growth.",
+    "Glist handles all the numbers ,from tax compliance to managing your payroll,fast tracking all business registrations and licensing,handling your bookkeeping and accounts, managing your inventory,providing personal financial advice and managing rental property  under one roof of experts.We make it easy for  individuals, entrepreneurs and established businesses to decide with confidence.",
+    "We crunch the numbers. You focus on growth.",
   ],
   cta: { label: "About Glist", href: "/about" },
 } as const;

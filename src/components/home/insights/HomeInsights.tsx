@@ -5,7 +5,7 @@ import { InsightsLinks } from "./InsightsLinks";
 export function HomeInsights() {
   return (
     <>
-      <CircleBand colorClass="text-night" className="bg-sand" reveal />
+      {/* <CircleBand colorClass="text-night" className="bg-sand" reveal /> */}
       <InsightsLinks />
     </>
   );
