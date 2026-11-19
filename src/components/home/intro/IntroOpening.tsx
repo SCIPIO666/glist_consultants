@@ -8,7 +8,7 @@ export function IntroOpening() {
   return (
     <section
       aria-labelledby="intro-word"
-      className="relative flex min-h-svh flex-col items-center justify-center px-[var(--gutter)] pb-16 pt-28 text-center"
+      className="relative flex min-h-[82svh] flex-col items-center justify-center px-[var(--gutter)] pb-6 pt-28 text-center sm:min-h-svh sm:pb-16"
     >
       <Reveal y={24}>
         <Eyebrow className="text-gold">{introOpening.eyebrow}</Eyebrow>
@@ -24,7 +24,7 @@ export function IntroOpening() {
         </h2>
       </Reveal>
 
-      <ScrollArrow variant="curl" className="mt-10 h-32 w-24 sm:h-40 sm:w-28" />
+      <ScrollArrow variant="curl" className="mt-8 h-28 w-20 sm:mt-10 sm:h-40 sm:w-28" />
     </section>
   );
 }

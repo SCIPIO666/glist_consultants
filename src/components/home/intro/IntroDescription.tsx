@@ -6,7 +6,7 @@ export function IntroDescription() {
   return (
     <section
       aria-label="About Glist Consultants"
-      className="relative flex min-h-svh items-center justify-center py-[20svh]"
+      className="relative flex items-center justify-center py-[12svh] sm:min-h-svh sm:py-[20svh]"
     >
       <div className="wrap">
         <ScrollReadText

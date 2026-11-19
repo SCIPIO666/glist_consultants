@@ -17,10 +17,10 @@ type Props = {
   className?: string;
 };
 
-const MAX_COLS = 16;
+const MAX_COLS = 28;
 
 /**
- * Rows of touching circles used as the top edge of a full-height section.
+ * Two rows (default) of small touching circles used as the top edge of a full-height section.
  *
  *   <CircleBand colorClass="text-night" />
  *   <section className="bg-night">...</section>
@@ -28,7 +28,7 @@ const MAX_COLS = 16;
  * Column count is responsive; circle size = 100% / columns, so rows never
  * show a half circle at the edge.
  */
-export function CircleBand({ rows = 3, colorClass = "text-night", reveal = false, className }: Props) {
+export function CircleBand({ rows = 2, colorClass = "text-night", reveal = false, className }: Props) {
   const root = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -60,7 +60,7 @@ export function CircleBand({ rows = 3, colorClass = "text-night", reveal = false
       ref={root}
       aria-hidden
       className={cn(
-        "pointer-events-none w-full overflow-hidden leading-none [--cols:6] sm:[--cols:8] lg:[--cols:12] 2xl:[--cols:16]",
+        "pointer-events-none w-full overflow-hidden leading-none [--cols:10] sm:[--cols:14] lg:[--cols:20] 2xl:[--cols:28]",
         colorClass,
         className,
       )}

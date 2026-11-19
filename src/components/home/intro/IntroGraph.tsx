@@ -157,18 +157,22 @@ export function IntroGraph() {
                 className="absolute left-0 top-0 -ml-2 -mt-2 size-4 rounded-full bg-gold opacity-0 shadow-[0_0_0_6px_rgb(217_166_46/0.25)]"
               />
 
-              {/* y labels */}
+              {/* y labels (outer span positions, inner span is animated) */}
               {introGraph.yLabels.map((label, i) => (
                 <span
                   key={label}
-                  data-label
                   aria-hidden
-                  className={`absolute right-full mr-3 -translate-y-1/2 text-xs font-medium sm:text-sm ${
-                    i === introGraph.yLabels.length - 1 ? "text-gold" : "text-white/80"
-                  }`}
+                  className="absolute right-full mr-2 -translate-y-1/2 sm:mr-3"
                   style={{ top: `${yTicks[i]}%` }}
                 >
-                  {label}
+                  <span
+                    data-label
+                    className={`block text-[0.7rem] font-medium sm:text-sm ${
+                      i === introGraph.yLabels.length - 1 ? "text-gold" : "text-white/80"
+                    }`}
+                  >
+                    {label}
+                  </span>
                 </span>
               ))}
 
@@ -176,14 +180,18 @@ export function IntroGraph() {
               {introGraph.xLabels.map((label, i) => (
                 <span
                   key={label}
-                  data-label
                   aria-hidden
-                  className={`absolute top-full mt-3 -translate-x-1/2 whitespace-nowrap text-xs font-medium sm:text-sm ${
-                    i === introGraph.xLabels.length - 1 ? "text-gold" : "text-white/80"
-                  }`}
+                  className="absolute top-full mt-3 -translate-x-1/2"
                   style={{ left: `${xTicks[i]}%` }}
                 >
-                  {label}
+                  <span
+                    data-label
+                    className={`block whitespace-nowrap text-[0.7rem] font-medium sm:text-sm ${
+                      i === introGraph.xLabels.length - 1 ? "text-gold" : "text-white/80"
+                    }`}
+                  >
+                    {label}
+                  </span>
                 </span>
               ))}
 
@@ -191,37 +199,39 @@ export function IntroGraph() {
               <p
                 data-label
                 aria-hidden
-                className="absolute left-0 top-full mt-11 max-w-[90%] text-[0.7rem] leading-snug text-white/60 sm:text-xs"
+                className="absolute left-0 top-full mt-10 max-w-full text-[0.7rem] leading-snug text-white/60 sm:text-xs"
               >
                 {introGraph.yTitle} · {introGraph.caption}
               </p>
 
-              {/* tagline in the middle of the chart */}
-              <h2
-                data-tagline
-                className="absolute left-[46%] top-[32%] z-10 w-[min(34rem,92%)] -translate-x-1/2 -translate-y-1/2 text-center font-display text-[clamp(1.6rem,0.9rem+2.6vw,3.6rem)] font-normal leading-[1.12] tracking-[-0.015em]"
-              >
-                <span className="block">{introGraph.taglineTop}</span>
-                <span className="relative mt-1 inline-block">
-                  {introGraph.taglineAccent}
-                  <svg
-                    aria-hidden
-                    viewBox="0 0 300 14"
-                    preserveAspectRatio="none"
-                    className="pointer-events-none absolute -bottom-2 left-0 h-3 w-full overflow-visible text-gold"
-                  >
-                    <path
-                      data-underline
-                      d="M2 9 C60 3 120 12 180 6 S270 5 298 8"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth={2.5}
-                      strokeLinecap="round"
-                      vectorEffect="non-scaling-stroke"
-                    />
-                  </svg>
-                </span>
-              </h2>
+              {/* tagline in the middle of the chart (outer div positions, h2 is animated) */}
+              <div className="absolute left-[44%] top-[30%] z-10 w-[min(34rem,94%)] -translate-x-1/2 -translate-y-1/2 sm:left-[46%] sm:top-[32%]">
+                <h2
+                  data-tagline
+                  className="text-center font-display text-[clamp(1.45rem,0.8rem+2.9vw,3.6rem)] font-normal leading-[1.15] tracking-[-0.015em]"
+                >
+                  <span className="block">{introGraph.taglineTop}</span>
+                  <span className="relative mt-1 inline-block">
+                    {introGraph.taglineAccent}
+                    <svg
+                      aria-hidden
+                      viewBox="0 0 300 14"
+                      preserveAspectRatio="none"
+                      className="pointer-events-none absolute -bottom-2 left-0 h-3 w-full overflow-visible text-gold"
+                    >
+                      <path
+                        data-underline
+                        d="M2 9 C60 3 120 12 180 6 S270 5 298 8"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth={2.5}
+                        strokeLinecap="round"
+                        vectorEffect="non-scaling-stroke"
+                      />
+                    </svg>
+                  </span>
+                </h2>
+              </div>
             </div>
           </div>
         </div>
