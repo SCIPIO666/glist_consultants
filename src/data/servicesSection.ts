@@ -1,14 +1,20 @@
 /**
- * Home "services intro" section copy. The seven cards themselves come from
- * data/services.ts so the titles, blurbs and photos stay in one place.
+ * Home services section copy. The seven wedges themselves come from
+ * data/services.ts so titles, links and photos stay in one place.
+ *
+ * Minimal on purpose: a title and one button. No eyebrow, no description.
  */
 export const servicesSection = {
-  eyebrow: "Our services",
-  titleBefore: "Seven ways to keep your",
-  titleMark: "numbers",
-  titleAfter: "in order.",
-  lead: "From tax returns to tenants, one team handles the work behind your money.",
-  primaryCta: { label: "Book a consultation", href: "/contact" },
-  secondaryCta: { label: "All services", href: "/services" },
-  cardCta: "Read more",
+  titleLines: ["Our", "services"],
+  cta: { label: "Book a consultation", href: "/contact" },
+  /** Short names for the wedges, split into lines. Keyed by service slug. */
+  wheelLabels: {
+    taxation: ["Taxation"],
+    payroll: ["Payroll"],
+    registrations: ["Registrations"],
+    bookkeeping: ["Bookkeeping"],
+    "stock-taking": ["Stock", "taking"],
+    "financial-advisory": ["Financial", "advisory"],
+    "property-management": ["Property", "management"],
+  } as Record<string, string[]>,
 } as const;

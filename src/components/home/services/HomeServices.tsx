@@ -1,12 +1,12 @@
 import { CircleBand } from "@/components/motion/CircleBand";
-import { ServicesStack } from "./ServicesStack";
+import { ServicesWheel } from "./ServicesWheel";
 
-/** Home services intro: a band of night circles rising over the sand intro, then the stack. */
+/** Home services: three rows of night circles rising over the sand intro, then the wheel. */
 export function HomeServices() {
   return (
     <>
-      <CircleBand colorClass="text-night" className="bg-sand" reveal />
-      <ServicesStack />
+      <CircleBand rows={3} colorClass="text-night" className="bg-sand" reveal />
+      <ServicesWheel />
     </>
   );
 }

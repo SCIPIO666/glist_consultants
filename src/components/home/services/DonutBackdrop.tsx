@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { gsap, ScrollTrigger, mq, useGSAP } from "@/lib/gsap";
+import { cn } from "@/lib/cn";
 
 type Seg = { pct: number; cls: string };
 
@@ -24,12 +25,10 @@ const donutB: Seg[] = [
 const GAP = 0.9; // visible gap between segments, in % of the ring
 
 function Donut({ segs }: { segs: Seg[] }) {
-  let acc = 0;
   return (
     <svg aria-hidden viewBox="0 0 200 200" className="size-full">
       {segs.map((s, i) => {
-        const start = acc;
-        acc += s.pct;
+        const start = segs.slice(0, i).reduce((sum, x) => sum + x.pct, 0);
         return (
           <circle
             key={i}
@@ -51,13 +50,30 @@ function Donut({ segs }: { segs: Seg[] }) {
   );
 }
 
+type Props = {
+  /** Donut diameter as a share of the section height. 0.7 matches the design sketch. */
+  size?: number;
+  /** Visible gap between the two donuts, as a share of the section height. */
+  gap?: number;
+  /** Sideways nudge in % of the width: the top donut goes left, the bottom one right. */
+  shift?: number;
+  className?: string;
+};
+
 /**
- * Two huge donuts that split the section in half, with a visible margin between.
- * Each is centred on the edge it shares with the other, so only half of each
- * shows. They rotate in opposite directions and pause while off-screen.
+ * Reusable background: two big donuts stacked one above the other, centred, with a
+ * visible gap between them. Each hangs off its own edge of the section (the top one
+ * off the top, the bottom one off the bottom), so only the part inside the section
+ * shows. They turn in opposite directions and pause while off-screen.
+ *
+ * Drop it as the first child of a `relative` box that has a definite height:
+ *   <div className="relative h-svh"><DonutBackdrop />...</div>
  */
-export function DonutBackdrop() {
+export function DonutBackdrop({ size = 0.7, gap = 0.02, shift = 3, className }: Props) {
   const root = useRef<HTMLDivElement>(null);
+  // How far each donut hangs past its edge, as a share of the height.
+  const over = (2 * size + gap - 1) / 2;
+  const d = `${size * 100}%`;
 
   useGSAP(
     () => {
@@ -88,21 +104,23 @@ export function DonutBackdrop() {
   );
 
   return (
-    <div ref={root} aria-hidden className="pointer-events-none absolute inset-0">
-      {/* top half: its donut is centred on the bottom edge of this half */}
-      <div className="absolute inset-x-0 top-0 h-[calc(50%-0.4rem)] overflow-hidden">
-        <div className="absolute left-[70%] top-full -ml-[56svh] -mt-[56svh] size-[112svh]">
-          <div data-donut="a" className="size-full">
-            <Donut segs={donutA} />
-          </div>
+    <div ref={root} aria-hidden className={cn("pointer-events-none absolute inset-0 overflow-hidden", className)}>
+      {/* Top donut: hangs above the top edge */}
+      <div
+        className="absolute aspect-square"
+        style={{ height: d, top: `${-over * 100}%`, left: `${50 - shift}%`, transform: "translateX(-50%)" }}
+      >
+        <div data-donut="a" className="size-full">
+          <Donut segs={donutA} />
         </div>
       </div>
-      {/* bottom half: its donut is centred on the top edge of this half */}
-      <div className="absolute inset-x-0 bottom-0 h-[calc(50%-0.4rem)] overflow-hidden">
-        <div className="absolute left-[28%] top-0 -ml-[56svh] -mt-[56svh] size-[112svh]">
-          <div data-donut="b" className="size-full">
-            <Donut segs={donutB} />
-          </div>
+      {/* Bottom donut: hangs below the bottom edge */}
+      <div
+        className="absolute aspect-square"
+        style={{ height: d, bottom: `${-over * 100}%`, left: `${50 + shift}%`, transform: "translateX(-50%)" }}
+      >
+        <div data-donut="b" className="size-full">
+          <Donut segs={donutB} />
         </div>
       </div>
     </div>
