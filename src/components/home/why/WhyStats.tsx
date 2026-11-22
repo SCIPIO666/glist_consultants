@@ -6,7 +6,7 @@ import { WaveLines } from "@/components/ui/WaveLines";
 import { statsSection as copy, type Stat } from "@/data/stats";
 
 const fmt = (n: number) => Math.round(n).toLocaleString("en-KE");
-const SECONDS_PER_ROW = 5;
+const SECONDS_PER_ROW = 6;
 
 function StatRow({ s }: { s: Stat }) {
   return (

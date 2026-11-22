@@ -17,19 +17,16 @@ export type Review = {
 export const reviewsAreSamples = true;
 
 export const reviewsSection: {
-  eyebrow: string;
-  titleBefore: string;
-  titleMark: string;
-  titleAfter: string;
-  lead: string;
+  label: string;
+  /** 7 to 10 words. The accent phrase gets the gradient. */
+  heading: string;
+  headingAccent: string;
   cta: { label: string; href: string };
   items: Review[];
 } = {
-  eyebrow: "Client reviews",
-  titleBefore: "The",
-  titleMark: "proof",
-  titleAfter: " is in the paperwork.",
-  lead: "Landlords, founders and families on what changed once the numbers were in our hands.",
+  label: "Testimonials",
+  heading: "Clear books, kept deadlines, and a business",
+  headingAccent: "free to grow.",
   cta: { label: "Book a consultation", href: "/contact" },
   items: [
     {
