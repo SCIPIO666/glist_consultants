@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { gsap, ScrollTrigger, mq, useGSAP } from "@/lib/gsap";
 import { Reveal } from "@/components/motion/Reveal";
 import { Button } from "@/components/ui/Button";
-import { ScatterDots } from "@/components/ui/ScatterDots";
+import { DashField } from "@/components/ui/DashField";
 import { whyReasons as copy } from "@/data/whyUs";
 import { WhyReasonCard } from "./WhyReasonCard";
 
@@ -14,7 +14,7 @@ import { WhyReasonCard } from "./WhyReasonCard";
  *   LEFT   minimalist title (no eyebrow, no description) + one CTA at the bottom
  *   RIGHT  four frosted-glass reasons, each split [number | heading + text]
  *   Two faint, purely decorative vertical lines divide the whole section into thirds.
- *   Soft blurred colour orbs and a scatter of gold specks sit behind the glass.
+ *   Soft blurred colour orbs and a field of tiny slanted dashes sit behind the glass.
  *
  * Entry: each reason has its own scroll trigger and arrives from the right when it
  * reaches the screen (reversible). Reasons arriving together are staggered.
@@ -85,13 +85,13 @@ export function WhyReasons() {
 
   return (
     <section ref={root} aria-labelledby="why-title" className="relative overflow-hidden bg-mist text-ink">
-      {/* Backdrop for the glass: soft colour orbs + gold specks (decorative) */}
+      {/* Backdrop for the glass: soft colour orbs + dash field (decorative) */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <span className="absolute left-[42%] top-[6%] size-[18rem] rounded-full bg-brand/30 blur-3xl lg:size-[28rem]" />
         <span className="absolute -right-16 top-[36%] size-[16rem] rounded-full bg-gold/40 blur-3xl lg:size-[26rem]" />
         <span className="absolute bottom-[-3rem] left-[28%] size-[16rem] rounded-full bg-brand-soft/35 blur-3xl lg:size-[24rem]" />
       </div>
-      <ScatterDots tone="gold" className="absolute bottom-0 right-0 w-[min(75vw,34rem)] lg:w-[min(46vw,42rem)]" />
+      <DashField focus="bottom-left" className="absolute inset-0 size-full" />
 
       {/* Two faint decorative lines: the section in thirds (desktop only) */}
       <span aria-hidden data-why-line className="pointer-events-none absolute inset-y-0 left-1/3 hidden w-px bg-ink/10 lg:block" />
