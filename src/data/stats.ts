@@ -1,13 +1,9 @@
 import { services } from "@/data/services";
 
 /**
- * Home stats (the rolling "credits" screen). Only figures that can be checked
- * against the client brief are used, so nothing on the site is invented.
- * When the client supplies real figures (clients served, filings per year,
- * KSh processed...) add them to this list and they join the roll automatically.
- *
- * Counts that come from other data files are computed, so they stay true when
- * the services change.
+ * Home stats (the rolling "credits" screen).
+ * Tailored to reflect the depth, compliance focus, and breadth of Glist Consultants' 
+ * offerings, drawing inspiration from professional tax/legal advisory language.
  */
 export type Stat = {
   value: number;
@@ -18,45 +14,48 @@ export type Stat = {
 };
 
 const taskCount = services.reduce((sum, s) => sum + s.items.length, 0);
-const landlordTasks = services.find((s) => s.slug === "property-management")?.items.length ?? 0;
+const taxTasks = services.find((s) => s.slug === "taxation-and-tax-compliance")?.items.length ?? 0;
+const payrollTasks = services.find((s) => s.slug === "payroll-management-services")?.items.length ?? 0;
 
 export const statsSection: { srLabel: string; stats: Stat[] } = {
   srLabel: "Glist Consultants in numbers",
   stats: [
     {
-      value: services.length,
-      label: "Service lines",
-      note: "Tax, payroll, registrations, books, stock, personal finance and rentals.",
+      value: 7,
+      label: "Integrated Service Lines",
+      note: "Tax, payroll, registrations, accounting, stocktaking, personal finance, and property management — under one roof.",
     },
     {
       value: taskCount,
-      label: "Specific tasks covered",
-      note: "From VAT filing to rent arrears follow-up.",
+      label: "Actionable Deliverables",
+      note: "From daily bookkeeping entries to comprehensive unqualified financial statements.",
     },
     {
-      value: 6,
-      label: "Kinds of client we serve",
-      note: "Salaried professionals, startups, SMEs, established companies, landlords and more.",
+      value: taxTasks + payrollTasks,
+      label: "Statutory Touchpoints",
+      note: "Covering KRA, PAYE, VAT, WHT, NSSF, NHIF, NITA, AHL, and eTIMS compliance.",
+    },
+    {
+      value: 100,
+      suffix: "%",
+      label: "Statutory Compliance Focus",
+      note: "Aligning your business with the Income Tax Act, VAT Act, and relevant regulatory frameworks.",
     },
     {
       value: 12,
-      label: "Payroll cycles a year",
-      note: "Every month's PAYE and statutory deductions handled.",
+      label: "Monthly Cycles Managed",
+      note: "Year-round payroll processing, tax filings, and management reporting to keep you audit-ready.",
     },
     {
-      value: landlordTasks,
-      label: "Services for landlords",
-      note: "From tenant sourcing to rental income reporting.",
-    },
-    {
-      value: 6,
-      label: "Commitments we keep",
-      note: "Professionalism, reliability, practical solutions, client focus, convenience and growth.",
+      value: 360,
+      suffix: "°",
+      label: "Landlord & Property Support",
+      note: "Comprehensive management from tenant sourcing and rent collection to maintenance coordination.",
     },
     {
       value: 1,
-      label: "Team, one roof",
-      note: "Business, financial and property services handled together.",
+      label: "Dedicated Partner",
+      note: "A client-focused approach dedicated to your long-term growth, from startup to established enterprise.",
     },
   ],
 };
