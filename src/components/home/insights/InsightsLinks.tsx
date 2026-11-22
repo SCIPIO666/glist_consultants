@@ -31,13 +31,19 @@ function LongArrow({ className }: { className?: string }) {
 export function InsightsLinks() {
   const f = copy.featured;
   return (
-    <section aria-labelledby="insights-title" className="relative isolate overflow-hidden bg-brand text-white">
-      <FacetBackdrop className="text-white" />
+    <section aria-labelledby="insights-title" className="relative isolate overflow-hidden bg-linear-to-br from-night-card via-[#0d4452] to-[#14396a] text-white">
+      {/* calmer than flat brand blue: deep teal-to-navy, soft facets and a fine dot grid */}
+      <FacetBackdrop className="text-brand-soft" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-70 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_80%)]"
+        style={{ backgroundImage: "radial-gradient(rgb(255 255 255 / 0.16) 1px, transparent 1.5px)", backgroundSize: "22px 22px" }}
+      />
 
       <div className="wrap-wide flex min-h-svh flex-col items-center justify-center gap-10 py-[clamp(4.5rem,10svh,7rem)] lg:gap-14">
         <div className="flex flex-col items-center text-center">
           <Reveal y={40}>
-            <h2 id="insights-title" className="text-h1 font-normal">
+            <h2 id="insights-title" className="text-h1 font-medium">
               {copy.title}
             </h2>
           </Reveal>

@@ -36,7 +36,7 @@ export function SiteHeader() {
         <div
           className={cn(
             "transition-[background-color,backdrop-filter,box-shadow] duration-500",
-            scrolled ? "bg-night/85 shadow-lift backdrop-blur-md" : "bg-transparent",
+            scrolled ? "bg-night/95 shadow-lift md:bg-night/85 md:backdrop-blur-md" : "bg-transparent",
           )}
         >
           <div className="wrap-wide flex h-[var(--header-h)] items-center justify-end gap-3">

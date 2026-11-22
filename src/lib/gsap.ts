@@ -15,6 +15,10 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, DrawSVGPlugin, SplitText, MotionPathPlugin);
 
+// Phones: the URL bar showing/hiding resizes the viewport mid-scroll. Without this,
+// every pinned/scrubbed scene recalculates on each resize and the page stutters.
+ScrollTrigger.config({ ignoreMobileResize: true });
+
 /** Shared easing + duration so every section feels like the same site. */
 export const motion = {
   ease: "expo.out",

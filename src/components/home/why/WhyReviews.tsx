@@ -5,6 +5,7 @@ import { gsap, mq, useGSAP } from "@/lib/gsap";
 import { Reveal } from "@/components/motion/Reveal";
 import Link from "next/link";
 import { ArrowRight } from "@/components/ui/icons";
+import { QuoteMark } from "@/components/ui/QuoteMark";
 import { reviewsAreSamples, reviewsSection as copy } from "@/data/reviews";
 import { ReviewCard } from "./ReviewCard";
 
@@ -49,7 +50,7 @@ export function WhyReviews() {
         // one strip lower than the last so every card's stars row stays visible.
         const tl = gsap.timeline({
           defaults: { ease: "power2.inOut" },
-          scrollTrigger: { trigger: el, start: "top top", end: "bottom bottom", scrub: true, invalidateOnRefresh: true },
+          scrollTrigger: { trigger: el, start: "top top", end: "bottom bottom", scrub: true, invalidateOnRefresh: true, fastScrollEnd: true },
         });
         for (let i = 1; i < n; i++) {
           tl.fromTo(cards[i], { y: fromBelow }, { y: 0, duration: 1 }, LEAD + (i - 1));
@@ -76,14 +77,14 @@ export function WhyReviews() {
     >
       <div className="sticky top-0 h-svh overflow-hidden flat:static flat:h-auto flat:overflow-visible">
         {/* faint bright glow behind the stack */}
-        <div aria-hidden className="absolute -right-1/4 top-1/4 size-[40rem] rounded-full bg-brand/20 blur-3xl" />
+        <div aria-hidden className="pointer-events-none absolute -right-1/4 top-1/4 size-[40rem] rounded-full bg-[radial-gradient(closest-side,rgb(31_111_214/0.26),transparent)]" />
 
         <div className="wrap-wide relative flex h-full flex-col gap-4 pt-[calc(var(--header-h)+0.25rem)] pb-4 sm:gap-6 sm:pb-6 lg:pb-8 flat:py-24">
           {/* Top rule: label, line, big quote mark */}
           <div className="flex items-center gap-4 sm:gap-6">
             <p className="text-xs font-bold uppercase tracking-[0.2em] sm:text-sm">{copy.label}</p>
-            <span aria-hidden className="h-px flex-1 bg-linear-to-r from-white/50 to-transparent" />
-            <QuoteMark className="text-5xl sm:text-7xl" />
+            <span aria-hidden className="h-px flex-1 bg-linear-to-r from-[#7ff0d6] to-[#7ff0d6]/10" />
+            <QuoteMark kind="close" className="h-8 sm:h-12" />
           </div>
 
           <div className="flex min-h-0 flex-1 flex-col gap-4 sm:gap-6 lg:grid lg:grid-cols-[1fr_1.1fr] lg:items-start lg:gap-16">
@@ -103,7 +104,7 @@ export function WhyReviews() {
               <div className="mt-6 hidden lg:mt-8 lg:block">
                 <CtaLink />
               </div>
-              <QuoteMark className="absolute -bottom-6 left-0 hidden text-[9rem] lg:block" />
+              <QuoteMark kind="open" className="absolute bottom-0 left-0 hidden h-24 lg:block" />
             </div>
 
             {/* Right: the stack. Height = one card + one strip per extra card. */}
@@ -126,18 +127,6 @@ export function WhyReviews() {
         </div>
       </div>
     </section>
-  );
-}
-
-/** Big gradient opening quote mark (decorative). */
-function QuoteMark({ className }: { className?: string }) {
-  return (
-    <span
-      aria-hidden
-      className={`select-none bg-linear-to-br from-gold via-[#f1d27a] to-brand-soft bg-clip-text font-display font-bold leading-none text-transparent ${className ?? ""}`}
-    >
-      &ldquo;
-    </span>
   );
 }
 

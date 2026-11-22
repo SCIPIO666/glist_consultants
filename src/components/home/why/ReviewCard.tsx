@@ -17,7 +17,8 @@ export function ReviewCard({ review, index }: { review: Review; index: number })
       className={cn(
         "absolute inset-x-0 top-[calc(var(--offset)*var(--i))] h-[calc(100%-var(--offset)*(var(--n)-1))] overflow-hidden",
         "rounded-card border border-white/15 bg-linear-to-br from-night-card via-[#0c4f6e] to-brand text-white",
-        "shadow-[0_-14px_32px_-10px_rgb(0_10_12/0.6)]",
+        "shadow-[0_-6px_14px_-8px_rgb(0_10_12/0.55)] sm:shadow-[0_-14px_32px_-10px_rgb(0_10_12/0.6)]",
+        "will-change-transform [backface-visibility:hidden]",
         "flat:relative flat:top-auto flat:mb-5 flat:h-auto",
       )}
     >

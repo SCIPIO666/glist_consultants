@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Plus_Jakarta_Sans, Caveat } from "next/font/google";
+import { Poppins, Plus_Jakarta_Sans, Caveat } from "next/font/google";
 import "./globals.css";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { SiteShell } from "@/components/layout/SiteShell";
@@ -11,9 +11,12 @@ const jakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+// Heading face (replaces Fraunces). To try another family, change only this block:
+// the rest of the site reads it through the --font-display token in globals.css.
+const heading = Poppins({
+  variable: "--font-heading",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
   style: ["normal", "italic"],
   display: "swap",
 });
@@ -52,7 +55,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${jakarta.variable} ${fraunces.variable} ${caveat.variable}`}>
+    <html lang="en" className={`${jakarta.variable} ${heading.variable} ${caveat.variable}`}>
       <body>
         <SmoothScroll>
           <SiteShell>{children}</SiteShell>

@@ -205,7 +205,7 @@ export function IntroGraph() {
               </p>
 
               {/* tagline in the middle of the chart (outer div positions, h2 is animated) */}
-              <div className="absolute left-[44%] top-[30%] z-10 w-[min(34rem,94%)] -translate-x-1/2 -translate-y-1/2 sm:left-[46%] sm:top-[32%]">
+              <div className="absolute left-1/2 top-[30%] z-10 w-[min(34rem,84%)] -translate-x-1/2 -translate-y-1/2 sm:left-[46%] sm:top-[32%] sm:w-[min(34rem,94%)]">
                 <h2
                   data-tagline
                   className="text-center font-display text-[clamp(1.45rem,0.8rem+2.9vw,3.6rem)] font-normal leading-[1.15] tracking-[-0.015em]"
