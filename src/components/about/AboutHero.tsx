@@ -66,7 +66,7 @@ export function AboutHero() {
         lay.style.setProperty("--r", `${state.r}px`);
         gsap.set(pic, { x: -(state.x - w / 2) * 0.05, y: -(state.y - h / 2) * 0.05 });
       };
-      const radius = () => Math.max(150, Math.min(el.clientWidth, el.clientHeight) * 0.34);
+      const radius = () => Math.max(260, Math.min(el.clientWidth, el.clientHeight) * 0.5);
 
       // Mouse: follow the pointer
       mm.add(`${mq.motionOk} and (hover: hover) and (pointer: fine)`, () => {
@@ -145,11 +145,11 @@ export function AboutHero() {
       >
         <div ref={img} className="absolute -inset-[6%] will-change-transform">
           <Image src={copy.revealImage.src} alt="" fill sizes="100vw" quality={70} className="object-cover" />
-          <div className="absolute inset-0 bg-night/55" />
+          <div className="absolute inset-0 bg-night/20" />
         </div>
       </div>
 
-      <div className="wrap-wide relative z-10 flex min-h-svh flex-col justify-center py-[calc(var(--header-h)+3rem)]">
+      <div className="wrap-wide relative z-10 flex min-h-svh [text-shadow:0_1px_18px_rgb(0_21_25/0.7)] flex-col justify-center py-[calc(var(--header-h)+3rem)]">
         <h1 id="about-title" className="sr-only">
           {copy.h1}
         </h1>
