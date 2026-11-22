@@ -1,10 +1,13 @@
 import { services } from "@/data/services";
 
 /**
- * Home stats. Only figures that can be checked are used here, so nothing on the
- * site is invented. When the client supplies real figures (clients served,
- * filings per year, KSh processed...) add them to this list and they appear
- * automatically; a stat counts up from 0 to `value`.
+ * Home stats (the rolling "credits" screen). Only figures that can be checked
+ * against the client brief are used, so nothing on the site is invented.
+ * When the client supplies real figures (clients served, filings per year,
+ * KSh processed...) add them to this list and they join the roll automatically.
+ *
+ * Counts that come from other data files are computed, so they stay true when
+ * the services change.
  */
 export type Stat = {
   value: number;
@@ -14,11 +17,10 @@ export type Stat = {
   note: string;
 };
 
-/** Every bullet across the seven service categories, straight from the brief. */
 const taskCount = services.reduce((sum, s) => sum + s.items.length, 0);
+const landlordTasks = services.find((s) => s.slug === "property-management")?.items.length ?? 0;
 
-export const statsSection: { eyebrow: string; srLabel: string; stats: Stat[] } = {
-  eyebrow: "The work in numbers",
+export const statsSection: { srLabel: string; stats: Stat[] } = {
   srLabel: "Glist Consultants in numbers",
   stats: [
     {
@@ -29,23 +31,32 @@ export const statsSection: { eyebrow: string; srLabel: string; stats: Stat[] } =
     {
       value: taskCount,
       label: "Specific tasks covered",
-      note: "From VAT filing to rent arrears follow-up, listed on our services page.",
+      note: "From VAT filing to rent arrears follow-up.",
+    },
+    {
+      value: 6,
+      label: "Kinds of client we serve",
+      note: "Salaried professionals, startups, SMEs, established companies, landlords and more.",
     },
     {
       value: 12,
       label: "Payroll cycles a year",
-      note: "Every month's PAYE and statutory deductions computed and filed on time.",
+      note: "Every month's PAYE and statutory deductions handled.",
     },
     {
-      value: 2400,
-      prefix: "KSh ",
-      label: "Monthly personal relief",
-      note: "The PAYE relief we apply when computing your payroll. Check current KRA rules.",
+      value: landlordTasks,
+      label: "Services for landlords",
+      note: "From tenant sourcing to rental income reporting.",
+    },
+    {
+      value: 6,
+      label: "Commitments we keep",
+      note: "Professionalism, reliability, practical solutions, client focus, convenience and growth.",
+    },
+    {
+      value: 1,
+      label: "Team, one roof",
+      note: "Business, financial and property services handled together.",
     },
   ],
 };
-
-export const starPanel = {
-  caption: "Guiding Success,",
-  captionAccent: "Illuminating Paths.",
-} as const;
