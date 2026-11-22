@@ -1,12 +1,9 @@
-import { CircleBand } from "@/components/motion/CircleBand";
 import { InsightsLinks } from "./InsightsLinks";
 
-/** Home insights block: night circles rise over the sand reviews, then the link panels. */
+/**
+ * Home insights teaser. No circle band above it: you had commented the band out,
+ * so the section simply follows the reviews. Add <CircleBand .../> here if wanted.
+ */
 export function HomeInsights() {
-  return (
-    <>
-      {/* <CircleBand colorClass="text-night" className="bg-sand" reveal /> */}
-      <InsightsLinks />
-    </>
-  );
+  return <InsightsLinks />;
 }
