@@ -3,50 +3,41 @@
  * The reasons are drawn from the six commitments in the client brief
  * (professionalism, reliability, practical solutions, client focus, convenience, growth).
  * Keep claims honest: no invented statistics or client counts.
+ *
+ * The reasons screen is minimal on purpose: a title and one button on the left,
+ * four numbered reasons on the right. No eyebrow, no description.
  */
 export type WhyReason = {
-  tag: string;
   title: string;
   text: string;
 };
 
 export const whyReasons: {
-  eyebrow: string;
-  titleBefore: string;
-  titleMark: string;
-  titleAfter: string;
-  lead: string;
+  /** One entry per line of the big title. */
+  titleLines: string[];
   cta: { label: string; href: string };
   srListLabel: string;
   items: WhyReason[];
 } = {
-  eyebrow: "Why choose us",
-  titleBefore: "Calm numbers, kept",
-  titleMark: "deadlines",
-  titleAfter: ", and room to grow.",
-  lead: "Every engagement rests on the same commitments. These are the four you will notice first.",
-  cta: { label: "More about Glist", href: "/about" },
+  titleLines: ["Why", "choose", "us"],
+  cta: { label: "About us", href: "/about" },
   srListLabel: "Reasons to choose Glist Consultants",
   items: [
     {
-      tag: "Practical",
       title: "Advice you can act on",
-      text: "We solve the problem in front of you: the return to file, the payroll to run, the tenant to find. Plain language and clear next steps, never theory for its own sake.",
+      text: "We solve the problem in front of you: the return to file, the payroll to run, the tenant to find. Plain language, clear next steps.",
     },
     {
-      tag: "Reliable",
       title: "Deadlines kept, records straight",
-      text: "Statutory dates do not move, so we plan around them. You get dependable, timely support delivered to professional standards.",
+      text: "Statutory dates do not move, so we plan around them. Dependable, timely support delivered to professional standards.",
     },
     {
-      tag: "Convenient",
       title: "One roof, seven services",
-      text: "Tax, payroll, registrations, books, stock, personal finance and rentals, all with one team that already knows your business.",
+      text: "Tax, payroll, registrations, books, stock, personal finance and rentals, with one team that already knows your business.",
     },
     {
-      tag: "Client-first",
       title: "Built around you",
-      text: "We take the time to understand your situation before we advise, then work alongside you as your business or portfolio grows.",
+      text: "We take the time to understand your situation before we advise, then work alongside you as you grow.",
     },
   ],
 };
