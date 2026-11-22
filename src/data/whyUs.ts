@@ -24,28 +24,28 @@ export const whyReasons: {
   srListLabel: "Reasons to choose Glist Consultants",
   items: [
     {
-      title: "Statutory compliance, safeguarded",
-      text: "We meticulously review your tax processes against the Income Tax Act and VAT Act, ensuring your business avoids penalties and regulatory exposure.",
+      title: "We keep you compliant",
+      text: "We track your tax obligations against the Income Tax Act and VAT Act, so you avoid penalties and stay off KRA's radar.",
     },
     {
-      title: "Revenue authority representation",
-      text: "From routine KRA health checks to handling objections and appeals at the Tax Appeals Tribunal, we stand between you and the authorities.",
+      title: "We deal with the authorities",
+      text: "If KRA comes knocking, we handle it. From routine health checks to objections and appeals, we represent your interests.",
     },
     {
-      title: "Cross-functional financial visibility",
-      text: "Unify your payroll, bookkeeping, and tax compliance under one team. We bridge the gap between daily operations and strategic financial planning.",
+      title: "One team, all your numbers",
+      text: "Payroll, bookkeeping, and tax under one roof means no gaps, no miscommunications, and no dropped balls.",
     },
     {
-      title: "Proactive risk mitigation",
-      text: "We identify compliance gaps and knowledge shortfalls within your organization before they become costly liabilities, offering tailored training and solutions.",
+      title: "We spot problems early",
+      text: "We review your processes to find compliance gaps before they become expensive problems, and we train your team to stay sharp.",
     },
     {
-      title: "Audit-ready records, always",
-      text: "Dependable, timely support with meticulous record-keeping. Whether you need eTIMS-compliant invoicing or IFRS-aligned financial statements, your books are prepared.",
+      title: "Your records are audit-ready",
+      text: "We keep meticulous records—from eTIMS invoices to IFRS-aligned statements—so you're always prepared.",
     },
     {
-      title: "Tailored for your next stage of growth",
-      text: "Whether you are a startup navigating pre-setup consultancy or an established enterprise restructuring for efficiency, we adapt our advisory to your lifecycle.",
+      title: "We grow as you grow",
+      text: "Whether you're a startup or restructuring for efficiency, our advice evolves as your business does.",
     },
   ],
 };

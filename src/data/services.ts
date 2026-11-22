@@ -17,9 +17,9 @@ export const services: Service[] = [
     slug: "taxation",
     letter: "A",
     title: "Taxation and Tax Compliance",
-    short: "Strategic tax advisory and meticulous KRA statutory compliance.",
+    short: "Registration, filing, and KRA compliance for individuals and businesses.",
     intro:
-      "We provide comprehensive tax advisory and compliance support, aligning your operations with the Income Tax Act and VAT Act to mitigate regulatory exposure.",
+      "We take the stress out of tax. From VAT and PAYE to your annual returns, we make sure you're compliant with KRA and avoid penalties.",
     items: [
       "Value Added Tax (VAT) registration, filing and compliance.",
       "Withholding Tax computations, filing and compliance.",
@@ -35,9 +35,9 @@ export const services: Service[] = [
     slug: "payroll",
     letter: "B",
     title: "Payroll Management Services",
-    short: "End-to-end payroll administration and statutory remittance.",
+    short: "Accurate monthly payroll, PAYE and statutory remittances.",
     intro:
-      "We deliver rigorous payroll administration, ensuring accurate employee compensation and seamless compliance with all statutory deduction frameworks.",
+      "We handle your monthly payroll from start to finish. Your staff gets paid accurately and on time, and all statutory deductions are filed and remitted correctly.",
     items: [
       "Monthly payroll processing.",
       "PAYE computations and filing.",
@@ -52,9 +52,9 @@ export const services: Service[] = [
     slug: "registrations",
     letter: "C",
     title: "Business and Statutory Registrations",
-    short: "Corporate structuring and critical government platform access.",
+    short: "KRA PIN, company registration, eGP and IFMIS setup.",
     intro:
-      "We facilitate the essential legal and regulatory registrations required to establish and operationalize your business in Kenya.",
+      "Starting something new? We help you cross the starting line. We handle your company registration, KRA PIN, and all the necessary government platform registrations.",
     items: [
       "KRA PIN registration.",
       "Company registration.",
@@ -69,9 +69,9 @@ export const services: Service[] = [
     slug: "bookkeeping",
     letter: "D",
     title: "Bookkeeping and Accounting",
-    short: "Audit-ready financial records and IFRS-aligned reporting.",
+    short: "Clean records, reconciliations, and reports you can trust.",
     intro:
-      "We maintain meticulous financial records, providing the cross-functional visibility and management reports necessary for strategic decision-making.",
+      "You can't run a business if you don't know your numbers. We keep your records clean, reconcile your bank accounts, and give you clear financial reports you can actually understand.",
     items: [
       "Day-to-day bookkeeping.",
       "Preparation and maintenance of financial records.",
@@ -86,9 +86,9 @@ export const services: Service[] = [
     slug: "stock-taking",
     letter: "E",
     title: "Stock Taking and Inventory Management",
-    short: "Accurate inventory verification and variance accountability.",
+    short: "Verified stock records and clear reporting on variances.",
     intro:
-      "We conduct thorough inventory audits and implement robust stock management systems to identify discrepancies and safeguard your assets.",
+      "We do the physical counting so you know exactly what's on your shelves. We'll help you spot discrepancies, track stock movement, and keep accurate inventory records.",
     items: [
       "Physical stocktaking.",
       "Inventory verification.",
@@ -103,9 +103,9 @@ export const services: Service[] = [
     slug: "financial-advisory",
     letter: "F",
     title: "Personal Financial Advisory",
-    short: "Strategic wealth management and financial literacy.",
+    short: "Practical, personalised guidance for everyday money decisions.",
     intro:
-      "We provide tailored financial planning and advisory services, empowering individuals to optimize wealth and navigate complex financial decisions.",
+      "We help you get a handle on your personal finances. Whether you're trying to stick to a budget, get out of debt, or plan for the future, we'll give you practical steps to follow.",
     items: [
       "Personal financial planning.",
       "Budgeting and expenditure management.",
@@ -120,9 +120,9 @@ export const services: Service[] = [
     slug: "property-management",
     letter: "G",
     title: "Rental Property Management",
-    short: "Comprehensive asset management for landlords and investors.",
+    short: "Tenants, rent collection, and upkeep handled for you.",
     intro:
-      "We provide full-cycle property management solutions designed to optimize occupancy, ensure reliable rent collection, and protect asset value.",
+      "Your property should be an asset, not a headache. We find good tenants, collect the rent, manage the upkeep, and keep you updated with clear monthly reports.",
     items: [
       "Tenant sourcing and placement.",
       "Rent collection and monitoring.",

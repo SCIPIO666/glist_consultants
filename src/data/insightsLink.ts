@@ -17,12 +17,12 @@ export const insightsLink: {
   };
 } = {
   title: "News and Insights",
-  linkLabel: "Our latest insights",
+  linkLabel: "See all insights",
   linkHref: "/insights",
   featured: {
     date: "November 2026",
-    title: "Staying ahead of KRA deadlines: a simple filing calendar",
-    cta: "Read more",
+    title: "A simple filing calendar to keep you ahead of KRA deadlines",
+    cta: "Read the article",
     href: "/insights",
     image: {
       src: "/pexels-artempodrez-6779714.webp",

@@ -4,25 +4,25 @@
  * four steps are written from it. Have the client approve or reorder them.
  */
 export const aboutProcess = {
-  title: "Our Engagement Methodology",
-  lead: "Every engagement—whether a targeted tax health check or comprehensive cross-functional management—follows a disciplined, four-phase approach.",
+  title: "How we work",
+  lead: "Whether it's a single tax return or managing your whole portfolio, we follow the same simple, reliable process.",
   image: { src: "/pages/about/process.webp", alt: "Financial papers, a phone and a calculator on a desk" },
   steps: [
     {
-      heading: "01. Diagnostic Assessment",
-      text: "We conduct a comprehensive review of your current operations, identifying regulatory exposures, compliance gaps, and opportunities for tax-efficient structuring.",
+      heading: "We listen first",
+      text: "We sit down with you to understand your business, your obligations, and where you want to go.",
     },
     {
-      heading: "02. Strategic Architecture",
-      text: "We define the scope of engagement, establish clear timelines for all statutory and management deliverables, and align our advisory with your broader commercial objectives.",
+      heading: "We make a plan",
+      text: "We agree on what needs to be done, who's doing it, and the dates that matter, so nothing slips through the cracks.",
     },
     {
-      heading: "03. Rigorous Execution",
-      text: "Our team assumes responsibility for the meticulous preparation, filing, and reconciliation of your accounts—ensuring total alignment with KRA, IFRS, and all relevant regulatory frameworks.",
+      heading: "We do the work",
+      text: "We prepare, file, and manage everything on your behalf, to a professional standard.",
     },
     {
-      heading: "04. Continuous Advisory",
-      text: "We provide ongoing transparency through detailed management reporting, proactively updating you on legislative shifts and advising on strategic growth milestones.",
+      heading: "We stick around",
+      text: "We give you clear reports and practical advice as your business or property portfolio grows.",
     },
   ],
 } as const;

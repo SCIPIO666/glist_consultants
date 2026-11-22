@@ -2,8 +2,8 @@ import { services } from "@/data/services";
 
 /**
  * Home stats (the rolling "credits" screen).
- * Tailored to reflect the depth, compliance focus, and breadth of Glist Consultants' 
- * offerings, drawing inspiration from professional tax/legal advisory language.
+ * Tailored to reflect the depth, compliance focus, and breadth of Glist Consultants'
+ * offerings.
  */
 export type Stat = {
   value: number;
@@ -14,48 +14,48 @@ export type Stat = {
 };
 
 const taskCount = services.reduce((sum, s) => sum + s.items.length, 0);
-const taxTasks = services.find((s) => s.slug === "taxation-and-tax-compliance")?.items.length ?? 0;
-const payrollTasks = services.find((s) => s.slug === "payroll-management-services")?.items.length ?? 0;
+const taxTasks = services.find((s) => s.slug === "taxation")?.items.length ?? 0;
+const payrollTasks = services.find((s) => s.slug === "payroll")?.items.length ?? 0;
 
 export const statsSection: { srLabel: string; stats: Stat[] } = {
   srLabel: "Glist Consultants in numbers",
   stats: [
     {
       value: 7,
-      label: "Integrated Service Lines",
-      note: "Tax, payroll, registrations, accounting, stocktaking, personal finance, and property management — under one roof.",
+      label: "Service lines",
+      note: "Tax, payroll, registrations, books, stock, personal finance, and property—all in one place.",
     },
     {
       value: taskCount,
-      label: "Actionable Deliverables",
-      note: "From daily bookkeeping entries to comprehensive unqualified financial statements.",
+      label: "Specific tasks handled",
+      note: "From your daily bookkeeping to filing your annual returns.",
     },
     {
       value: taxTasks + payrollTasks,
-      label: "Statutory Touchpoints",
-      note: "Covering KRA, PAYE, VAT, WHT, NSSF, NHIF, NITA, AHL, and eTIMS compliance.",
+      label: "Statutory touchpoints",
+      note: "We keep you compliant with KRA, NSSF, NHIF, NITA, AHL, and eTIMS.",
     },
     {
       value: 100,
       suffix: "%",
-      label: "Statutory Compliance Focus",
-      note: "Aligning your business with the Income Tax Act, VAT Act, and relevant regulatory frameworks.",
+      label: "Focus on compliance",
+      note: "We stay up to date with the Income Tax Act and VAT Act so you don't have to.",
     },
     {
       value: 12,
-      label: "Monthly Cycles Managed",
-      note: "Year-round payroll processing, tax filings, and management reporting to keep you audit-ready.",
+      label: "Monthly cycles managed",
+      note: "Year-round payroll processing, tax filing, and reporting that keeps you audit-ready.",
     },
     {
       value: 360,
       suffix: "°",
-      label: "Landlord & Property Support",
-      note: "Comprehensive management from tenant sourcing and rent collection to maintenance coordination.",
+      label: "Landlord support",
+      note: "Everything from finding tenants to collecting rent and coordinating repairs.",
     },
     {
       value: 1,
-      label: "Dedicated Partner",
-      note: "A client-focused approach dedicated to your long-term growth, from startup to established enterprise.",
+      label: "Dedicated partner",
+      note: "One team that knows your business, from startup to established enterprise.",
     },
   ],
 };

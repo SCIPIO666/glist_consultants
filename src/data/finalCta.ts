@@ -3,13 +3,13 @@
  * Contact details are read from lib/site.ts so they are edited in one place.
  */
 export const finalCta = {
-  eyebrow: "Secure your financial foundation",
-  titleBefore: "Delegate the",
-  titleMark: "compliance.",
-  titleAfter: "Accelerate your growth.",
-  text: "Whether you require rigorous tax health checks, end-to-end payroll administration, statutory registrations, or comprehensive property management, our advisory team is equipped to deliver.",
-  closing: "Partner with Glist Consultants to mitigate risk and clarify your financial trajectory.",
-  primary: { label: "Schedule a consultation", href: "/contact" },
+  eyebrow: "Let's talk",
+  titleBefore: "Leave the numbers",
+  titleMark: "to us.",
+  titleAfter: "You focus on growth.",
+  text: "Whether you need help with your tax returns, your payroll, or managing your rental properties, we're here to take the stress out of it.",
+  closing: "Get in touch today and let's find the right solution for you.",
+  primary: { label: "Book a consultation", href: "/contact" },
   whatsappLabel: "Chat on WhatsApp",
   whatsappMessage: "Hello Glist Consultants, I would like to book a consultation.",
   bgImage: "/pages/home/insight-bg/bg.webp",

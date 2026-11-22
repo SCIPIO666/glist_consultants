@@ -20,3 +20,6 @@ export const aboutHero = {
 } as const;
 
 export type AboutHeroIcon = (typeof aboutHero.groups)[number]["icon"];
+
+
+

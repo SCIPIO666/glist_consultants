@@ -5,8 +5,8 @@
 export const aboutHero = {
   breadcrumb: "About Us",
   eyebrow: "About Glist Consultants",
-  titleLines: ["The strategic minds", "behind your numbers."],
-  lead: "Glist Consultants is a professional business, financial, and property advisory firm. We deliver pragmatic, client-focused solutions that drive sustainable growth for startups, SMEs, and established enterprises.",
+  titleLines: ["The team behind", "your numbers."],
+  lead: "We are a business, financial, and property consultancy for individuals, startups, and established companies. We give you straightforward, reliable advice so you can make confident financial decisions.",
   primaryCta: { label: "Book a consultation", href: "/contact" },
   secondaryCta: { label: "Our services", href: "/services" },
   images: {
@@ -19,25 +19,25 @@ export const aboutHero = {
 export const aboutMeta = {
   title: "About Us",
   description:
-    "Glist Consultants is a Kenyan advisory firm providing strategic tax, payroll, registration, accounting, and property management services to protect and grow your enterprise.",
+    "Meet Glist Consultants: a professional business, financial and property consultancy in Kenya offering tax, payroll, registration, bookkeeping, stock taking, personal financial advisory and rental property management.",
 } as const;
 
 export const aboutBackground = {
   eyebrow: "Who we are",
-  titleBefore: "A consultancy built to protect and propel the enterprises it",
+  titleBefore: "A consultancy built around the people it",
   titleMark: "serves.",
   paragraphs: [
-    "We navigate the complex intersection of regulatory compliance and business strategy. By managing your statutory obligations and financial operations, we free you to focus on core growth.",
-    "Our practice is anchored in rigorous professionalism, absolute integrity, and a commitment to practical, actionable solutions that withstand scrutiny.",
+    "Navigating taxes, payroll, and business operations can be overwhelming. We take that weight off your shoulders by handling the compliance and keeping your records straight.",
+    "We believe in doing things right. That means treating your business with integrity, meeting your deadlines, and giving you advice you can actually use.",
   ],
-  clientsHeading: "Who we advise",
+  clientsHeading: "Who we work with",
   clients: [
-    "Salaried professionals seeking wealth optimization",
-    "Founders and scaling startups",
-    "Small and medium-sized enterprises (SMEs)",
-    "Established corporate entities and institutions",
-    "Landlords and real estate investors",
-    "Businesses requiring end-to-end compliance and accounting architecture",
+    "Individuals and salaried professionals",
+    "Entrepreneurs and startups",
+    "Small and medium-sized businesses (SMEs)",
+    "Established companies",
+    "Landlords and property investors",
+    "Anyone who needs a reliable hand with their books and taxes",
   ],
   image: {
     src: "/pexels-tima-miroshnichenko-6694475.webp",
