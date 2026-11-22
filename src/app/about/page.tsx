@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { AboutHero } from "@/components/about/AboutHero";
 import { AboutOpening } from "@/components/about/AboutOpening";
 import { AboutGlance } from "@/components/about/AboutGlance";
+import { AboutSections } from "@/components/about/AboutSections";
 import { aboutMeta } from "@/data/about";
 
 export const metadata: Metadata = {
@@ -13,8 +14,8 @@ export const metadata: Metadata = {
 
 /**
  * ABOUT (redesign). One section per milestone:
- *   hero (M17-19) -> opening (M18) -> "Glist at a glance" strip (M19) -> sections
- *   (background, mission, vision, values) -> process
+ *   hero (M17-19) -> opening (M18) -> glance strip (M19) -> sections (M20) -> process
+ * Pass side="right" to <AboutSections> to move the vertical titles to the right.
  * No circle bands anywhere until the design asks for them.
  */
 export default function AboutPage() {
@@ -23,6 +24,7 @@ export default function AboutPage() {
       <AboutHero />
       <AboutOpening />
       <AboutGlance />
+      <AboutSections />
     </main>
   );
 }
