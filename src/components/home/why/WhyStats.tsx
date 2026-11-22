@@ -69,7 +69,7 @@ export function WhyStats() {
     <section
       ref={root}
       aria-label={copy.srLabel}
-      className="relative isolate h-svh min-h-[34rem] overflow-hidden bg-[radial-gradient(130%_100%_at_50%_0%,#0b3a41_0%,#002025_55%,#001519_100%)] text-white shadow-[rgba(50,50,93,0.25)_0px_30px_60px_-12px_inset,rgba(0,0,0,0.3)_0px_18px_36px_-18px_inset] motion-reduce:h-auto motion-reduce:min-h-0 motion-reduce:py-24"
+      className="relative isolate h-[40svh] min-h-[34rem] overflow-hidden bg-[radial-gradient(130%_100%_at_50%_0%,#0b3a41_0%,#002025_55%,#001519_100%)] text-white shadow-[rgba(50,50,93,0.25)_0px_30px_60px_-12px_inset,rgba(0,0,0,0.3)_0px_18px_36px_-18px_inset] motion-reduce:h-auto motion-reduce:min-h-0 motion-reduce:py-24"
     >
       {/* Blue glow */}
       <div
