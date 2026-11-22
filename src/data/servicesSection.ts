@@ -5,8 +5,8 @@
  * Minimal on purpose: a title and one button. No eyebrow, no description.
  */
 export const servicesSection = {
-  titleLines: ["Our", "services"],
-  cta: { label: "Book a consultation", href: "/contact" },
+  titleLines: ["Our", "Practice Areas"],
+  cta: { label: "Discuss your requirements", href: "/contact" },
   /** Short names for the wedges, split into lines. Keyed by service slug. */
   wheelLabels: {
     taxation: ["Taxation"],

@@ -5,8 +5,8 @@
 export const aboutHero = {
   breadcrumb: "About Us",
   eyebrow: "About Glist Consultants",
-  titleLines: ["The team behind", "your numbers."],
-  lead: "Glist Consultants is a professional business, financial and property consultancy. We provide reliable, practical and client-focused solutions to individuals, entrepreneurs, startups, SMEs and established businesses.",
+  titleLines: ["The strategic minds", "behind your numbers."],
+  lead: "Glist Consultants is a professional business, financial, and property advisory firm. We deliver pragmatic, client-focused solutions that drive sustainable growth for startups, SMEs, and established enterprises.",
   primaryCta: { label: "Book a consultation", href: "/contact" },
   secondaryCta: { label: "Our services", href: "/services" },
   images: {
@@ -19,25 +19,25 @@ export const aboutHero = {
 export const aboutMeta = {
   title: "About Us",
   description:
-    "Meet Glist Consultants: a professional business, financial and property consultancy in Kenya offering tax, payroll, registration, bookkeeping, stock taking, personal financial advisory and rental property management.",
+    "Glist Consultants is a Kenyan advisory firm providing strategic tax, payroll, registration, accounting, and property management services to protect and grow your enterprise.",
 } as const;
 
 export const aboutBackground = {
   eyebrow: "Who we are",
-  titleBefore: "A consultancy built around the people it",
+  titleBefore: "A consultancy built to protect and propel the enterprises it",
   titleMark: "serves.",
   paragraphs: [
-    "We support our clients in navigating financial obligations, meeting statutory compliance requirements, managing business operations and making informed financial decisions.",
-    "Our approach is built on professionalism, integrity, reliability and a commitment to helping our clients achieve sustainable growth.",
+    "We navigate the complex intersection of regulatory compliance and business strategy. By managing your statutory obligations and financial operations, we free you to focus on core growth.",
+    "Our practice is anchored in rigorous professionalism, absolute integrity, and a commitment to practical, actionable solutions that withstand scrutiny.",
   ],
-  clientsHeading: "Who we work with",
+  clientsHeading: "Who we advise",
   clients: [
-    "Individuals and salaried professionals",
-    "Entrepreneurs and startups",
+    "Salaried professionals seeking wealth optimization",
+    "Founders and scaling startups",
     "Small and medium-sized enterprises (SMEs)",
-    "Established companies and institutions",
-    "Landlords and property investors",
-    "Businesses seeking accounting, payroll and tax compliance support",
+    "Established corporate entities and institutions",
+    "Landlords and real estate investors",
+    "Businesses requiring end-to-end compliance and accounting architecture",
   ],
   image: {
     src: "/pexels-tima-miroshnichenko-6694475.webp",
@@ -45,5 +45,5 @@ export const aboutBackground = {
     position: "50% 40%",
   },
   badge: "Guiding Success, Illuminating Paths.",
-  cta: { label: "See what we do", href: "/services" },
+  cta: { label: "Explore our services", href: "/services" },
 } as const;

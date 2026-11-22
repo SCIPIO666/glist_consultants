@@ -4,7 +4,7 @@
  */
 
 export const introOpening = {
-  eyebrow: "What is Glist",
+  eyebrow: "The Glist Standard",
   /** The big word. A gold dot is added after it. */
   word: "Clarity",
 } as const;
@@ -14,14 +14,14 @@ export const introOpening = {
  * Keep starred phrases short (one or two words) so they never wrap badly.
  */
 export const introDescription =
-  "Glist Consultants is a  financial expertise company. We give individuals, entrepreneurs and growing businesses *reliable*, practical support with tax, payroll, registrations, books and property management, so you stay *compliant*, decide with confidence and focus on *growth*.";
+  "Glist Consultants is a professional financial and advisory firm. We partner with individuals, entrepreneurs, and established enterprises to provide *pragmatic* solutions for tax, payroll, registrations, accounting, and property management. We ensure you remain *compliant*, make informed decisions, and maintain focus on *growth*.";
 
 export const introGraph = {
   /** Two lines. The second line gets the hand-drawn underline. */
-  taglineTop: "Get the numbers right,",
-  taglineAccent: "and growth follows.",
+  taglineTop: "Rigorous compliance,",
+  taglineAccent: "uninterrupted growth.",
   /** Small caption under the chart. Keep it honest: this chart is an illustration, not real data. */
-  caption: "YOY growth",
+  caption: "Strategic trajectory",
   srSummary: "Illustrative chart: business revenue rises steadily over five years, dips once, then climbs sharply.",
   /** Bottom to top. */
   yLabels: ["0", "1M", "2M", "3M", "4M"],
@@ -50,10 +50,10 @@ export const introGraphPoints: [number, number][] = [
 
 export const introClose = {
   /** No eyebrow on this screen, by design. */
-  title: "For people building something that lasts.",
+  title: "Built for enterprises that intend to last.",
   paragraphs: [
-    "Glist handles all the numbers ,from tax compliance to managing your payroll,fast tracking all business registrations and licensing,handling your bookkeeping and accounts, managing your inventory,providing personal financial advice and managing rental property  under one roof of experts.We make it easy for  individuals, entrepreneurs and established businesses to decide with confidence.",
-    "We crunch the numbers. You focus on growth.",
+    "Glist manages the operational and regulatory complexities of your business. From statutory tax compliance and end-to-end payroll administration to corporate registrations, rigorous bookkeeping, and comprehensive property management—our multidisciplinary team operates under one roof.",
+    "We mitigate your risk. You scale your enterprise.",
   ],
   cta: { label: "About Glist", href: "/about" },
 } as const;
