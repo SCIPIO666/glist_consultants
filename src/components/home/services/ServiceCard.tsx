@@ -36,9 +36,9 @@ export function ServiceCard({ service, index, total, ctaLabel }: Props) {
 
       <div className="relative z-10 flex h-full flex-col justify-between p-5 sm:p-7">
         <div className="flex items-center justify-between">
-          <span className="grid size-10 place-items-center rounded-full bg-gold font-display text-lg font-semibold text-night-deep">
+          {/* <span className="grid size-10 place-items-center rounded-full bg-gold font-display text-lg font-semibold text-night-deep">
             {service.letter}
-          </span>
+          </span> */}
           <span className="text-sm tabular-nums text-white/70">
             {pad(index + 1)} / {pad(total)}
           </span>
