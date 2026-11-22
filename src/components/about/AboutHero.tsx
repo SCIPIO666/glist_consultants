@@ -66,7 +66,7 @@ export function AboutHero() {
         lay.style.setProperty("--r", `${state.r}px`);
         gsap.set(pic, { x: -(state.x - w / 2) * 0.05, y: -(state.y - h / 2) * 0.05 });
       };
-      const radius = () => Math.max(260, Math.min(el.clientWidth, el.clientHeight) * 0.5);
+      const radius = () => Math.max(260, Math.min(el.clientWidth, el.clientHeight) * 0.62);
 
       // Mouse: follow the pointer
       mm.add(`${mq.motionOk} and (hover: hover) and (pointer: fine)`, () => {
@@ -141,7 +141,7 @@ export function AboutHero() {
       <div
         ref={layer}
         aria-hidden
-        className="pointer-events-none absolute inset-0 z-[1] [--r:0px] [--mx:70%] [--my:50%] [-webkit-mask-image:radial-gradient(circle_var(--r)_at_var(--mx)_var(--my),#000_55%,transparent_100%)] [mask-image:radial-gradient(circle_var(--r)_at_var(--mx)_var(--my),#000_55%,transparent_100%)]"
+        className="pointer-events-none absolute inset-0 z-[1] [--r:0px] [--mx:70%] [--my:50%] [-webkit-mask-image:radial-gradient(circle_var(--r)_at_var(--mx)_var(--my),#000_93%,transparent_100%)] [mask-image:radial-gradient(circle_var(--r)_at_var(--mx)_var(--my),#000_93%,transparent_100%)]"
       >
         <div ref={img} className="absolute -inset-[6%] will-change-transform">
           <Image src={copy.revealImage.src} alt="" fill sizes="100vw" quality={70} className="object-cover" />

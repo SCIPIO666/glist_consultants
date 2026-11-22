@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { AboutHero } from "@/components/about/AboutHero";
 import { AboutOpening } from "@/components/about/AboutOpening";
+import { AboutGlance } from "@/components/about/AboutGlance";
 import { aboutMeta } from "@/data/about";
 
 export const metadata: Metadata = {
@@ -12,16 +13,16 @@ export const metadata: Metadata = {
 
 /**
  * ABOUT (redesign). One section per milestone:
- *   hero (M17/18) -> opening (M18) -> "Glist at a glance" strip -> sections
+ *   hero (M17-19) -> opening (M18) -> "Glist at a glance" strip (M19) -> sections
  *   (background, mission, vision, values) -> process
  * No circle bands anywhere until the design asks for them.
- * The old AboutBackground section is replaced by the redesign and no longer used.
  */
 export default function AboutPage() {
   return (
     <main>
       <AboutHero />
       <AboutOpening />
+      <AboutGlance />
     </main>
   );
 }
