@@ -16,7 +16,7 @@ export function ReviewCard({ review, index }: { review: Review; index: number })
       style={{ zIndex: index + 1, "--i": index } as CSSProperties}
       className={cn(
         "absolute inset-x-0 top-[calc(var(--offset)*var(--i))] h-[calc(100%-var(--offset)*(var(--n)-1))] overflow-hidden lg:h-[var(--card-h)]",
-        "bg-gradient-to-br from-brand via-brand to-[#2a58d8] text-white shadow-[0_-14px_30px_-12px_rgba(0,10,20,0.55)] ring-1 ring-white/15",
+        "bg-gradient-to-br from-brand via-brand to-[#2a58d8] text-white shadow-[0_-8px_18px_-10px_rgba(0,10,20,0.5)] will-change-transform ring-1 ring-white/15",
         "flat:relative flat:top-auto flat:mb-5 flat:h-auto",
       )}
     >

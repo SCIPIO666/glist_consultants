@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "@/components/ui/icons";
+import { FacetBackdrop } from "@/components/ui/FacetBackdrop";
 import { insightsLink as copy } from "@/data/insightsLink";
 
 /** A thin line arrow that stretches on hover, in gold. */
@@ -20,13 +21,14 @@ function LineArrow() {
 export function InsightTeaser() {
   const c = copy.card;
   return (
-    <section aria-labelledby="insights-title" className="relative isolate overflow-hidden bg-brand text-white">
-      {/* faceted shapes, like the reference's soft geometric backdrop */}
-      <div aria-hidden className="absolute inset-0 -z-10">
-        <div className="absolute -left-[10%] top-0 h-full w-[45%] bg-white/[0.05] [clip-path:polygon(0_0,100%_0,60%_100%,0_100%)]" />
-        <div className="absolute left-[30%] top-0 h-full w-[40%] bg-night/[0.07] [clip-path:polygon(40%_0,100%_0,60%_100%,0_100%)]" />
-        <div className="absolute -right-[5%] top-0 h-full w-[50%] bg-white/[0.06] [clip-path:polygon(50%_0,100%_0,100%_100%,0_100%)]" />
-      </div>
+    <section aria-labelledby="insights-title" className="relative isolate overflow-hidden bg-linear-to-br from-night-card via-[#0d4452] to-[#14396a] text-white">
+      {/* deep teal-to-navy, soft facets and a fine dot grid */}
+      <FacetBackdrop className="text-brand-soft" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-70 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_80%)]"
+        style={{ backgroundImage: "radial-gradient(rgb(255 255 255 / 0.16) 1px, transparent 1.5px)", backgroundSize: "22px 22px" }}
+      />
 
       <div className="wrap-wide flex flex-col items-center py-[clamp(4rem,10svh,7rem)]">
         <h2 id="insights-title" className="text-center text-[clamp(2.2rem,1.3rem+3.6vw,4.2rem)] font-medium leading-none tracking-[-0.02em]">

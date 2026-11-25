@@ -4,6 +4,7 @@ import { useRef, type CSSProperties } from "react";
 import { gsap, mq, useGSAP } from "@/lib/gsap";
 import { Reveal } from "@/components/motion/Reveal";
 import { Button } from "@/components/ui/Button";
+import { QuoteMark } from "@/components/ui/QuoteMark";
 import { reviewsAreSamples, reviewsSection as copy } from "@/data/reviews";
 import { ReviewCard } from "./ReviewCard";
 
@@ -11,21 +12,6 @@ const n = copy.items.length;
 const SCROLL_PER_CARD = 60; // svh of scrolling per card
 const HOLD = 50; // svh of rest at the end
 const LEAD = 0.3; // timeline units of rest before the first card moves
-
-/** Big quote mark with a gold-to-blue gradient fill. */
-function QuoteMark({ className }: { className?: string }) {
-  return (
-    <span
-      aria-hidden
-      className={
-        "block select-none bg-gradient-to-br from-gold via-brand-soft to-brand bg-clip-text font-display font-bold leading-[0.8] text-transparent " +
-        (className ?? "")
-      }
-    >
-      &ldquo;
-    </span>
-  );
-}
 
 /**
  * Why us, part 3 of 3: reviews, on a night screen with soft gradients. Top: the TESTIMONIALS
@@ -83,7 +69,7 @@ export function WhyReviews() {
           <div className="flex items-center gap-4 lg:col-span-2">
             <p className="text-sm font-bold uppercase tracking-[0.14em]">{copy.label}</p>
             <span aria-hidden className="h-px flex-1 bg-white/30" />
-            <QuoteMark className="text-[3.25rem] sm:text-[4.5rem]" />
+            <QuoteMark kind="close" className="h-8 sm:h-11" />
           </div>
 
           {/* Left: fixed heading + CTA, quote mark at the bottom */}
@@ -103,7 +89,7 @@ export function WhyReviews() {
                 </Button>
               </div>
             </div>
-            <QuoteMark className="hidden text-[7rem] lg:block" />
+            <QuoteMark kind="open" className="hidden h-24 lg:block" />
           </div>
 
           {/* Right: the stack. Height = one card + one strip per extra card. */}
