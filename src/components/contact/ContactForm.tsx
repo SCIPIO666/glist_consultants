@@ -15,7 +15,7 @@ const field =
   "transition-[border-color,box-shadow] duration-300 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/30";
 const label = "mb-2 block text-sm font-semibold text-white/80";
 
-export function ContactForm() {
+export function ContactForm({ defaultService = "" }: { defaultService?: string }) {
   const [status, setStatus] = useState<Status>("idle");
   const [waMessage, setWaMessage] = useState<string | undefined>();
 
@@ -80,7 +80,7 @@ export function ContactForm() {
         </div>
         <div>
           <label htmlFor="c-service" className={label}>{copy.fields.service.label}</label>
-          <select id="c-service" name="service" defaultValue="" className={cn(field, "appearance-none bg-[length:1.1rem] bg-[right_1rem_center] bg-no-repeat pr-11")}
+          <select id="c-service" name="service" defaultValue={defaultService} className={cn(field, "appearance-none bg-[length:1.1rem] bg-[right_1rem_center] bg-no-repeat pr-11")}
             style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d9a62e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")" }}>
             <option value="" disabled>{copy.fields.service.placeholder}</option>
             {services.map((s) => (

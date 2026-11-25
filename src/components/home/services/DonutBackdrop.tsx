@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, type CSSProperties } from "react";
+import { useRef } from "react";
 import { gsap, ScrollTrigger, mq, useGSAP } from "@/lib/gsap";
 import { cn } from "@/lib/cn";
 
@@ -22,18 +22,16 @@ const donutB: Seg[] = [
   { pct: 15, cls: "text-brand-soft opacity-35" },
 ];
 
-const GAP = 0.9; // visible gap between ring segments, in % of the ring
+const GAP = 0.9; // visible gap between segments, in % of the ring
 
 function Donut({ segs }: { segs: Seg[] }) {
-  // Where each segment starts, computed up front (no reassigning inside render).
-  const starts = segs.map((_, i) => segs.slice(0, i).reduce((sum, x) => sum + x.pct, 0));
   return (
     <svg aria-hidden viewBox="0 0 200 200" className="size-full">
       {segs.map((s, i) => {
-        const start = starts[i];
+        const start = segs.slice(0, i).reduce((sum, x) => sum + x.pct, 0);
         return (
           <circle
-            key={s.cls}
+            key={i}
             cx={100}
             cy={100}
             r={66}
@@ -53,35 +51,38 @@ function Donut({ segs }: { segs: Seg[] }) {
 }
 
 type Props = {
-  /** Diameter of each donut as a % of the host's height. Default 72. */
+  /** Donut diameter as a share of the section height. 0.7 matches the design sketch. */
   size?: number;
-  /** Space left between the two donuts, as a % of the host's height. Default 1.2. */
+  /** Visible gap between the two donuts, as a share of the section height. */
   gap?: number;
-  /** Seconds per full turn. Default 150. */
-  duration?: number;
+  /** Sideways nudge in % of the width: the top donut goes left, the bottom one right. */
+  shift?: number;
   className?: string;
 };
 
 /**
- * Two stacked donuts, centred horizontally, turning in opposite directions.
- * The top one pokes out above the host and the bottom one below it; they meet
- * in the middle with a small gap. Drop it inside any `relative overflow-hidden`
- * box (it fills it) and it pauses itself while the nearest <section> is off-screen.
+ * Reusable background: two big donuts stacked one above the other, centred, with a
+ * visible gap between them. Each hangs off its own edge of the section (the top one
+ * off the top, the bottom one off the bottom), so only the part inside the section
+ * shows. They turn in opposite directions and pause while off-screen.
  *
- *   <DonutBackdrop size={72} gap={1.2} />
+ * Drop it as the first child of a `relative` box that has a definite height:
+ *   <div className="relative h-svh"><DonutBackdrop />...</div>
  */
-export function DonutBackdrop({ size = 72, gap = 1.2, duration = 150, className }: Props) {
+export function DonutBackdrop({ size = 0.7, gap = 0.02, shift = 3, className }: Props) {
   const root = useRef<HTMLDivElement>(null);
+  // How far each donut hangs past its edge, as a share of the height.
+  const over = (2 * size + gap - 1) / 2;
+  const d = `${size * 100}%`;
 
   useGSAP(
     () => {
-      const host = root.current;
-      if (!host) return;
-      const section = host.closest("section") ?? host;
+      const section = root.current?.closest("section");
+      if (!root.current || !section) return;
       const mm = gsap.matchMedia();
       mm.add(mq.motionOk, () => {
-        const a = gsap.to("[data-donut='a']", { rotation: 360, duration, ease: "none", repeat: -1 });
-        const b = gsap.to("[data-donut='b']", { rotation: -360, duration, ease: "none", repeat: -1 });
+        const a = gsap.to("[data-donut='a']", { rotation: 360, duration: 150, ease: "none", repeat: -1, transformOrigin: "50% 50%" });
+        const b = gsap.to("[data-donut='b']", { rotation: -360, duration: 150, ease: "none", repeat: -1, transformOrigin: "50% 50%" });
         const st = ScrollTrigger.create({
           trigger: section,
           start: "top bottom",
@@ -99,21 +100,25 @@ export function DonutBackdrop({ size = 72, gap = 1.2, duration = 150, className 
         return () => st.kill();
       });
     },
-    { scope: root, dependencies: [duration] },
+    { scope: root },
   );
-
-  const base = "absolute left-1/2 aspect-square -translate-x-1/2";
-  const topStyle: CSSProperties = { height: `${size}%`, top: `${50 - gap / 2 - size}%` };
-  const bottomStyle: CSSProperties = { height: `${size}%`, top: `${50 + gap / 2}%` };
 
   return (
     <div ref={root} aria-hidden className={cn("pointer-events-none absolute inset-0 overflow-hidden", className)}>
-      <div className={base} style={topStyle}>
+      {/* Top donut: hangs above the top edge */}
+      <div
+        className="absolute aspect-square"
+        style={{ height: d, top: `${-over * 100}%`, left: `${50 - shift}%`, transform: "translateX(-50%)" }}
+      >
         <div data-donut="a" className="size-full">
           <Donut segs={donutA} />
         </div>
       </div>
-      <div className={base} style={bottomStyle}>
+      {/* Bottom donut: hangs below the bottom edge */}
+      <div
+        className="absolute aspect-square"
+        style={{ height: d, bottom: `${-over * 100}%`, left: `${50 + shift}%`, transform: "translateX(-50%)" }}
+      >
         <div data-donut="b" className="size-full">
           <Donut segs={donutB} />
         </div>

@@ -10,7 +10,7 @@ export const hero = {
   /** One entry per line; the second line is styled as the accent. */
   titleLines: ["Guiding ", "Success"],
   lead:
-    "We handle the tax, payroll, and property side of things so you can focus on running and growing your business.",
+    "Comprehensive financial, tax, and property advisory. We navigate the regulatory landscape so you can build your enterprise with confidence.",
   primaryCta: { label: "Book a consultation", href: "/contact" },
   whatsappMessage: "Hello Glist Consultants, I would like to book a consultation.",
 } as const;
@@ -39,11 +39,11 @@ export const heroAlt2 = {
 
 /** The text loop under the coins. Mirrors the seven services in the brief. */
 export const heroTicker = [
-  "Tax compliance",
-  "Payroll",
-  "Registrations",
-  "Bookkeeping",
-  "Stock taking",
-  "Financial advisory",
-  "Property management",
+  "Statutory Compliance",
+  "Payroll Administration",
+  "Entity Registration",
+  "Bookkeeping & Reporting",
+  "Inventory Verification",
+  "Wealth Advisory",
+  "Property Management",
 ] as const;

@@ -1,6 +1,9 @@
-import { InsightTeaser } from "./InsightTeaser";
+import { InsightsLinks } from "./InsightsLinks";
 
-/** Home insights block: a single teaser card for the latest insight. */
+/**
+ * Home insights teaser. No circle band above it: you had commented the band out,
+ * so the section simply follows the reviews. Add <CircleBand .../> here if wanted.
+ */
 export function HomeInsights() {
-  return <InsightTeaser />;
+  return <InsightsLinks />;
 }

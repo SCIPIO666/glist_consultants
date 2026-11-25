@@ -1,166 +1,132 @@
 "use client";
 
 import { useRef, type CSSProperties } from "react";
-import Image from "next/image";
-import Link from "next/link";
 import { gsap, mq, useGSAP } from "@/lib/gsap";
+import { Reveal } from "@/components/motion/Reveal";
+import { Button } from "@/components/ui/Button";
 import { services } from "@/data/services";
 import { servicesSection as copy } from "@/data/servicesSection";
-import { serviceIcons } from "./ServiceIcons";
+import { DonutBackdrop } from "./DonutBackdrop";
+import { ServiceWheel } from "./ServiceWheel";
 
-const N = services.length;
-const STEP = 360 / N; // degrees per panel
-const GAP_DEG = 1.4; // visible gap between panels
-const R_OUT = 0.46; // outer radius, as a fraction of the wheel box
-const R_IN = 0.2; // hub radius
-const R_MID = (R_OUT + R_IN) / 2 + 0.02; // where icon + label sit
-const LIFT = 0.022; // how far a hovered panel moves outward (fraction of the box)
-
-const rad = (deg: number) => (deg * Math.PI) / 180;
-const pt = (deg: number, r: number) => `${(0.5 + r * Math.sin(rad(deg))).toFixed(4)} ${(0.5 - r * Math.cos(rad(deg))).toFixed(4)}`;
-
-/** Ring-sector path in 0..1 box units (used with clipPathUnits="objectBoundingBox"). Panel 0 is centred at 12 o'clock. */
-function sectorPath(i: number) {
-  const a0 = i * STEP - STEP / 2 + GAP_DEG / 2;
-  const a1 = i * STEP + STEP / 2 - GAP_DEG / 2;
-  return `M ${pt(a0, R_IN)} L ${pt(a0, R_OUT)} A ${R_OUT} ${R_OUT} 0 0 1 ${pt(a1, R_OUT)} L ${pt(a1, R_IN)} A ${R_IN} ${R_IN} 0 0 0 ${pt(a0, R_IN)} Z`;
-}
-
-const clipId = (i: number) => `gc-wheel-sector-${i}`;
+const n = services.length;
+const SCROLL = 300; // svh of scrolling that builds the wheel
+const LEAD = 0.5; // timeline units before the first wedge starts (the hub comes in first)
+const STEP = 0.55; // timeline units between one wedge and the next
+const DUR = 0.9; // how long one wedge takes to settle
+const HOLD = 0.6; // rest at the end
 
 /**
- * A wheel of seven clickable panels, one per service. Scrolling reveals it clockwise from
- * the 12 o'clock panel (scrubbed, so scrolling back un-reveals it). It is pinned by the
- * parent section, which is why the scrub trigger is the closest <section>.
+ * Services section. The section is tall and its content is pinned (CSS sticky) while
+ * scrolling plays a scrubbed timeline: the hub pops in, then the wedges sweep in one by
+ * one clockwise from 12 o'clock, each with its coloured arc drawing alongside.
+ * Scroll back up and it un-builds. The title and button stay fixed on the left.
  *
- * Hover / focus: the panel lifts out of the wheel with a deeper shadow and the service photo
- * fades in as its background. Layers (each owns one job, so GSAP and CSS never fight):
- *   outer   - GSAP scrub (opacity / scale / rotate)
- *   lift    - CSS translate + drop-shadow on hover
- *   link    - clip-path sector (also the hit area) holding colour, photo, icon and label
+ * Reduced motion or a very short screen: no pinning; the finished wheel just sits there.
  */
 export function ServicesWheel() {
-  const root = useRef<HTMLDivElement>(null);
+  const root = useRef<HTMLElement>(null);
 
   useGSAP(
     () => {
-      const host = root.current;
-      const section = host?.closest("section");
-      if (!host || !section) return;
-      const panels = gsap.utils.toArray<HTMLElement>("[data-sector]", host).slice(1); // 12 o'clock one is visible from the start
+      const el = root.current;
+      if (!el) return;
       const mm = gsap.matchMedia();
 
       mm.add(mq.pin, () => {
-        const tl = gsap.timeline({
-          defaults: { ease: "power2.out" },
-          scrollTrigger: { trigger: section, start: "top top", end: "bottom bottom", scrub: 0.6 },
+        const wedges = gsap.utils.toArray<HTMLElement>("[data-wedge]", el);
+        const arcs = gsap.utils.toArray<SVGPathElement>("[data-arc]", el);
+
+        // A wedge you cannot see yet cannot be clicked or tabbed to.
+        let ready = -1;
+        const setReady = (count: number) => {
+          if (count === ready) return;
+          ready = count;
+          wedges.forEach((w, i) => w.toggleAttribute("inert", i >= count));
+        };
+        setReady(0);
+
+        const tl: gsap.core.Timeline = gsap.timeline({
+          defaults: { ease: "power2.inOut" },
+          scrollTrigger: {
+            trigger: el,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 0.6,
+            onUpdate: (self) => {
+              const t = self.progress * tl.duration();
+              const done = wedges.filter((_, i) => t >= LEAD + i * STEP + DUR * 0.7).length;
+              setReady(done);
+            },
+          },
         });
-        tl.to({}, { duration: 0.3 }); // short rest before the first reveal
-        panels.forEach((p, i) => {
+
+        tl.fromTo("[data-hub]", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.6)" }, 0);
+        wedges.forEach((w, i) => {
+          const at = LEAD + i * STEP;
           tl.fromTo(
-            p,
-            { autoAlpha: 0, scale: 0.55, rotation: -STEP },
-            { autoAlpha: 1, scale: 1, rotation: 0, duration: 1 },
-            0.3 + i * 0.75,
+            w,
+            { rotation: -26, scale: 0.86, opacity: 0, transformOrigin: "50% 50%" },
+            { rotation: 0, scale: 1, opacity: 1, duration: DUR },
+            at,
           );
+          tl.fromTo(arcs[i], { drawSVG: "0%" }, { drawSVG: "100%", duration: DUR, ease: "none" }, at + 0.1);
         });
-        tl.to({}, { duration: 0.8 }); // rest on the full wheel
+        tl.to({}, { duration: HOLD }, LEAD + (n - 1) * STEP + DUR);
+
+        return () => {
+          wedges.forEach((w) => w.removeAttribute("inert"));
+        };
       });
     },
     { scope: root },
   );
 
-  return (
-    <div ref={root} className="@container relative mx-auto aspect-square w-[min(100%,54svh)] lg:w-[min(100%,78svh)] lg:max-w-[40rem] flat:w-full flat:max-w-[32rem]">
-      {/* Clip paths: zero-size, not display:none (that would break the references) */}
-      <svg aria-hidden width="0" height="0" className="absolute">
-        <defs>
-          {services.map((s, i) => (
-            <clipPath key={s.slug} id={clipId(i)} clipPathUnits="objectBoundingBox">
-              <path d={sectorPath(i)} />
-            </clipPath>
-          ))}
-        </defs>
-      </svg>
+  const style = { "--wheel-h": `calc(100svh + ${SCROLL}svh)` } as CSSProperties;
 
-      {/* Hub */}
-      <div
-        aria-hidden
-        className="absolute left-1/2 top-1/2 grid size-[36%] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-night-deep"
-      >
-        <div className="text-center leading-none">
-          <p className="font-display text-[11cqw] font-medium text-gold">{String(N).padStart(2, "0")}</p>
-          <p className="mt-[1.4cqw] text-[2.4cqw] font-semibold uppercase tracking-[0.22em] text-white/70">services</p>
+  return (
+    <section
+      ref={root}
+      aria-labelledby="services-title"
+      style={style}
+      className="relative h-[var(--wheel-h)] bg-night text-white flat:h-auto"
+    >
+      <div className="sticky top-0 h-svh overflow-hidden flat:static flat:h-auto flat:overflow-hidden">
+        <DonutBackdrop />
+
+        <div className="wrap-wide relative z-10 flex h-full flex-col items-center justify-between gap-3 pb-5 pt-[calc(var(--header-h)+2.75rem)] lg:grid lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-10 lg:pb-0 lg:pt-[var(--header-h)] flat:min-h-svh flat:justify-center flat:gap-10 flat:py-24">
+          {/* Fixed left side: title and one button, nothing else */}
+          <div className="flex w-full items-end justify-between gap-4 lg:block">
+            <Reveal y={40}>
+              <h2
+                id="services-title"
+                className="text-[clamp(2.25rem,1.2rem+4.8vw,7.25rem)] font-medium leading-[0.95] tracking-[-0.03em]"
+              >
+                {copy.titleLines[0]}
+                <span className="max-lg:ml-[0.25em] lg:block">
+                  {copy.titleLines[1]}
+                  <span className="text-gold">.</span>
+                </span>
+              </h2>
+            </Reveal>
+            <Reveal y={20} delay={0.15} className="hidden lg:mt-10 lg:block">
+              <Button href={copy.cta.href} size="lg" arrow>
+                {copy.cta.label}
+              </Button>
+            </Reveal>
+          </div>
+
+          {/* Circular grid */}
+          <ServiceWheel className="w-[min(92vw,calc(100svh-17.5rem))] shrink-0 lg:w-[min(100%,calc(100svh-8rem))] lg:justify-self-center flat:w-[min(92vw,36rem)]" />
+
+          {/* Phone / tablet button (the desktop one sits under the title) */}
+          <div className="flex w-full justify-center lg:hidden">
+            <Button href={copy.cta.href} arrow>
+              {copy.cta.label}
+            </Button>
+          </div>
         </div>
       </div>
-
-      <ul aria-label={copy.srListLabel} className="absolute inset-0">
-        {services.map((s, i) => {
-          const a = i * STEP;
-          const Icon = serviceIcons[s.slug];
-          const label = copy.wheelLabels[s.slug] ?? s.title;
-          const style = {
-            "--lx": `${(LIFT * Math.sin(rad(a)) * 100).toFixed(2)}cqw`,
-            "--ly": `${(-LIFT * Math.cos(rad(a)) * 100).toFixed(2)}cqw`,
-            "--cx": `${((0.5 + R_MID * Math.sin(rad(a))) * 100).toFixed(2)}%`,
-            "--cy": `${((0.5 - R_MID * Math.cos(rad(a))) * 100).toFixed(2)}%`,
-          } as CSSProperties;
-          return (
-            <li
-              key={s.slug}
-              data-sector
-              style={style}
-              className={
-                "pointer-events-none absolute inset-0 hover:z-10 focus-within:z-10 " +
-                (i === 0 ? "" : "invisible opacity-0 flat:visible flat:opacity-100")
-              }
-            >
-              <div className="pointer-events-none size-full drop-shadow-[0_4px_8px_rgba(0,0,0,0.28)] transition-[translate,filter] duration-500 ease-out-expo [li:hover>&]:translate-x-[var(--lx)] [li:hover>&]:translate-y-[var(--ly)] [li:hover>&]:drop-shadow-[0_26px_30px_rgba(0,0,0,0.6)] [li:focus-within>&]:translate-x-[var(--lx)] [li:focus-within>&]:translate-y-[var(--ly)] [li:focus-within>&]:drop-shadow-[0_26px_30px_rgba(0,0,0,0.6)]">
-                <Link
-                  href={`/services#${s.slug}`}
-                  aria-label={s.title}
-                  style={{ clipPath: `url(#${clipId(i)})` }}
-                  className="group pointer-events-auto absolute inset-0 block overflow-hidden bg-night-card outline-none"
-                >
-                  {/* Panel colour (alternates a touch so neighbours read apart) */}
-                  <span
-                    aria-hidden
-                    className={
-                      "absolute inset-0 transition-opacity duration-500 " +
-                      (i % 2 === 0 ? "bg-night-card" : "bg-[#0e444c]")
-                    }
-                  />
-                  {/* Photo: only on hover / focus */}
-                  <Image
-                    src={s.image}
-                    alt=""
-                    fill
-                    sizes="(min-width:1024px) 640px, 90vw"
-                    quality={60}
-                    className="object-cover opacity-0 transition-[opacity,transform] duration-700 ease-out-expo scale-110 group-hover:scale-100 group-hover:opacity-100 group-focus-visible:scale-100 group-focus-visible:opacity-100"
-                  />
-                  <span
-                    aria-hidden
-                    className="absolute inset-0 bg-night-deep/0 transition-colors duration-500 group-hover:bg-night-deep/55 group-focus-visible:bg-night-deep/55"
-                  />
-                  {/* Light edge so the lifted panel has depth */}
-                  <span
-                    aria-hidden
-                    className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-black/25 opacity-100"
-                  />
-                  <span
-                    className="absolute flex w-[21%] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-[1.4cqw] text-center text-white"
-                    style={{ left: "var(--cx)", top: "var(--cy)" }}
-                  >
-                    {Icon && <Icon className="size-[6.4cqw] text-gold transition-transform duration-500 ease-out-expo group-hover:scale-110 group-focus-visible:scale-110" />}
-                    <span className="text-[max(0.66rem,2.7cqw)] font-semibold leading-tight">{label}</span>
-                  </span>
-                </Link>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+    </section>
   );
 }

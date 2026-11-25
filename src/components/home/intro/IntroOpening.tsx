@@ -17,7 +17,7 @@ export function IntroOpening() {
       <Reveal y={70} delay={0.15} duration={1.3} className="mt-5">
         <h2
           id="intro-word"
-          className="font-display text-[clamp(3.75rem,1rem+14.5vw,15rem)] font-medium leading-[0.95] tracking-[-0.035em]"
+          className="font-display text-[clamp(4.25rem,1rem+17vw,16rem)] font-medium leading-[0.95] tracking-[-0.035em]"
         >
           {introOpening.word}
           <span aria-hidden className="ml-[0.04em] inline-block size-[0.14em] rounded-full bg-gold" />
