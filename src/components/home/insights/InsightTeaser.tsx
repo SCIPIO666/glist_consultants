@@ -13,16 +13,12 @@ function LineArrow() {
   );
 }
 
-/**
- * Home insights: one teaser card, laid out like the reference. A heading, a small
- * "latest insights" link, then a white card with the photo on the left and the
- * topic/date, title and "read more" on the right. Whole card is one link.
- */
+/** Home insights teaser, using the original GC11 content-data contract. */
 export function InsightTeaser() {
-  const c = copy.card;
+  const c = copy.featured;
+
   return (
     <section aria-labelledby="insights-title" className="relative isolate overflow-hidden bg-linear-to-br from-night-card via-[#0d4452] to-[#14396a] text-white">
-      {/* deep teal-to-navy, soft facets and a fine dot grid */}
       <FacetBackdrop className="text-brand-soft" />
       <div
         aria-hidden
@@ -36,10 +32,10 @@ export function InsightTeaser() {
         </h2>
 
         <Link
-          href={copy.allLink.href}
+          href={copy.linkHref}
           className="group mt-6 inline-flex items-center gap-5 text-sm font-semibold uppercase tracking-[0.1em] text-white"
         >
-          {copy.allLink.label}
+          {copy.linkLabel}
           <LineArrow />
         </Link>
 
@@ -49,8 +45,8 @@ export function InsightTeaser() {
         >
           <div className="relative aspect-[4/3] overflow-hidden md:aspect-square">
             <Image
-              src={c.image}
-              alt={c.imageAlt}
+              src={c.image.src}
+              alt={c.image.alt}
               fill
               sizes="(min-width: 768px) 36vw, 90vw"
               quality={70}
@@ -59,14 +55,13 @@ export function InsightTeaser() {
           </div>
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.1em] text-brand">
-              {c.topic} <span aria-hidden className="mx-2 text-ink/30">|</span>
               <time>{c.date}</time>
             </p>
             <p className="mt-4 font-display text-[clamp(1.9rem,1.1rem+2.8vw,3.4rem)] leading-[1.08] tracking-[-0.02em] text-ink">
               {c.title}
             </p>
             <span className="mt-6 inline-flex items-center gap-5 text-sm font-semibold uppercase tracking-[0.1em]">
-              {c.readMore}
+              {c.cta}
               <LineArrow />
             </span>
           </div>

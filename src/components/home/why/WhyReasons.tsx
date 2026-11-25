@@ -78,7 +78,7 @@ export function WhyReasons() {
         <span className="absolute -right-16 top-[36%] size-[16rem] rounded-full bg-gold/40 blur-3xl lg:size-[26rem]" />
         <span className="absolute bottom-[-3rem] left-[28%] size-[16rem] rounded-full bg-brand-soft/35 blur-3xl lg:size-[24rem]" />
       </div>
-      <ScatterDots tone="gold" className="absolute bottom-0 right-0 w-[min(75vw,34rem)] lg:w-[min(46vw,42rem)]" />
+      <ScatterDots className="absolute bottom-0 right-0 w-[min(75vw,34rem)] lg:w-[min(46vw,42rem)]" />
 
       {/* Two faint decorative lines: the section in thirds (desktop only) */}
       <span aria-hidden data-why-line className="pointer-events-none absolute inset-y-0 left-1/3 hidden w-px bg-ink/10 lg:block" />
