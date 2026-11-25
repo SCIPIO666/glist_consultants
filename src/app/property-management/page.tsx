@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { PropertyHero } from "@/components/property/PropertyHero";
-import { PropertyPillars } from "@/components/property/PropertyPillars";
 import { PropertyEnquiry } from "@/components/property/PropertyEnquiry";
 import { PropertyFocus } from "@/components/property/PropertyFocus";
 import { PropertyAbout } from "@/components/property/PropertyAbout";
@@ -20,14 +19,13 @@ export const metadata: Metadata = {
 
 /**
  * PROPERTY MANAGEMENT. Modelled section by section on the reference page:
- * hero -> three big cards -> enquiry form -> three feature cards -> about -> mission
+ * hero (with the three Find / Collect / Maintain cards as glass panels) -> enquiry form -> three feature cards -> about -> mission
  * -> numbered check-offs -> task cards -> testimonials -> news -> final CTA + question strip.
  */
 export default function PropertyManagementPage() {
   return (
     <main>
       <PropertyHero />
-      <PropertyPillars />
       <PropertyEnquiry />
       <PropertyFocus />
       <PropertyAbout />

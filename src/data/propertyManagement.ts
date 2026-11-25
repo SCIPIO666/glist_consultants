@@ -13,11 +13,14 @@ export const propertyMeta = {
 } as const;
 
 export const propertyHero = {
-  titleStrong: "We run your rentals",
-  titleRest: "so you don't have to.",
-  lead: "Tenants, rent and repairs take real time. Hand them to one dependable team and keep the income.",
+  /** Stacked one phrase per line, like the reference. */
+  titleLines: ["We run", "your rentals", "so you don't", "have to."],
+  note: "Free landlord consultation",
   cta: { label: "Get help now", href: "#enquire" },
-  image: "/pages/services/rental.webp",
+  /** Bottom-right quiet link. */
+  more: { title: "How do we manage your rentals?", label: "Read", href: "/services#property-management" },
+  main: { src: "/pages/home/services-intro/property-management.webp", alt: "A modern apartment block managed on behalf of its landlord", position: "62% 40%" },
+  side: { src: "/pages/services/rental.webp", alt: "Colourful balconies on a block of rental flats", position: "50% 45%" },
 } as const;
 
 /** Section 2: the three big cards (the reference shows settlement figures; we have no real figures, so we show the job). */
