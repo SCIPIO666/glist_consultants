@@ -16,7 +16,7 @@ export const propertyHero = {
   /** Stacked one phrase per line, like the reference. */
   titleLines: ["We run", "your rentals", "so you don't", "have to."],
   note: "Free landlord consultation",
-  cta: { label: "Get help now", href: "#enquire" },
+  cta: { label: "Get help now", href: "/contact?service=property-management" },
   /** Bottom-right quiet link. */
   more: { title: "How do we manage your rentals?", label: "Read", href: "/services#property-management" },
   main: { src: "/pages/home/services-intro/property-management.webp", alt: "A modern apartment block managed on behalf of its landlord", position: "62% 40%" },

@@ -73,12 +73,12 @@ export function PropertyHero() {
   return (
     <section ref={root} aria-labelledby="property-title" className="relative isolate overflow-hidden bg-night text-white">
       {/* Background circle: its CSS position is where it settles (bottom-left) */}
-      <div
-        data-ph="orb"
-        aria-hidden
-        className="pointer-events-none absolute -bottom-[16%] -left-[7%] -z-10 aspect-square w-[clamp(15rem,32vw,30rem)] rounded-full border border-brand-soft/25 opacity-0"
-        style={{ background: "radial-gradient(circle at 32% 28%, rgb(74 144 226 / 0.5), rgb(31 111 214 / 0.22) 52%, rgb(0 32 37 / 0) 74%)" }}
-      />
+    <div
+      data-ph="orb"
+      aria-hidden
+      className="pointer-events-none absolute -bottom-[16%] -left-[7%] -z-10 aspect-square w-[clamp(15rem,32vw,30rem)] rounded-full border border-white/25 opacity-0"
+      style={{ background: "radial-gradient(circle at 32% 28%, rgb(255 255 255 / 0.5), rgb(255 255 255 / 0.22) 52%, rgb(0 32 37 / 0) 74%)" }}
+    />
 
       <div className="wrap-wide relative grid min-h-[clamp(36rem,100svh,58rem)] items-center gap-10 pt-[calc(var(--header-h)+2.5rem)] pb-14 lg:grid-cols-[1.1fr_1fr] lg:gap-0 lg:pb-16">
         {/* Copy */}
