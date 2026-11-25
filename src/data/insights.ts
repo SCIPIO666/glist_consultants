@@ -47,7 +47,7 @@ export const insightsPage = {
   lead: "Plain-English guides on tax, payroll, bookkeeping, property and personal finance, written to help you decide with confidence.",
   filterTitle: "Filter articles",
   groups: { service: "Service", category: "Category", reading: "Reading time" },
-  readLabel: "Read article",
+  readLabel: "Read more",
   emptyTitle: "No articles match these filters.",
   emptyHint: "Try removing a filter to see more.",
   disclaimer: "General information only, not professional advice. Contact us for guidance on your situation.",
@@ -63,6 +63,11 @@ export function formatInsightDate(iso: string) {
   return new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(
     new Date(iso + "T00:00:00Z"),
   );
+}
+
+/** "November 2026": the short date shown on cards. */
+export function formatInsightMonth(iso: string) {
+  return new Intl.DateTimeFormat("en-GB", { month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(iso + "T00:00:00Z"));
 }
 
 const raw: Insight[] = [

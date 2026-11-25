@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { categories, formatInsightDate, insightsPage as copy, type Insight } from "@/data/insights";
-import { cn } from "@/lib/cn";
+import { formatInsightMonth, insightsPage as copy, type Insight } from "@/data/insights";
 
 /** Long thin arrow; the shaft stretches on hover of the card (group). */
 function LongArrow() {
@@ -23,109 +22,45 @@ function LongArrow() {
 }
 
 /**
- * One wide article card, in one of two looks:
- *   "white"  white card, text on the left, photo panel on the right
- *   "image"  the photo is the card background, text over a dark gradient
- * Both: category chip, date, read time, title, description, and a "Read article"
- * link whose hit area covers the whole card.
+ * Minimal article card, the same look as the Home "News and Insights" teaser:
+ * white card, photo on the left, then date, title and a "Read more" link.
+ * The link's hit area covers the whole card. (Category, description and read
+ * time stay in the data for the filters and the article page, but are not shown here.)
  */
-export function InsightCard({
-  item,
-  variant,
-  priority = false,
-}: {
-  item: Insight;
-  variant: "white" | "image";
-  priority?: boolean;
-}) {
-  const dark = variant === "image";
-  const category = categories.find((c) => c.value === item.category)?.label ?? item.category;
-
-  const body = (
-    <div
-      className={cn(
-        "relative flex flex-col justify-between gap-8 p-6 sm:p-8 lg:p-10",
-        dark ? "h-full min-h-[inherit] max-w-3xl" : "sm:order-1",
-      )}
-    >
-      <div>
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs font-semibold uppercase tracking-[0.12em]">
-          <span className={cn("rounded-pill px-3 py-1", dark ? "bg-white/15 text-white backdrop-blur-sm" : "bg-brand/10 text-brand")}>
-            {category}
-          </span>
-          <time dateTime={item.date} className={dark ? "text-white/80" : "text-ink-muted"}>
-            {formatInsightDate(item.date)}
-          </time>
-          <span aria-hidden className={dark ? "text-white/40" : "text-ink/25"}>
-            /
-          </span>
-          <span className={dark ? "text-white/80" : "text-ink-muted"}>{item.readMinutes} min read</span>
-        </div>
-
-        <h3 className="mt-5 font-display text-[clamp(1.5rem,1.1rem+1.5vw,2.5rem)] font-medium leading-[1.12] tracking-[-0.015em] sm:max-w-[28ch]">
-          {item.title}
-        </h3>
-        <p className={cn("mt-3 max-w-[54ch] text-base leading-relaxed", dark ? "text-white/80" : "text-ink-muted")}>
-          {item.excerpt}
-        </p>
-      </div>
-
-      <Link
-        href={`/insights/${item.slug}`}
-        className={cn(
-          "inline-flex w-fit items-center gap-4 text-sm font-semibold uppercase tracking-[0.12em] after:absolute after:inset-0 after:z-10 after:content-['']",
-          dark ? "text-white focus-visible:outline-white" : "text-ink",
-        )}
-      >
-        {copy.readLabel}
-        <span className="sr-only">: {item.title}</span>
-        <LongArrow />
-      </Link>
-    </div>
-  );
-
+export function InsightCard({ item, priority = false }: { item: Insight; priority?: boolean }) {
   return (
-    <article
-      className={cn(
-        "group relative isolate min-h-[19rem] overflow-hidden rounded-card shadow-card transition-shadow duration-500 ease-out-expo hover:shadow-lift lg:min-h-[21rem]",
-        dark ? "bg-night-deep text-white" : "flex flex-col bg-white text-ink sm:grid sm:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]",
-      )}
-    >
-      {dark ? (
-        <>
+    <article className="group relative grid overflow-hidden rounded-card bg-white text-ink shadow-card transition-shadow duration-500 ease-out-expo hover:shadow-lift sm:grid-cols-[minmax(0,0.4fr)_1fr] sm:items-center">
+      <div className="p-5 sm:p-7 lg:p-9">
+        <div className="relative aspect-[4/3] overflow-hidden">
           <Image
             src={item.image.src}
             alt={item.image.alt}
             fill
             priority={priority}
-            sizes="(min-width: 1024px) 60rem, 100vw"
-            quality={65}
-            className="-z-20 object-cover transition-transform duration-700 ease-out-expo group-hover:scale-105"
+            sizes="(min-width: 1280px) 22rem, (min-width: 640px) 34vw, 90vw"
+            quality={70}
+            className="object-cover transition-transform duration-700 ease-out-expo group-hover:scale-105"
             style={{ objectPosition: item.image.focus }}
           />
-          <div
-            aria-hidden
-            className="absolute inset-0 -z-10 bg-linear-to-t from-night-deep/95 via-night-deep/65 to-night/25 sm:bg-linear-to-r sm:from-night-deep/90 sm:via-night-deep/60 sm:to-night/10"
-          />
-          {body}
-        </>
-      ) : (
-        <>
-          {body}
-          <div className="relative order-first aspect-[16/9] overflow-hidden sm:order-2 sm:aspect-auto">
-            <Image
-              src={item.image.src}
-              alt={item.image.alt}
-              fill
-              priority={priority}
-              sizes="(min-width: 1024px) 24rem, (min-width: 640px) 40vw, 100vw"
-              quality={65}
-              className="object-cover transition-transform duration-700 ease-out-expo group-hover:scale-105"
-              style={{ objectPosition: item.image.focus }}
-            />
-          </div>
-        </>
-      )}
+        </div>
+      </div>
+
+      <div className="px-5 pb-7 sm:px-2 sm:py-7 sm:pr-9 lg:pr-12">
+        <time dateTime={item.date} className="text-sm font-semibold uppercase tracking-[0.12em] text-brand">
+          {formatInsightMonth(item.date)}
+        </time>
+        <h3 className="mt-3 max-w-[24ch] font-display text-[clamp(1.5rem,1.1rem+1.6vw,2.6rem)] font-normal leading-[1.12] tracking-[-0.015em]">
+          {item.title}
+        </h3>
+        <Link
+          href={`/insights/${item.slug}`}
+          className="mt-6 inline-flex items-center gap-4 text-sm font-semibold uppercase tracking-[0.12em] text-ink after:absolute after:inset-0 after:content-['']"
+        >
+          {copy.readLabel}
+          <span className="sr-only">: {item.title}</span>
+          <LongArrow />
+        </Link>
+      </div>
     </article>
   );
 }

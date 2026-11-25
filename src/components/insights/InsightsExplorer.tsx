@@ -33,7 +33,7 @@ function passes(item: Insight, sel: Sel, skip?: Key) {
 /**
  * The Insights page: a long list of wide article cards on the right and a
  * sticky checklist of filters on the left (a collapsible panel on phones).
- * Cards alternate between a white look and a photo-background look.
+ * Cards are the minimal teaser-style card (photo, date, title, Read more).
  */
 export function InsightsExplorer() {
   const [sel, setSel] = useState<Sel>(EMPTY);
@@ -115,11 +115,11 @@ export function InsightsExplorer() {
           </header>
 
           {filtered.length > 0 ? (
-            <ul role="list" className="space-y-6 lg:space-y-8">
+            <ul role="list" className="space-y-5 lg:space-y-6">
               {filtered.map((item, i) => (
                 <li key={item.slug}>
                   <Reveal y={50} duration={1.1}>
-                    <InsightCard item={item} variant={i % 2 === 0 ? "white" : "image"} priority={i === 0} />
+                    <InsightCard item={item} priority={i === 0} />
                   </Reveal>
                 </li>
               ))}
