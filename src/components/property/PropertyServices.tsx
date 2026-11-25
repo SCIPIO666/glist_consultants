@@ -2,200 +2,233 @@
 
 import { useRef, useState } from "react";
 import { gsap, ScrollTrigger, mq, useGSAP } from "@/lib/gsap";
-import { DashField } from "@/components/ui/DashField";
+import { useSmoothScroll } from "@/components/providers/SmoothScroll";
 import { Button } from "@/components/ui/Button";
 import { ArrowRight } from "@/components/ui/icons";
 import { propertyServices as copy } from "@/data/propertyServices";
 
-const pad = (n: number) => String(n).padStart(2, "0");
+type ServiceDisc = HTMLElement & { __serviceIndex?: number };
+const pad = (value: number) => String(value).padStart(2, "0");
 
 /**
- * Property services: fixed editorial column beside a flowing field of circular,
- * glass-finished service panels. The service field remains part of normal page
- * scrolling; each circle reveals as it enters and reverses cleanly on scroll-up.
+ * Full-screen rental property services scene.
+ * The page itself is the scroller: ScrollTrigger pins the scene and scrubs
+ * every glass disc bottom -> centre -> top. This intentionally avoids a nested
+ * overflow scroller so Lenis and ScrollTrigger stay in sync.
  */
 export function PropertyServices() {
   const root = useRef<HTMLElement>(null);
   const [active, setActive] = useState(0);
+  const { scrollTo } = useSmoothScroll();
   const total = copy.items.length;
 
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia();
+  useGSAP(() => {
+    const section = root.current;
+    if (!section) return;
 
-      mm.add(mq.motionOk, () => {
-        const heading = root.current?.querySelectorAll<HTMLElement>("[data-ps=head]") ?? [];
-        const cards = gsap.utils.toArray<HTMLElement>("[data-ps=card]");
+    const discs = gsap.utils.toArray<ServiceDisc>("[data-service-disc]", section);
+    const contents = gsap.utils.toArray<HTMLElement>("[data-service-content]", section);
+    if (!discs.length) return;
 
-        gsap.fromTo(
-          heading,
-          { autoAlpha: 0, y: 34 },
-          {
+    const mm = gsap.matchMedia();
+
+    mm.add(mq.pin, () => {
+      // Keep all but the first disc out of view before the first scroll tick.
+      gsap.set(discs, { autoAlpha: 0, yPercent: 115, scale: 0.84, rotation: -10 });
+      gsap.set(contents, { autoAlpha: 0, y: 18 });
+
+      const timeline = gsap.timeline({
+        defaults: { ease: "none" },
+        scrollTrigger: {
+          id: "property-services-orbit",
+          trigger: section,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 0.8,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            const next = Math.min(total - 1, Math.floor(self.progress * total));
+            setActive((current) => (current === next ? current : next));
+          },
+        },
+      });
+
+      discs.forEach((disc, index) => {
+        const content = contents[index];
+        const at = index;
+
+        timeline.to(disc, {
+          yPercent: 0,
+          autoAlpha: 1,
+          scale: 1,
+          rotation: 0,
+          duration: 0.44,
+        }, at);
+
+        if (content) {
+          timeline.to(content, {
             autoAlpha: 1,
             y: 0,
-            duration: 0.95,
-            stagger: 0.12,
-            ease: "expo.out",
-            scrollTrigger: {
-              trigger: root.current,
-              start: "top 72%",
-              toggleActions: "play none none reverse",
-            },
-          },
-        );
+            duration: 0.3,
+          }, at + 0.18);
+        }
 
-        cards.forEach((card, index) => {
-          const circle = card.querySelector<HTMLElement>("[data-ps=orb]");
-          const timeline = gsap.timeline({
-            scrollTrigger: {
-              trigger: card,
-              start: "top 88%",
-              toggleActions: "play none none reverse",
-            },
-          });
-
-          timeline.fromTo(
-            card,
-            { autoAlpha: 0, y: 58, scale: 0.94 },
-            { autoAlpha: 1, y: 0, scale: 1, duration: 0.9, ease: "expo.out" },
-          );
-          if (circle) {
-            timeline.fromTo(
-              circle,
-              { scale: 0.72, rotate: -12 },
-              { scale: 1, rotate: 0, duration: 0.8, ease: "back.out(1.7)" },
-              0.12,
-            );
+        // Every disc except the last one clears upward as the next arrives.
+        if (index < total - 1) {
+          timeline.to(disc, {
+            yPercent: -118,
+            autoAlpha: 0,
+            scale: 0.84,
+            rotation: 10,
+            duration: 0.56,
+          }, at + 0.44);
+          if (content) {
+            timeline.to(content, { autoAlpha: 0, y: -18, duration: 0.2 }, at + 0.43);
           }
-
-          ScrollTrigger.create({
-            trigger: card,
-            start: "top 60%",
-            end: "bottom 40%",
-            onToggle: (self) => {
-              if (self.isActive) setActive(index);
-            },
-          });
-        });
-
-        gsap.fromTo(
-          "[data-ps=corner]",
-          { autoAlpha: 0, scale: 0.94 },
-          {
-            autoAlpha: 1,
-            scale: 1,
-            duration: 1.5,
-            stagger: 0.18,
-            ease: "expo.out",
-            scrollTrigger: {
-              trigger: root.current,
-              start: "top 78%",
-              toggleActions: "play none none reverse",
-            },
-          },
-        );
-
+        } else {
+          // Give the final service a little breathing room at the end of the pin.
+          timeline.to({}, { duration: 1 }, at + 0.44);
+        }
       });
 
-      mm.add(mq.reduced, () => {
-        gsap.set("[data-ps=head], [data-ps=card], [data-ps=orb], [data-ps=corner]", {
-          autoAlpha: 1,
-          x: 0,
-          y: 0,
-          scale: 1,
-          rotate: 0,
-        });
+      // The decorative orbit is invisible; its slow rotation adds subtle depth
+      // without competing with the scroll-controlled service transitions.
+      gsap.to("[data-service-orbit]", {
+        rotation: 360,
+        duration: 100,
+        repeat: -1,
+        ease: "none",
+        transformOrigin: "50% 50%",
       });
 
-      return () => mm.revert();
-    },
-    { scope: root },
-  );
+      requestAnimationFrame(() => ScrollTrigger.refresh());
+      return () => {
+        ScrollTrigger.getById("property-services-orbit")?.kill();
+      };
+    });
+
+    // Short screens and reduced-motion users get a normal, readable service list.
+    mm.add("(prefers-reduced-motion: reduce), (max-height: 559px)", () => {
+      gsap.set(discs, { clearProps: "all", autoAlpha: 1, yPercent: 0, scale: 1, rotation: 0 });
+      gsap.set(contents, { clearProps: "all", autoAlpha: 1, y: 0 });
+    });
+
+    return () => mm.revert();
+  }, { scope: root, dependencies: [total] });
+
+  const jumpTo = (index: number) => {
+    const section = root.current;
+    if (!section) return;
+    scrollTo(section, index * window.innerHeight);
+  };
 
   return (
     <section
       ref={root}
-      aria-labelledby="ps-title"
-      className="relative isolate overflow-hidden bg-night text-white"
+      aria-labelledby="property-services-title"
+      className="property-services-root relative isolate bg-night text-white"
+      style={{ height: `${(total + 1) * 100}svh` }}
     >
-      {/* Diagonal corner details from the property-page moodboard. */}
-      <div
-        data-ps="corner"
-        aria-hidden
-        className="pointer-events-none absolute right-0 top-0 -z-10 h-[min(66%,44rem)] w-[min(76%,54rem)] opacity-0"
-      >
-        <DashField focus="top-right" variant="ripple" className="size-full" />
-      </div>
-      <div
-        data-ps="corner"
-        aria-hidden
-        className="pointer-events-none absolute bottom-0 left-0 -z-10 h-[min(66%,44rem)] w-[min(76%,54rem)] opacity-0"
-      >
-        <DashField focus="bottom-left" variant="ripple" className="size-full" />
-      </div>
-
-      {/* Quiet circular geometry behind the service field. */}
-      <div aria-hidden className="pointer-events-none absolute -right-[18rem] top-[22%] -z-10 size-[42rem] rounded-full border border-white/[0.07]" />
-      <div aria-hidden className="pointer-events-none absolute -right-[12rem] top-[29%] -z-10 size-[30rem] rounded-full border border-gold/[0.13]" />
-
-      <div className="wrap-wide grid min-h-svh gap-12 py-[clamp(5rem,11svh,8.5rem)] lg:grid-cols-[minmax(17rem,0.78fr)_minmax(0,1.22fr)] lg:gap-12 xl:gap-20">
-        {/* Editorial column stays in view while the service circles pass by. */}
-        <div className="relative lg:py-12">
-          <div className="lg:sticky lg:top-[calc(var(--header-h)+3rem)]">
-            <p data-ps="head" className="mb-6 text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-gold opacity-0">
-              Rental property management
-            </p>
-            <h2
-              data-ps="head"
-              id="ps-title"
-              className="max-w-[11ch] font-display text-[clamp(2.7rem,4.8vw,5.3rem)] font-medium leading-[0.98] tracking-[-0.045em] opacity-0"
-            >
-              {copy.title}
-            </h2>
-            <p data-ps="head" className="mt-7 max-w-md text-base leading-relaxed text-white/65 opacity-0 sm:text-lg">
-              {copy.text}
-            </p>
-            <div data-ps="head" className="mt-9 flex flex-wrap items-center gap-6 opacity-0">
-              <Button href={copy.cta.href} size="lg" arrow>
-                {copy.cta.label}
-              </Button>
-              <p aria-label={`Service ${active + 1} of ${total}`} className="font-display text-2xl tabular-nums text-white/85">
-                {pad(active + 1)}<span className="text-white/35"> / {pad(total)}</span>
-              </p>
-            </div>
+      <div className="sticky top-0 grid h-svh min-h-[34rem] grid-rows-[auto_minmax(0,1fr)] overflow-hidden lg:grid-rows-1 lg:grid-cols-[minmax(17rem,0.72fr)_minmax(0,1.28fr)] flat:static flat:h-auto flat:min-h-svh">
+        {/* Fixed service index */}
+        <aside
+          data-service-sidebar
+          className="relative z-20 flex min-h-0 flex-col justify-center border-b border-white/10 bg-night-deep px-6 py-5 sm:px-9 lg:border-b-0 lg:border-r lg:border-r-gold/35 lg:px-[clamp(2rem,5vw,5.5rem)] lg:py-12"
+        >
+          <p className="mb-3 font-mono text-[0.62rem] uppercase tracking-[0.24em] text-white/45">Glist Consultants</p>
+          <h2 id="property-services-title" className="mb-5 text-[clamp(1.7rem,3.2vw,3.4rem)] font-medium leading-none tracking-[-0.055em]">
+            Services<span className="text-gold">.</span>
+          </h2>
+          <nav aria-label="Rental property management services" className="grid grid-cols-2 gap-x-3 gap-y-1 sm:grid-cols-4 lg:grid-cols-1 lg:gap-y-2">
+            {copy.items.map((item, index) => (
+              <button
+                key={item.title}
+                type="button"
+                onClick={() => jumpTo(index)}
+                aria-current={active === index ? "step" : undefined}
+                className={`group flex min-w-0 items-start gap-2 text-left text-[0.7rem] leading-snug transition-colors duration-300 sm:text-sm lg:text-[clamp(0.82rem,1.05vw,1rem)] ${active === index ? "text-white" : "text-white/45 hover:text-white/85"}`}
+              >
+                <span className={`mt-[0.48em] h-px shrink-0 transition-all duration-300 ${active === index ? "w-4 bg-gold" : "w-2 bg-white/30 group-hover:w-3"}`} />
+                <span>{item.title}</span>
+              </button>
+            ))}
+          </nav>
+          <div className="mt-4 flex items-center gap-4 lg:mt-8">
+            <Button href={copy.cta.href} size="md" arrow>{copy.cta.label}</Button>
+            <span className="font-mono text-xs tabular-nums text-white/45">
+              <span className="text-gold">{pad(active + 1)}</span> / {pad(total)}
+            </span>
           </div>
-        </div>
+        </aside>
 
-        {/* Circular glassmorphism panels replace the previous horizontal strips. */}
-        <ol className="grid grid-cols-1 justify-items-center gap-7 sm:grid-cols-2 sm:gap-5 lg:gap-7 xl:gap-9">
+        {/* Brand-colour stage: pinned while the document scroll scrubs the discs. */}
+        <div className="relative isolate min-h-[27rem] overflow-hidden bg-night lg:min-h-0 flat:grid flat:grid-cols-1 flat:gap-5 flat:overflow-visible flat:px-5 flat:py-10">
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+            <div className="absolute -right-[18%] -top-[28%] size-[72%] rounded-full bg-brand/10 blur-[100px]" />
+            <div className="absolute -bottom-[30%] -left-[16%] size-[65%] rounded-full bg-night-card/90 blur-[90px]" />
+            <div className="absolute inset-0 opacity-[0.11] [background-image:linear-gradient(rgba(255,255,255,.12)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.12)_1px,transparent_1px)] [background-size:72px_72px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_78%)]" />
+            <span className="absolute right-6 top-6 font-mono text-[0.58rem] uppercase tracking-[0.2em] text-white/35 sm:right-8">Property management / Services</span>
+          </div>
+
+          {/* Invisible circular track: only the glass discs are visible. */}
+          <div data-service-orbit aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 aspect-square w-[min(76vw,78svh,48rem)] -translate-x-1/2 -translate-y-1/2 rounded-full border border-transparent">
+            <span className="absolute left-1/2 top-0 size-2 -translate-x-1/2 rounded-full bg-transparent" />
+          </div>
+
           {copy.items.map((item, index) => (
-            <li
+            <article
               key={item.title}
-              data-ps="card"
-              className="group relative aspect-square w-full max-w-[22rem] opacity-0"
+              data-service-panel
+              aria-label={`${item.title} service`}
+              className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden px-4 py-8 sm:px-8 lg:px-12 flat:pointer-events-auto flat:static flat:min-h-[32rem]"
             >
               <div
-                data-ps="orb"
-                className="relative flex size-full flex-col items-center justify-center overflow-hidden rounded-full border border-white/[0.16] bg-[radial-gradient(circle_at_32%_22%,rgba(255,255,255,0.14),rgba(255,255,255,0.045)_46%,rgba(11,58,65,0.76)_100%)] px-8 py-9 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.13),0_24px_70px_-36px_rgba(0,0,0,0.9)] backdrop-blur-xl transition duration-700 ease-out group-hover:-translate-y-2 group-hover:border-gold/65 group-hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.2),0_34px_85px_-34px_rgba(0,0,0,0.95)]"
+                data-service-disc
+                className="service-glass-disc relative grid aspect-square w-[min(78vw,66svh,34rem)] place-items-center overflow-hidden rounded-full border border-white/25 p-7 text-center sm:p-10 lg:w-[min(48vw,70svh,42rem)] flat:mx-auto"
+                style={{
+                  background: "radial-gradient(circle at 27% 16%, rgba(255,255,255,.24), transparent 32%), radial-gradient(circle at 78% 82%, rgba(74,144,226,.20), transparent 42%), linear-gradient(145deg, rgba(11,58,65,.78), rgba(0,32,37,.62) 52%, rgba(0,21,25,.76))",
+                  backdropFilter: "blur(32px) saturate(155%)",
+                  WebkitBackdropFilter: "blur(32px) saturate(155%)",
+                  boxShadow: "0 30px 90px rgba(0,0,0,.34), inset 0 1px 1px rgba(255,255,255,.42), inset 0 -24px 54px rgba(0,0,0,.22), 0 0 0 1px rgba(217,166,46,.10)",
+                  transformStyle: "preserve-3d",
+                }}
               >
-                <span aria-hidden className="pointer-events-none absolute inset-[0.55rem] rounded-full border border-white/[0.07] transition duration-700 group-hover:inset-[0.85rem] group-hover:border-gold/25" />
-                <span className="relative mb-5 flex size-12 items-center justify-center rounded-full border border-gold/55 bg-night/55 font-display text-sm text-gold shadow-[0_0_28px_rgba(217,166,46,0.12)] transition duration-500 group-hover:scale-110 group-hover:bg-gold group-hover:text-night-deep">
-                  {pad(index + 1)}
-                </span>
-                <h3 className="relative max-w-[15ch] font-display text-xl font-medium leading-tight tracking-[-0.025em] text-white sm:text-[1.35rem]">
-                  {item.title}
-                </h3>
-                <p className="relative mt-3 max-w-[28ch] text-[0.82rem] leading-relaxed text-white/65 sm:text-sm">
-                  {item.text}
-                </p>
-                <span aria-hidden className="relative mt-5 flex size-8 items-center justify-center rounded-full border border-white/20 text-white/65 transition duration-500 group-hover:translate-x-1 group-hover:border-gold group-hover:bg-gold group-hover:text-night-deep">
-                  <ArrowRight className="size-3.5" />
-                </span>
+                <span aria-hidden="true" className="pointer-events-none absolute inset-[3.5%] rounded-full border border-white/25" />
+                <span aria-hidden="true" className="pointer-events-none absolute inset-[6.5%] rounded-full border border-gold/15" />
+                <span aria-hidden="true" className="pointer-events-none absolute -left-[8%] top-[7%] h-[34%] w-[72%] rotate-[-24deg] rounded-full bg-white/[0.075] blur-2xl" />
+                <span aria-hidden="true" className="pointer-events-none absolute bottom-[8%] right-[5%] size-[42%] rounded-full bg-brand/15 blur-3xl" />
+                <span aria-hidden="true" className="pointer-events-none absolute left-[18%] top-[13%] h-px w-[42%] rotate-[24deg] bg-gradient-to-r from-transparent via-white/60 to-transparent" />
+
+                <div data-service-content className="relative z-10 mx-auto flex max-w-[25rem] flex-col items-center">
+                  <span className="mb-4 font-mono text-[0.65rem] uppercase tracking-[0.24em] text-gold sm:mb-6">
+                    {pad(index + 1)} <span className="text-white/40">/ {pad(total)}</span>
+                  </span>
+                  <h3 className="text-[clamp(1.2rem,2.4vw,2.35rem)] font-medium leading-[1.08] tracking-[-0.045em] text-white">{item.title}</h3>
+                  <p className="mt-4 max-w-[31ch] text-[clamp(0.76rem,1vw,0.98rem)] leading-[1.75] text-white/75 sm:mt-5">{item.text}</p>
+                  <span className="mt-5 inline-flex items-center gap-2 text-[0.58rem] uppercase tracking-[0.2em] text-gold sm:mt-7">
+                    Managed with care <ArrowRight className="size-3" />
+                  </span>
+                </div>
+                <span aria-hidden="true" className="absolute bottom-[15%] right-[17%] size-1.5 rounded-full bg-gold shadow-[0_0_18px_rgba(217,166,46,.8)]" />
               </div>
-            </li>
+            </article>
           ))}
-        </ol>
+        </div>
       </div>
+      <style jsx>{`
+        @media (prefers-reduced-motion: reduce), (max-height: 559px) {
+          .property-services-root { height: auto !important; }
+        }
+        .service-glass-disc {
+          -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+          will-change: transform, opacity;
+          isolation: isolate;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .service-glass-disc { will-change: auto; }
+        }
+      `}</style>
     </section>
   );
 }
