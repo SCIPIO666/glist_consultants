@@ -1,20 +1,19 @@
 /**
- * Home services section copy. The seven wedges themselves come from
- * data/services.ts so titles, links and photos stay in one place.
- *
- * Minimal on purpose: a title and one button. No eyebrow, no description.
+ * Home services section copy. The seven panels come from data/services.ts so
+ * titles and photos stay in one place; `wheelLabels` are the short names printed
+ * on the wheel (the full titles show on the Services page).
  */
 export const servicesSection = {
-  titleLines: ["Our", "services"],
+  title: "Our services",
   cta: { label: "Book a consultation", href: "/contact" },
-  /** Short names for the wedges, split into lines. Keyed by service slug. */
+  srListLabel: "Our seven services",
   wheelLabels: {
-    taxation: ["Taxation"],
-    payroll: ["Payroll"],
-    registrations: ["Registrations"],
-    bookkeeping: ["Bookkeeping"],
-    "stock-taking": ["Stock", "taking"],
-    "financial-advisory": ["Financial", "advisory"],
-    "property-management": ["Property", "management"],
-  } as Record<string, string[]>,
+    taxation: "Taxation",
+    payroll: "Payroll",
+    registrations: "Registrations",
+    bookkeeping: "Bookkeeping",
+    "stock-taking": "Stock taking",
+    "financial-advisory": "Financial advisory",
+    "property-management": "Property management",
+  } as Record<string, string>,
 } as const;

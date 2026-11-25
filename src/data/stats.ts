@@ -1,9 +1,10 @@
 import { services } from "@/data/services";
 
 /**
- * Home stats (the rolling "credits" screen).
- * Tailored to reflect the depth, compliance focus, and breadth of Glist Consultants'
- * offerings.
+ * Home stats. Only figures that can be checked are used here, so nothing on the
+ * site is invented. When the client supplies real figures (clients served,
+ * filings per year, KSh processed...) add them to this list and they appear
+ * automatically in the scrolling credits.
  */
 export type Stat = {
   value: number;
@@ -13,49 +14,32 @@ export type Stat = {
   note: string;
 };
 
+/** Every bullet across the seven service categories, straight from the brief. */
 const taskCount = services.reduce((sum, s) => sum + s.items.length, 0);
-const taxTasks = services.find((s) => s.slug === "taxation")?.items.length ?? 0;
-const payrollTasks = services.find((s) => s.slug === "payroll")?.items.length ?? 0;
 
 export const statsSection: { srLabel: string; stats: Stat[] } = {
   srLabel: "Glist Consultants in numbers",
   stats: [
     {
-      value: 7,
+      value: services.length,
       label: "Service lines",
-      note: "Tax, payroll, registrations, books, stock, personal finance, and property—all in one place.",
+      note: "Tax, payroll, registrations, books, stock, personal finance and rentals.",
     },
     {
       value: taskCount,
-      label: "Specific tasks handled",
-      note: "From your daily bookkeeping to filing your annual returns.",
-    },
-    {
-      value: taxTasks + payrollTasks,
-      label: "Statutory touchpoints",
-      note: "We keep you compliant with KRA, NSSF, NHIF, NITA, AHL, and eTIMS.",
-    },
-    {
-      value: 100,
-      suffix: "%",
-      label: "Focus on compliance",
-      note: "We stay up to date with the Income Tax Act and VAT Act so you don't have to.",
+      label: "Specific tasks covered",
+      note: "From VAT filing to rent arrears follow-up, listed on our services page.",
     },
     {
       value: 12,
-      label: "Monthly cycles managed",
-      note: "Year-round payroll processing, tax filing, and reporting that keeps you audit-ready.",
+      label: "Payroll cycles a year",
+      note: "Every month's PAYE and statutory deductions computed and filed on time.",
     },
     {
-      value: 360,
-      suffix: "°",
-      label: "Landlord support",
-      note: "Everything from finding tenants to collecting rent and coordinating repairs.",
-    },
-    {
-      value: 1,
-      label: "Dedicated partner",
-      note: "One team that knows your business, from startup to established enterprise.",
+      value: 2400,
+      prefix: "KSh ",
+      label: "Monthly personal relief",
+      note: "The PAYE relief we apply when computing your payroll. Check current KRA rules.",
     },
   ],
 };

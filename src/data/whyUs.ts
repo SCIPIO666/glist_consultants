@@ -3,49 +3,42 @@
  * The reasons are drawn from the six commitments in the client brief
  * (professionalism, reliability, practical solutions, client focus, convenience, growth).
  * Keep claims honest: no invented statistics or client counts.
- *
- * The reasons screen is minimal on purpose: a title and one button on the left,
- * six numbered reasons on the right. No eyebrow, no description.
  */
 export type WhyReason = {
+  tag: string;
   title: string;
   text: string;
 };
 
 export const whyReasons: {
-  /** One entry per line of the big title. */
-  titleLines: string[];
+  title: string;
   cta: { label: string; href: string };
   srListLabel: string;
   items: WhyReason[];
 } = {
-  titleLines: ["Why", "choose", "us"],
-  cta: { label: "About us", href: "/about" },
+  title: "Why choose us",
+  cta: { label: "More about Glist", href: "/about" },
   srListLabel: "Reasons to choose Glist Consultants",
   items: [
     {
-      title: "We keep you compliant",
-      text: "We track your tax obligations against the Income Tax Act and VAT Act, so you avoid penalties and stay off KRA's radar.",
+      tag: "Practical",
+      title: "Advice you can act on",
+      text: "We solve the problem in front of you: the return to file, the payroll to run, the tenant to find. Plain language and clear next steps, never theory for its own sake.",
     },
     {
-      title: "We deal with the authorities",
-      text: "If KRA comes knocking, we handle it. From routine health checks to objections and appeals, we represent your interests.",
+      tag: "Reliable",
+      title: "Deadlines kept, records straight",
+      text: "Statutory dates do not move, so we plan around them. You get dependable, timely support delivered to professional standards.",
     },
     {
-      title: "One team, all your numbers",
-      text: "Payroll, bookkeeping, and tax under one roof means no gaps, no miscommunications, and no dropped balls.",
+      tag: "Convenient",
+      title: "One roof, seven services",
+      text: "Tax, payroll, registrations, books, stock, personal finance and rentals, all with one team that already knows your business.",
     },
     {
-      title: "We spot problems early",
-      text: "We review your processes to find compliance gaps before they become expensive problems, and we train your team to stay sharp.",
-    },
-    {
-      title: "Your records are audit-ready",
-      text: "We keep meticulous records—from eTIMS invoices to IFRS-aligned statements—so you're always prepared.",
-    },
-    {
-      title: "We grow as you grow",
-      text: "Whether you're a startup or restructuring for efficiency, our advice evolves as your business does.",
+      tag: "Client-first",
+      title: "Built around you",
+      text: "We take the time to understand your situation before we advise, then work alongside you as your business or portfolio grows.",
     },
   ],
 };

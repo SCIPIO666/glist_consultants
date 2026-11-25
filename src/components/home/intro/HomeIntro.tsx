@@ -1,4 +1,3 @@
-import { CircleBand } from "@/components/motion/CircleBand";
 import { ProgressRail } from "@/components/motion/ProgressRail";
 import { IntroOpening } from "./IntroOpening";
 import { IntroDescription } from "./IntroDescription";
@@ -15,7 +14,6 @@ export function HomeIntro() {
   return (
     <>
       {/* Night circles rise over the hero ticker, then the intro begins */}
-      {/* <CircleBand colorClass="text-night" reveal /> */}
 
       <div className="relative bg-night text-white">
         <ProgressRail />
@@ -24,7 +22,6 @@ export function HomeIntro() {
         <IntroGraph />
 
         {/* Sand circles rise over the dark graph into the light closing screen */}
-        {/* <CircleBand colorClass="text-sand" className="bg-night" reveal /> */}
         <IntroClose />
       </div>
     </>
