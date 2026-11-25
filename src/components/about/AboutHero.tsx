@@ -68,8 +68,9 @@ export function AboutHero() {
       };
       const radius = () => Math.max(260, Math.min(el.clientWidth, el.clientHeight) * 0.62);
 
+      // The reveal circle only exists from tablet width up; phones get a plain still photo (see JSX).
       // Mouse: follow the pointer
-      mm.add(`${mq.motionOk} and (hover: hover) and (pointer: fine)`, () => {
+      mm.add(`${mq.motionOk} and (hover: hover) and (pointer: fine) and (min-width: 768px)`, () => {
         state.x = el.clientWidth * 0.66;
         state.y = el.clientHeight * 0.5;
         apply();
@@ -99,7 +100,7 @@ export function AboutHero() {
       });
 
       // Touch: no cursor, so the circle drifts on its own
-      mm.add(`${mq.motionOk} and (hover: none)`, () => {
+      mm.add(`${mq.motionOk} and (hover: none) and (min-width: 768px)`, () => {
         const w = el.clientWidth;
         const h = el.clientHeight;
         state.x = w * 0.3;
@@ -116,7 +117,7 @@ export function AboutHero() {
       });
 
       // Reduced motion: a still circle on the right
-      mm.add(mq.reduced, () => {
+      mm.add(`${mq.reduced} and (min-width: 768px)`, () => {
         state.x = el.clientWidth * 0.72;
         state.y = el.clientHeight * 0.5;
         state.r = radius() * 0.8;
@@ -128,28 +129,46 @@ export function AboutHero() {
 
   return (
     <section ref={root} aria-labelledby="about-title" className="relative isolate overflow-hidden bg-night text-white">
-      {/* Pulsing circle waves */}
-      <PulseRings
-        className="text-brand-soft"
-        centers={[
-          { x: "6%", y: "48%", size: "52rem" },
-          { x: "96%", y: "58%", size: "46rem", delay: 3 },
-        ]}
-      />
+      {/* Phones: light version. One small pulse, a still dimmed photo, no mask or parallax. */}
+      <div className="md:hidden">
+        <div aria-hidden className="absolute inset-0 z-0">
+          <Image src={copy.revealImage.src} alt="" fill sizes="100vw" quality={55} className="object-cover opacity-25" />
+          <div className="absolute inset-0 bg-gradient-to-b from-night/80 via-night/60 to-night/90" />
+        </div>
+        <PulseRings
+          className="text-brand-soft"
+          rings={2}
+          media={`${mq.motionOk} and (max-width: 767px)`}
+          centers={[{ x: "10%", y: "50%", size: "26rem" }]}
+        />
+      </div>
 
-      {/* Cursor reveal: photo seen through a soft circle that follows the mouse */}
-      <div
-        ref={layer}
-        aria-hidden
-        className="pointer-events-none absolute inset-0 z-[1] [--r:0px] [--mx:70%] [--my:50%] [-webkit-mask-image:radial-gradient(circle_var(--r)_at_var(--mx)_var(--my),#000_93%,transparent_100%)] [mask-image:radial-gradient(circle_var(--r)_at_var(--mx)_var(--my),#000_93%,transparent_100%)]"
-      >
-        <div ref={img} className="absolute -inset-[6%] will-change-transform">
-          <Image src={copy.revealImage.src} alt="" fill sizes="100vw" quality={70} className="object-cover" />
-          <div className="absolute inset-0 bg-night/20" />
+      {/* Tablet and desktop: the full hero */}
+      <div className="hidden md:block">
+        {/* Pulsing circle waves */}
+        <PulseRings
+          className="text-brand-soft"
+          media={`${mq.motionOk} and (min-width: 768px)`}
+          centers={[
+            { x: "6%", y: "48%", size: "52rem" },
+            { x: "96%", y: "58%", size: "46rem", delay: 3 },
+          ]}
+        />
+
+        {/* Cursor reveal: photo seen through a soft circle that follows the mouse */}
+        <div
+          ref={layer}
+          aria-hidden
+          className="pointer-events-none absolute inset-0 z-[1] [--r:0px] [--mx:70%] [--my:50%] [-webkit-mask-image:radial-gradient(circle_var(--r)_at_var(--mx)_var(--my),#000_93%,transparent_100%)] [mask-image:radial-gradient(circle_var(--r)_at_var(--mx)_var(--my),#000_93%,transparent_100%)]"
+        >
+          <div ref={img} className="absolute -inset-[6%] will-change-transform">
+            <Image src={copy.revealImage.src} alt="" fill sizes="100vw" quality={70} className="object-cover" />
+            <div className="absolute inset-0 bg-night/20" />
+          </div>
         </div>
       </div>
 
-      <div className="wrap-wide relative z-10 flex min-h-svh [text-shadow:0_1px_18px_rgb(0_21_25/0.7)] flex-col justify-center py-[calc(var(--header-h)+3rem)]">
+      <div className="wrap-wide relative z-10 flex min-h-svh md:[text-shadow:0_1px_18px_rgb(0_21_25/0.7)] flex-col justify-center py-[calc(var(--header-h)+3rem)]">
         <h1 id="about-title" className="sr-only">
           {copy.h1}
         </h1>

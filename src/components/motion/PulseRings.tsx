@@ -14,7 +14,7 @@ export type PulseCenter = {
   delay?: number;
 };
 
-const RINGS = 4;
+const RINGS_MAX = 4;
 
 /**
  * Concentric translucent discs that swell outward from a point and fade, over
@@ -23,13 +23,25 @@ const RINGS = 4;
  *
  *   <PulseRings className="text-brand-soft" centers={[{ x: "8%", y: "45%", size: "46rem" }]} />
  */
-export function PulseRings({ centers, className }: { centers: PulseCenter[]; className?: string }) {
+export function PulseRings({
+  centers,
+  className,
+  rings = RINGS_MAX,
+  media = mq.motionOk,
+}: {
+  centers: PulseCenter[];
+  className?: string;
+  /** Rings per centre (1 to 4). Fewer rings = lighter on phones. */
+  rings?: number;
+  /** gsap.matchMedia query the pulse runs under (e.g. only on wide screens). Default: motion allowed. */
+  media?: string;
+}) {
   const root = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
-      mm.add(mq.motionOk, () => {
+      mm.add(media, () => {
         gsap.utils.toArray<HTMLElement>("[data-ring]", root.current).forEach((ring) => {
           const c = Number(ring.dataset.center);
           const r = Number(ring.dataset.ring);
@@ -42,7 +54,7 @@ export function PulseRings({ centers, className }: { centers: PulseCenter[]; cla
               duration: 7,
               ease: "power1.out",
               repeat: -1,
-              delay: (centers[c].delay ?? 0) + r * (7 / RINGS),
+              delay: (centers[c].delay ?? 0) + r * (7 / rings),
             },
           );
         });
@@ -54,7 +66,7 @@ export function PulseRings({ centers, className }: { centers: PulseCenter[]; cla
         });
       });
     },
-    { scope: root, dependencies: [] },
+    { scope: root, dependencies: [rings, media] },
   );
 
   return (
@@ -65,7 +77,7 @@ export function PulseRings({ centers, className }: { centers: PulseCenter[]; cla
           className="absolute -translate-x-1/2 -translate-y-1/2"
           style={{ left: c.x, top: c.y, width: c.size, height: c.size }}
         >
-          {Array.from({ length: RINGS }).map((_, ri) => (
+          {Array.from({ length: rings }).map((_, ri) => (
             <span
               key={ri}
               data-center={ci}
