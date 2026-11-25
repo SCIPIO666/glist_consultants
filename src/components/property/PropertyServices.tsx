@@ -53,41 +53,62 @@ export function PropertyServices() {
         },
       });
 
+      const step = 1.35; // one complete scroll beat per service
+      const enterDuration = 0.34;
+      const centreHold = 0.56;
+      const exitDuration = 0.45;
+
       discs.forEach((disc, index) => {
         const content = contents[index];
-        const at = index;
+        const at = index * step;
+        const exitAt = at + enterDuration + centreHold;
 
+        // Arrive from below and settle precisely in the centre.
         timeline.to(disc, {
           yPercent: 0,
           autoAlpha: 1,
           scale: 1,
           rotation: 0,
-          duration: 0.44,
+          duration: enterDuration,
+          ease: "power2.out",
         }, at);
 
+        // Reveal the copy after the disc has begun to settle, then keep it
+        // fully visible for the entire centre pause.
         if (content) {
           timeline.to(content, {
             autoAlpha: 1,
             y: 0,
-            duration: 0.3,
-          }, at + 0.18);
+            duration: 0.24,
+            ease: "power2.out",
+          }, at + 0.16);
         }
 
-        // Every disc except the last one clears upward as the next arrives.
         if (index < total - 1) {
+          // The full circle and its readable copy pause together before
+          // the circle travels out through the top of the stage.
           timeline.to(disc, {
             yPercent: -118,
             autoAlpha: 0,
-            scale: 0.84,
-            rotation: 10,
-            duration: 0.56,
-          }, at + 0.44);
+            scale: 0.9,
+            rotation: 8,
+            duration: exitDuration,
+            ease: "power2.in",
+          }, exitAt);
+
           if (content) {
-            timeline.to(content, { autoAlpha: 0, y: -18, duration: 0.2 }, at + 0.43);
+            // Keep the description readable through most of the outro;
+            // fade it only as the circle is nearly leaving the stage.
+            timeline.to(content, {
+              autoAlpha: 0,
+              y: -10,
+              duration: 0.18,
+              ease: "power1.in",
+            }, exitAt + 0.24);
           }
         } else {
-          // Give the final service a little breathing room at the end of the pin.
-          timeline.to({}, { duration: 1 }, at + 0.44);
+          // The final service remains centred and fully readable at the end.
+          timeline.to({}, { duration: centreHold + exitDuration }, at + enterDuration);
         }
       });
 
@@ -199,12 +220,12 @@ export function PropertyServices() {
                 <span aria-hidden="true" className="pointer-events-none absolute bottom-[8%] right-[5%] size-[42%] rounded-full bg-brand/15 blur-3xl" />
                 <span aria-hidden="true" className="pointer-events-none absolute left-[18%] top-[13%] h-px w-[42%] rotate-[24deg] bg-gradient-to-r from-transparent via-white/60 to-transparent" />
 
-                <div data-service-content className="relative z-10 mx-auto flex max-w-[25rem] flex-col items-center">
+                <div data-service-content className="relative z-10 mx-auto flex w-full max-w-[28rem] flex-col items-center">
                   <span className="mb-4 font-mono text-[0.65rem] uppercase tracking-[0.24em] text-gold sm:mb-6">
                     {pad(index + 1)} <span className="text-white/40">/ {pad(total)}</span>
                   </span>
                   <h3 className="text-[clamp(1.2rem,2.4vw,2.35rem)] font-medium leading-[1.08] tracking-[-0.045em] text-white">{item.title}</h3>
-                  <p className="mt-4 max-w-[31ch] text-[clamp(0.76rem,1vw,0.98rem)] leading-[1.75] text-white/75 sm:mt-5">{item.text}</p>
+                  <p className="mt-4 max-w-[34ch] text-[clamp(0.86rem,1.08vw,1.04rem)] leading-[1.8] text-white/85 sm:mt-5">{item.text}</p>
                   <span className="mt-5 inline-flex items-center gap-2 text-[0.58rem] uppercase tracking-[0.2em] text-gold sm:mt-7">
                     Managed with care <ArrowRight className="size-3" />
                   </span>
