@@ -158,7 +158,7 @@ export function PropertyServices() {
         >
           <p className="mb-3 font-mono text-[0.62rem] uppercase tracking-[0.24em] text-white/45">Glist Consultants</p>
           <h2 id="property-services-title" className="mb-5 text-[clamp(1.7rem,3.2vw,3.4rem)] font-medium leading-none tracking-[-0.055em]">
-            Services<span className="text-gold">.</span>
+            Property Management Services<span className="text-gold">.</span>
           </h2>
           <nav aria-label="Rental property management services" className="grid grid-cols-2 gap-x-3 gap-y-1 sm:grid-cols-4 lg:grid-cols-1 lg:gap-y-2">
             {copy.items.map((item, index) => (
