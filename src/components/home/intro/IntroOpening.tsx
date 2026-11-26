@@ -11,7 +11,7 @@ export function IntroOpening() {
       className="relative flex min-h-[82svh] flex-col items-center justify-center px-[var(--gutter)] pb-6 pt-28 text-center sm:min-h-svh sm:pb-16"
     >
       <Reveal y={24}>
-        <Eyebrow className="text-gold">{introOpening.eyebrow}</Eyebrow>
+        <Eyebrow className="text-kra-light">{introOpening.eyebrow}</Eyebrow>
       </Reveal>
 
       <Reveal y={70} delay={0.15} duration={1.3} className="mt-5">
@@ -20,7 +20,7 @@ export function IntroOpening() {
           className="font-display text-[clamp(3.75rem,1rem+14.5vw,15rem)] font-medium leading-[0.95] tracking-[-0.035em]"
         >
           {introOpening.word}
-          <span aria-hidden className="ml-[0.04em] inline-block size-[0.14em] rounded-full bg-gold" />
+          <span aria-hidden className="ml-[0.04em] inline-block size-[0.14em] rounded-full bg-kra" />
         </h2>
       </Reveal>
 

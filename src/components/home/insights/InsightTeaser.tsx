@@ -8,7 +8,7 @@ import { insightsLink as copy } from "@/data/insightsLink";
 function LineArrow() {
   return (
     <span aria-hidden className="relative inline-block h-px w-11 bg-gold transition-[width] duration-500 ease-out-expo group-hover:w-16">
-      <ArrowRight className="absolute -right-1 top-1/2 size-4 -translate-y-1/2 text-gold" />
+      <ArrowRight className="absolute -right-1 top-1/2 size-4 -translate-y-1/2 text-kra" />
     </span>
   );
 }

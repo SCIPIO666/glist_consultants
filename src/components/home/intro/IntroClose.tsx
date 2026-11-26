@@ -9,7 +9,8 @@ import { introClose } from "@/data/intro";
  */
 export function IntroClose() {
   return (
-    <section aria-labelledby="intro-close" className="relative bg-sand text-ink">
+    <section aria-labelledby="intro-close" className="relative overflow-hidden bg-sand text-ink">
+      <div aria-hidden className="pointer-events-none absolute -right-40 -top-40 size-[34rem] rounded-full bg-[radial-gradient(closest-side,rgb(228_32_43/0.18),transparent)]" />
       <div className="wrap-wide flex min-h-svh flex-col justify-center gap-12 py-[clamp(5rem,12svh,8rem)]">
         <Reveal>
           <h2 id="intro-close" className="max-w-[16ch] text-display font-medium">
@@ -19,7 +20,7 @@ export function IntroClose() {
 
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <Reveal x={-30} y={0} className="max-w-[30rem]">
-            <CircleGridLoop circleClass="bg-gold" />
+            <CircleGridLoop circleClass="bg-kra" />
           </Reveal>
 
           <Reveal target="children" stagger={0.15} className="max-w-xl space-y-6">

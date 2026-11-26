@@ -141,7 +141,7 @@ export function IntroGraph() {
                     data-line
                     d={toPath(introGraphPoints, w, h)}
                     fill="none"
-                    className="text-gold"
+                    className="text-kra-light"
                     stroke="currentColor"
                     strokeWidth={3}
                     strokeLinecap="round"
@@ -154,7 +154,7 @@ export function IntroGraph() {
               <span
                 data-dot
                 aria-hidden
-                className="absolute left-0 top-0 -ml-2 -mt-2 size-4 rounded-full bg-gold opacity-0 shadow-[0_0_0_6px_rgb(217_166_46/0.25)]"
+                className="absolute left-0 top-0 -ml-2 -mt-2 size-4 rounded-full bg-kra-light opacity-0 shadow-[0_0_0_6px_rgb(255_90_98/0.28)]"
               />
 
               {/* y labels (outer span positions, inner span is animated) */}
@@ -168,7 +168,7 @@ export function IntroGraph() {
                   <span
                     data-label
                     className={`block text-[0.7rem] font-medium sm:text-sm ${
-                      i === introGraph.yLabels.length - 1 ? "text-gold" : "text-white/80"
+                      i === introGraph.yLabels.length - 1 ? "text-kra-light" : "text-white/80"
                     }`}
                   >
                     {label}
@@ -187,7 +187,7 @@ export function IntroGraph() {
                   <span
                     data-label
                     className={`block whitespace-nowrap text-[0.7rem] font-medium sm:text-sm ${
-                      i === introGraph.xLabels.length - 1 ? "text-gold" : "text-white/80"
+                      i === introGraph.xLabels.length - 1 ? "text-kra-light" : "text-white/80"
                     }`}
                   >
                     {label}
@@ -217,7 +217,7 @@ export function IntroGraph() {
                       aria-hidden
                       viewBox="0 0 300 14"
                       preserveAspectRatio="none"
-                      className="pointer-events-none absolute -bottom-2 left-0 h-3 w-full overflow-visible text-gold"
+                      className="pointer-events-none absolute -bottom-2 left-0 h-3 w-full overflow-visible text-kra-light"
                     >
                       <path
                         data-underline

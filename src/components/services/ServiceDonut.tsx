@@ -21,10 +21,10 @@ type Props = {
 
 /** Segment colours: fill class + the class for the number printed on it. Cycles per segment. */
 const PALETTE = [
-  { fill: "fill-brand", num: "fill-white" },
+  { fill: "fill-kra", num: "fill-white" },
   { fill: "fill-gold", num: "fill-night-deep" },
-  { fill: "fill-brand-soft", num: "fill-night-deep" },
-  { fill: "fill-cta", num: "fill-white" },
+  { fill: "fill-brand", num: "fill-white" },
+  { fill: "fill-kra-deep", num: "fill-white" },
   { fill: "fill-whatsapp", num: "fill-night-deep" },
   { fill: "fill-mist", num: "fill-night-deep" },
 ] as const;

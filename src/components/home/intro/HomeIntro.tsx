@@ -15,7 +15,7 @@ export function HomeIntro() {
     <>
       {/* Night circles rise over the hero ticker, then the intro begins */}
 
-      <div className="relative bg-night text-white">
+      <div className="relative bg-night bg-[radial-gradient(50rem_40rem_at_100%_0%,rgb(228_32_43/0.16),transparent_65%),radial-gradient(45rem_35rem_at_0%_100%,rgb(228_32_43/0.10),transparent_65%)] text-white">
         <ProgressRail />
         <IntroOpening />
         <IntroDescription />

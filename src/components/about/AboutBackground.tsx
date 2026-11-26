@@ -25,7 +25,7 @@ export function AboutBackground() {
             <Reveal y={40} delay={0.1} className="mt-4">
               <h2 id="about-background" className="text-h2 font-medium">
                 {copy.titleBefore}{" "}
-                <Circled shape="squiggle" colorClass="text-gold">
+                <Circled shape="squiggle" colorClass="text-kra-light">
                   {copy.titleMark}
                 </Circled>
               </h2>

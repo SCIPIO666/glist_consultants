@@ -25,7 +25,7 @@ export function ScrollReadText({
   className,
   dim = 0.18,
   circleShape = "circle",
-  circleColorClass = "text-gold",
+  circleColorClass = "text-kra-light",
 }: Props) {
   const ref = useRef<HTMLElement>(null);
   const Component = Tag as ElementType;

@@ -88,7 +88,7 @@ export function ServicesWheel() {
                 {copy.titleLines[0]}
                 <span className="max-lg:ml-[0.25em] lg:block">
                   {copy.titleLines[1]}
-                  <span className="text-gold">.</span>
+                  <span className="text-kra">.</span>
                 </span>
               </h2>
             </Reveal>

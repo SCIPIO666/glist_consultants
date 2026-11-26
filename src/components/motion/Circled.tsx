@@ -48,7 +48,7 @@ type Props = {
 export function Circled({
   children,
   shape = "circle",
-  colorClass = "text-gold",
+  colorClass = "text-kra-light",
   stroke = 2,
   delay = 0,
   duration = 1.1,

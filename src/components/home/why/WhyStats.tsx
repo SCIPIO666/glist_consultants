@@ -64,7 +64,7 @@ export function WhyStats() {
     <section
       ref={root}
       aria-label={copy.srLabel}
-      className="relative isolate overflow-hidden bg-night text-white"
+      className="relative isolate overflow-hidden bg-night bg-[radial-gradient(40rem_28rem_at_85%_0%,rgb(228_32_43/0.22),transparent_70%)] text-white"
     >
       {/* depth: a soft lighter wash under the lines */}
       <div

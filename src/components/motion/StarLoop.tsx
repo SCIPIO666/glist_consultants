@@ -12,7 +12,7 @@ const COLUMNS = [
   { sizes: [24, 40, 28, 46, 22, 36, 26], tones: [0, 0, 1, 0, 0, 1, 0], seconds: 34 },
   { sizes: [42, 26, 32, 20, 44, 28, 34], tones: [1, 0, 0, 0, 1, 0, 0], seconds: 30 },
 ];
-const TONE = ["text-gold", "text-brand-soft"];
+const TONE = ["text-kra-light", "text-brand-soft"];
 
 function Star({ size, tone }: { size: number; tone: number }) {
   return (

@@ -29,7 +29,7 @@ export function WhyReasonCard({ item, index }: { item: WhyReason; index: number 
             className="bg-linear-to-b from-brand to-brand-soft bg-clip-text font-display text-[clamp(2.75rem,2rem+2.4vw,4.75rem)] font-medium leading-none tracking-[-0.03em] text-transparent tabular-nums"
           >
             {index + 1}
-            <span className="text-gold [-webkit-text-fill-color:currentColor]">.</span>
+            <span className="text-kra [-webkit-text-fill-color:currentColor]">.</span>
           </span>
         </div>
 

@@ -37,7 +37,7 @@ export function SiteFooter() {
           {/* Top: statement + CTAs */}
           <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-end">
             <div>
-              <p className="eyebrow text-gold">Let&apos;s talk</p>
+              <p className="eyebrow text-kra-light">Let&apos;s talk</p>
               <h2 className="mt-4 text-h2">
                 Let us handle the numbers.
                 <span className="block font-display italic text-brand-soft">You focus on growth.</span>
@@ -117,7 +117,7 @@ export function SiteFooter() {
 function FooterCol({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <h3 className="font-sans text-xs font-semibold uppercase tracking-[0.16em] text-gold">{title}</h3>
+      <h3 className="font-sans text-xs font-semibold uppercase tracking-[0.16em] text-kra-light">{title}</h3>
       <ul className="mt-3 space-y-2 text-sm">{children}</ul>
     </div>
   );

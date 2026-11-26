@@ -71,7 +71,7 @@ export function PageHero({ breadcrumb, eyebrow, titleLines, lead, primaryCta, se
           </nav>
 
           <div data-ph="item" className="mt-8 opacity-0">
-            <Eyebrow className="text-gold">{eyebrow}</Eyebrow>
+            <Eyebrow className="text-kra-light">{eyebrow}</Eyebrow>
           </div>
 
           <h1 id={id} className="mt-5 text-h1 font-medium">
@@ -79,7 +79,7 @@ export function PageHero({ breadcrumb, eyebrow, titleLines, lead, primaryCta, se
               <span
                 key={line}
                 data-ph="item"
-                className={cn("block opacity-0", i === titleLines.length - 1 && "italic text-gold")}
+                className={cn("block opacity-0", i === titleLines.length - 1 && "italic text-kra-light")}
               >
                 {line}
               </span>

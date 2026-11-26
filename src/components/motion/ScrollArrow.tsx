@@ -37,7 +37,7 @@ type Props = {
 export function ScrollArrow({
   variant = "curl",
   className,
-  colorClass = "text-gold",
+  colorClass = "text-kra-light",
   stroke = 2.5,
   start = "top 90%",
   end = "bottom 50%",
