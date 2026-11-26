@@ -43,8 +43,8 @@ export function MenuOverlay({
           t.set(root.current, { visibility: "visible" }, 0)
             .fromTo(
               root.current,
-              { clipPath: "circle(0px at calc(100% - 3.5rem) 2.5rem)" },
-              { clipPath: "circle(150vmax at calc(100% - 3.5rem) 2.5rem)", duration: 1.1 * d, ease: "power3.inOut" },
+              { clipPath: "circle(0px at calc(100% - var(--gutter) - 1.375rem) 2.5rem)" },
+              { clipPath: "circle(150vmax at calc(100% - var(--gutter) - 1.375rem) 2.5rem)", duration: 1.1 * d, ease: "power3.inOut" },
               0,
             )
             .from("[data-menu-logo]", { y: -40, opacity: 0, duration: 0.8 * d }, 0.45)
