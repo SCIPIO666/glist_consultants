@@ -13,8 +13,8 @@ import { cn } from "@/lib/cn";
 /**
  * Fixed top bar, conventional layout:
  *  - left: compact logo (GC mark + name)
- *  - centre/right (wide screens): the page links, with the current page marked
- *  - right: "Book a consultation" and the circular menu button (always available)
+ *  - centre/right (wide screens): the page links from 1024px up, with the current page marked
+ *  - right: "Book a consultation" (hidden at 1024-1279px to make room) and the circular menu button (always available)
  * The bar is clear at the top of the page and turns dark teal once you scroll.
  */
 export function SiteHeader() {
@@ -50,8 +50,8 @@ export function SiteHeader() {
               <LogoLockup priority />
             </Link>
 
-            <nav aria-label="Main" className="ml-auto hidden xl:block">
-              <ul className="flex items-center gap-8">
+            <nav aria-label="Main" className="ml-auto hidden lg:block">
+              <ul className="flex items-center gap-5 xl:gap-8">
                 {links.map((l) => (
                   <li key={l.href}>
                     <Link
@@ -76,8 +76,8 @@ export function SiteHeader() {
               </ul>
             </nav>
 
-            <div className="flex items-center gap-3 max-xl:ml-auto">
-              <div className="hidden sm:block">
+            <div className="flex items-center gap-3 max-lg:ml-auto">
+              <div className="hidden sm:block lg:hidden xl:block">
                 <Button href="/contact" variant="cta" size="md" arrow>
                   Book a consultation
                 </Button>
