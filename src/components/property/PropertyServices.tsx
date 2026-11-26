@@ -1,10 +1,11 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, type PointerEvent } from "react";
 import { gsap, ScrollTrigger, mq, useGSAP } from "@/lib/gsap";
 import { useSmoothScroll } from "@/components/providers/SmoothScroll";
 import { Button } from "@/components/ui/Button";
 import { ArrowRight } from "@/components/ui/icons";
+import { DashField } from "@/components/ui/DashField";
 import { propertyServices as copy } from "@/data/propertyServices";
 
 type ServiceDisc = HTMLElement & { __serviceIndex?: number };
@@ -137,24 +138,58 @@ export function PropertyServices() {
     return () => mm.revert();
   }, { scope: root, dependencies: [total] });
 
+  const jumping = useRef(false);
+
+  /**
+   * Skip to a service. Scrolling there would fly through every disc in between, so instead
+   * the stage softly fades away, the page jumps while nothing is visible, and the chosen
+   * disc fades in already settled in the centre. (Centre of a disc's hold = 0.46 of its beat.)
+   */
   const jumpTo = (index: number) => {
     const section = root.current;
-    if (!section) return;
-    scrollTo(section, index * window.innerHeight);
+    if (!section || jumping.current || index === active) return;
+    const target = (index + 0.46) * window.innerHeight;
+    const panels = gsap.utils.toArray<HTMLElement>("[data-service-panel]", section);
+    if (!ScrollTrigger.getById("property-services-orbit")) {
+      scrollTo(section, target); // flat / reduced-motion layouts: plain scroll
+      return;
+    }
+    jumping.current = true;
+    gsap
+      .timeline({ onComplete: () => { jumping.current = false; } })
+      .to(panels, { opacity: 0, scale: 0.94, duration: 0.3, ease: "power2.in" })
+      .add(() => scrollTo(section, target, { immediate: true }))
+      .to(panels, { opacity: 1, scale: 1, duration: 0.7, ease: "power2.out" }, "+=0.8");
   };
+
+  /** Hover: the glass disc turns a full sideways flip and lifts; leaving settles it back. */
+  const flipIn = (el: HTMLElement, e: PointerEvent) => {
+    if (e.pointerType !== "mouse" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    gsap.to(el, { scale: 1.045, duration: 0.6, ease: "power2.out", overwrite: "auto" });
+    if (el.dataset.flipping) return;
+    el.dataset.flipping = "1";
+    gsap.to(el, {
+      rotationY: 360,
+      transformPerspective: 1500,
+      duration: 1.2,
+      ease: "power3.inOut",
+      onComplete: () => { gsap.set(el, { rotationY: 0 }); delete el.dataset.flipping; },
+    });
+  };
+  const flipOut = (el: HTMLElement) => gsap.to(el, { scale: 1, duration: 0.7, ease: "power2.out", overwrite: "auto" });
 
   return (
     <section
       ref={root}
       aria-labelledby="property-services-title"
-      className="property-services-root relative isolate bg-night text-white"
+      className="property-services-root relative isolate bg-linear-to-br from-night via-[#073440] to-[#0a2c58] text-white"
       style={{ height: `${(total + 1) * 100}svh` }}
     >
       <div className="sticky top-0 grid h-svh min-h-[34rem] grid-rows-[auto_minmax(0,1fr)] overflow-hidden lg:grid-rows-1 lg:grid-cols-[minmax(17rem,0.72fr)_minmax(0,1.28fr)] flat:static flat:h-auto flat:min-h-svh">
         {/* Fixed service index */}
         <aside
           data-service-sidebar
-          className="relative z-20 flex min-h-0 flex-col justify-center border-b border-white/10 bg-night-deep px-6 py-5 sm:px-9 lg:border-b-0 lg:border-r lg:border-r-gold/35 lg:px-[clamp(2rem,5vw,5.5rem)] lg:py-12"
+          className="relative z-20 flex min-h-0 flex-col justify-center px-6 py-5 sm:px-9 lg:px-[clamp(2rem,5vw,5.5rem)] lg:py-12"
         >
           <p className="mb-3 font-mono text-[0.62rem] uppercase tracking-[0.24em] text-white/45">Glist Consultants</p>
           <h2 id="property-services-title" className="mb-5 text-[clamp(1.7rem,3.2vw,3.4rem)] font-medium leading-none tracking-[-0.055em]">
@@ -183,17 +218,21 @@ export function PropertyServices() {
         </aside>
 
         {/* Brand-colour stage: pinned while the document scroll scrubs the discs. */}
-        <div className="relative isolate min-h-[27rem] overflow-hidden bg-night lg:min-h-0 flat:grid flat:grid-cols-1 flat:gap-5 flat:overflow-visible flat:px-5 flat:py-10">
+        <div className="relative isolate min-h-[27rem] lg:min-h-0 flat:grid flat:grid-cols-1 flat:gap-5 flat:overflow-visible flat:px-5 flat:py-10">
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-            <div className="absolute -right-[18%] -top-[28%] size-[72%] rounded-full bg-brand/10 blur-[100px]" />
-            <div className="absolute -bottom-[30%] -left-[16%] size-[65%] rounded-full bg-night-card/90 blur-[90px]" />
+            {/* corner patterns: top-right and the opposite bottom-left */}
+            <DashField focus="top-right" variant="ripple" className="absolute right-0 top-0 h-[min(60%,34rem)] w-[min(70%,42rem)] opacity-60" />
+            <DashField focus="bottom-left" variant="ripple" className="absolute bottom-0 left-0 h-[min(60%,34rem)] w-[min(70%,42rem)] opacity-60" />
             <div className="absolute inset-0 opacity-[0.11] [background-image:linear-gradient(rgba(255,255,255,.12)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.12)_1px,transparent_1px)] [background-size:72px_72px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_78%)]" />
             <span className="absolute right-6 top-6 font-mono text-[0.58rem] uppercase tracking-[0.2em] text-white/35 sm:right-8">Property management / Services</span>
           </div>
 
           {/* Invisible circular track: only the glass discs are visible. */}
-          <div data-service-orbit aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 aspect-square w-[min(76vw,78svh,48rem)] -translate-x-1/2 -translate-y-1/2 rounded-full border border-transparent">
-            <span className="absolute left-1/2 top-0 size-2 -translate-x-1/2 rounded-full bg-transparent" />
+          <div data-service-orbit aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 aspect-square w-[min(76vw,78svh,48rem)] -translate-x-1/2 -translate-y-1/2 rounded-full">
+            <span className="absolute -top-[10%] left-1/2 size-[46%] -translate-x-1/2 rounded-full" style={{ background: "radial-gradient(closest-side, rgb(217 166 46 / 0.62), rgb(217 166 46 / 0))" }} />
+            <span className="absolute -right-[12%] top-1/2 size-[50%] -translate-y-1/2 rounded-full" style={{ background: "radial-gradient(closest-side, rgb(74 144 226 / 0.65), rgb(74 144 226 / 0))" }} />
+            <span className="absolute -bottom-[10%] left-1/2 size-[46%] -translate-x-1/2 rounded-full" style={{ background: "radial-gradient(closest-side, rgb(45 190 175 / 0.5), rgb(45 190 175 / 0))" }} />
+            <span className="absolute -left-[12%] top-1/2 size-[50%] -translate-y-1/2 rounded-full" style={{ background: "radial-gradient(closest-side, rgb(31 111 214 / 0.6), rgb(31 111 214 / 0))" }} />
           </div>
 
           {copy.items.map((item, index) => (
@@ -204,22 +243,18 @@ export function PropertyServices() {
               className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden px-4 py-8 sm:px-8 lg:px-12 flat:pointer-events-auto flat:static flat:min-h-[32rem]"
             >
               <div
-                data-service-disc
-                className="service-glass-disc relative grid aspect-square w-[min(78vw,66svh,34rem)] place-items-center overflow-hidden rounded-full border border-white/25 p-7 text-center sm:p-10 lg:w-[min(48vw,70svh,42rem)] flat:mx-auto"
-                style={{
-                  background: "radial-gradient(circle at 27% 16%, rgba(255,255,255,.24), transparent 32%), radial-gradient(circle at 78% 82%, rgba(74,144,226,.20), transparent 42%), linear-gradient(145deg, rgba(11,58,65,.78), rgba(0,32,37,.62) 52%, rgba(0,21,25,.76))",
-                  backdropFilter: "blur(32px) saturate(155%)",
-                  WebkitBackdropFilter: "blur(32px) saturate(155%)",
-                  boxShadow: "0 30px 90px rgba(0,0,0,.34), inset 0 1px 1px rgba(255,255,255,.42), inset 0 -24px 54px rgba(0,0,0,.22), 0 0 0 1px rgba(217,166,46,.10)",
-                  transformStyle: "preserve-3d",
-                }}
+                data-service-flip
+                onPointerEnter={(e) => flipIn(e.currentTarget, e)}
+                onPointerLeave={(e) => flipOut(e.currentTarget)}
+                className="pointer-events-auto relative aspect-square w-[min(78vw,66svh,34rem)] lg:w-[min(48vw,70svh,42rem)] flat:mx-auto"
               >
-                <span aria-hidden="true" className="pointer-events-none absolute inset-[3.5%] rounded-full border border-white/25" />
-                <span aria-hidden="true" className="pointer-events-none absolute inset-[6.5%] rounded-full border border-gold/15" />
-                <span aria-hidden="true" className="pointer-events-none absolute -left-[8%] top-[7%] h-[34%] w-[72%] rotate-[-24deg] rounded-full bg-white/[0.075] blur-2xl" />
-                <span aria-hidden="true" className="pointer-events-none absolute bottom-[8%] right-[5%] size-[42%] rounded-full bg-brand/15 blur-3xl" />
-                <span aria-hidden="true" className="pointer-events-none absolute left-[18%] top-[13%] h-px w-[42%] rotate-[24deg] bg-gradient-to-r from-transparent via-white/60 to-transparent" />
-
+                <div
+                  data-service-disc
+                  className="service-glass-disc relative grid size-full place-items-center overflow-hidden rounded-full bg-white/[0.12] p-7 text-center backdrop-blur-lg backdrop-saturate-150 shadow-[0_30px_80px_-24px_rgba(0,0,0,.5),inset_0_0_60px_rgba(255,255,255,.06)] transition-shadow duration-500 ease-out hover:shadow-[0_60px_120px_-24px_rgba(0,0,0,.7),0_0_90px_rgba(74,144,226,.22),inset_0_0_70px_rgba(255,255,255,.1)] sm:p-10 lg:backdrop-blur-xl"
+                  style={{
+                    background: "radial-gradient(circle at 28% 18%, rgba(255,255,255,.24), transparent 40%), linear-gradient(145deg, rgba(255,255,255,.17), rgba(255,255,255,.05) 55%, rgba(255,255,255,.1))",
+                  }}
+                >
                 <div data-service-content className="relative z-10 mx-auto flex w-full max-w-[28rem] flex-col items-center">
                   <span className="mb-4 font-mono text-[0.65rem] uppercase tracking-[0.24em] text-gold sm:mb-6">
                     {pad(index + 1)} <span className="text-white/40">/ {pad(total)}</span>
@@ -230,7 +265,7 @@ export function PropertyServices() {
                     Managed with care <ArrowRight className="size-3" />
                   </span>
                 </div>
-                <span aria-hidden="true" className="absolute bottom-[15%] right-[17%] size-1.5 rounded-full bg-gold shadow-[0_0_18px_rgba(217,166,46,.8)]" />
+                </div>
               </div>
             </article>
           ))}
@@ -241,8 +276,6 @@ export function PropertyServices() {
           .property-services-root { height: auto !important; }
         }
         .service-glass-disc {
-          -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
           will-change: transform, opacity;
           isolation: isolate;
         }

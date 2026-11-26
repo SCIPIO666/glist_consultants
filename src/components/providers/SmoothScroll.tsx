@@ -18,7 +18,7 @@ type ScrollApi = {
   stop: () => void;
   start: () => void;
   /** Smooth-scroll to a selector, element or pixel offset. */
-  scrollTo: (target: string | HTMLElement | number, offset?: number) => void;
+  scrollTo: (target: string | HTMLElement | number, offset?: number, options?: { immediate?: boolean }) => void;
 };
 
 const noop = () => {};
@@ -66,9 +66,9 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
 
   const stop = useCallback(() => lenisRef.current?.stop(), []);
   const start = useCallback(() => lenisRef.current?.start(), []);
-  const scrollTo = useCallback<ScrollApi["scrollTo"]>((target, offset = 0) => {
+  const scrollTo = useCallback<ScrollApi["scrollTo"]>((target, offset = 0, options) => {
     if (lenisRef.current) {
-      lenisRef.current.scrollTo(target, { offset });
+      lenisRef.current.scrollTo(target, { offset, immediate: options?.immediate });
     } else if (typeof target === "number") {
       window.scrollTo({ top: target + offset });
     } else {
