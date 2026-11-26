@@ -1,0 +1,2 @@
+# Run from the project root. Removes leftovers that no longer match the data files and break `next build`.
+Remove-Item src\components\home\insights\InsightsLinks.tsx, src\components\home\services\ServiceWheel.tsx, src\components\home\services\ServiceIcon.tsx, src\components\home\services\wheelGeometry.ts, src\components\home\services\ServicesStack.tsx, src\components\home\services\ServiceCard.tsx -ErrorAction SilentlyContinue

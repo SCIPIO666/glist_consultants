@@ -5,7 +5,7 @@ import { ServicesWheel } from "./ServicesWheel";
 export function HomeServices() {
   return (
     <>
-      <CircleBand rows={3} colorClass="text-night" className="bg-sand" reveal />
+      {/* <CircleBand rows={3} colorClass="text-night" className="bg-sand" reveal /> */}
       <ServicesWheel />
     </>
   );

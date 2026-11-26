@@ -28,6 +28,7 @@ function makeDots(count: number): Dot[] {
 
 const DOTS = makeDots(130);
 const COLORS = ["text-gold", "text-brand", "text-ink", "text-brand-soft"];
+const GOLD = ["text-gold", "text-gold", "text-gold", "text-gold"];
 
 /**
  * Decorative scatter of dots for a section corner. Position it with className:
@@ -35,8 +36,10 @@ const COLORS = ["text-gold", "text-brand", "text-ink", "text-brand-soft"];
  *   <ScatterDots className="absolute bottom-0 right-0 w-[min(46vw,32rem)]" />
  *
  * Fades out toward the top-left so it never competes with content.
+ * `tone="gold"` makes every dot gold (default is the mixed brand palette).
  */
-export function ScatterDots({ className }: { className?: string }) {
+export function ScatterDots({ className, tone = "mixed" }: { className?: string; tone?: "mixed" | "gold" }) {
+  const palette = tone === "gold" ? GOLD : COLORS;
   return (
     <svg
       aria-hidden
@@ -48,7 +51,7 @@ export function ScatterDots({ className }: { className?: string }) {
       )}
     >
       {DOTS.map((d, i) => (
-        <circle key={i} cx={d.x} cy={d.y} r={d.r} fill="currentColor" className={cn(COLORS[d.c], "opacity-40")} />
+        <circle key={i} cx={d.x} cy={d.y} r={tone === "gold" ? Math.round(d.r * 0.62 * 10) / 10 : d.r} fill="currentColor" className={cn(palette[d.c], tone === "gold" ? "opacity-70" : "opacity-40")} />
       ))}
     </svg>
   );

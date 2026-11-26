@@ -5,7 +5,7 @@
  * Keep claims honest: no invented statistics or client counts.
  *
  * The reasons screen is minimal on purpose: a title and one button on the left,
- * six numbered reasons on the right. No eyebrow, no description.
+ * four numbered reasons on the right. No eyebrow, no description.
  */
 export type WhyReason = {
   title: string;
@@ -24,28 +24,20 @@ export const whyReasons: {
   srListLabel: "Reasons to choose Glist Consultants",
   items: [
     {
-      title: "Statutory compliance, safeguarded",
-      text: "We meticulously review your tax processes against the Income Tax Act and VAT Act, ensuring your business avoids penalties and regulatory exposure.",
+      title: "Advice you can act on",
+      text: "We solve the problem in front of you: the return to file, the payroll to run, the tenant to find. Plain language, clear next steps.",
     },
     {
-      title: "Revenue authority representation",
-      text: "From routine KRA health checks to handling objections and appeals at the Tax Appeals Tribunal, we stand between you and the authorities.",
+      title: "Deadlines kept, records straight",
+      text: "Statutory dates do not move, so we plan around them. Dependable, timely support delivered to professional standards.",
     },
     {
-      title: "Cross-functional financial visibility",
-      text: "Unify your payroll, bookkeeping, and tax compliance under one team. We bridge the gap between daily operations and strategic financial planning.",
+      title: "One roof, seven services",
+      text: "Tax, payroll, registrations, books, stock, personal finance and rentals, with one team that already knows your business.",
     },
     {
-      title: "Proactive risk mitigation",
-      text: "We identify compliance gaps and knowledge shortfalls within your organization before they become costly liabilities, offering tailored training and solutions.",
-    },
-    {
-      title: "Audit-ready records, always",
-      text: "Dependable, timely support with meticulous record-keeping. Whether you need eTIMS-compliant invoicing or IFRS-aligned financial statements, your books are prepared.",
-    },
-    {
-      title: "Tailored for your next stage of growth",
-      text: "Whether you are a startup navigating pre-setup consultancy or an established enterprise restructuring for efficiency, we adapt our advisory to your lifecycle.",
+      title: "Built around you",
+      text: "We take the time to understand your situation before we advise, then work alongside you as you grow.",
     },
   ],
 };

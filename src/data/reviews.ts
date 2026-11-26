@@ -24,45 +24,45 @@ export const reviewsSection: {
   cta: { label: string; href: string };
   items: Review[];
 } = {
-  label: "Client Outcomes",
-  heading: "Regulatory exposure mitigated, operations streamlined, and enterprises",
-  headingAccent: "positioned to scale.",
+  label: "Testimonials",
+  heading: "Clear books, kept deadlines, and a business",
+  headingAccent: "free to grow.",
   cta: { label: "Book a consultation", href: "/contact" },
   items: [
     {
       quote:
-        "The transition was seamless. Rent is collected on time, and the monthly reporting gives me complete visibility into my property's yield. I no longer deal with tenant friction.",
+        "Rent now arrives on time and I get a clear monthly statement. I stopped chasing tenants the week Glist took over.",
       name: "Amina W.",
-      role: "Property Investor",
+      role: "Landlord",
       location: "Kilimani, Nairobi",
-      service: "Rental Property Management",
+      service: "Rental property management",
       stars: 5,
     },
     {
       quote:
-        "Their team audited our tax processes and identified compliance gaps we didn't know existed. Filing is now proactive, and we are fully prepared for any KRA review.",
+        "My returns are filed before the deadline and I finally understand what I owe and why. No more last-day panic.",
       name: "Peter K.",
-      role: "Managing Director",
+      role: "Shop owner",
       location: "Thika",
-      service: "Taxation and Tax Compliance",
+      service: "Taxation and tax compliance",
       stars: 5,
     },
     {
       quote:
-        "From incorporation to setting up our eTIMS-compliant invoicing and IFRS reporting structure, Glist provided the technical expertise a startup needs to scale securely.",
+        "They registered the company, set up our books and walked us through every step in plain language.",
       name: "Grace N.",
-      role: "Startup Founder",
+      role: "Startup founder",
       location: "Westlands, Nairobi",
-      service: "Registrations and Bookkeeping",
+      service: "Registration and bookkeeping",
       stars: 5,
     },
     {
       quote:
-        "A rigorous and structured financial plan. They didn't just look at my budget; they helped me restructure my debt and build a realistic strategy for wealth accumulation.",
+        "A practical budget and a plan to clear my debts. For the first time I know where my salary goes each month.",
       name: "Daniel O.",
-      role: "Salaried Professional",
+      role: "Salaried professional",
       location: "Nakuru",
-      service: "Personal Financial Advisory",
+      service: "Personal financial advisory",
       stars: 5,
     },
   ],

@@ -1,32 +1,18 @@
 /**
- * Home "News and Insights" teaser: ONE featured card, not a list.
- * PLACEHOLDER: the article below is a stand-in until the Insights page / Sanity
- * can supply the latest post. Replace `featured` (title, date, image, href) then;
- * later this file can be fed from the newest published insight automatically.
+ * Home insights teaser (just before the final CTA): ONE card for the latest insight.
+ * For now it is written by hand. When the Insights page exists, point it at the newest
+ * post (title, topic, date, link, image) instead. Sample content: replace before launch.
  */
-export const insightsLink: {
-  title: string;
-  linkLabel: string;
-  linkHref: string;
-  featured: {
-    date: string;
-    title: string;
-    cta: string;
-    href: string;
-    image: { src: string; alt: string };
-  };
-} = {
-  title: "News and Insights",
-  linkLabel: "Our latest insights",
-  linkHref: "/insights",
-  featured: {
-    date: "November 2026",
-    title: "Staying ahead of KRA deadlines: a simple filing calendar",
-    cta: "Read more",
+export const insightsLink = {
+  title: "News and insights",
+  allLink: { label: "Our latest insights", href: "/insights" },
+  card: {
+    image: "/pages/home/insight-bg/bg.webp",
+    imageAlt: "Smiling client reviewing a financial summary on a laptop",
+    topic: "Tax updates",
+    date: "20 November 2026",
+    title: "The filing dates worth putting in your diary",
     href: "/insights",
-    image: {
-      src: "/pexels-artempodrez-6779714.webp",
-      alt: "Accounting papers, a calculator and charts laid out on a desk",
-    },
+    readMore: "Read more",
   },
-};
+} as const;

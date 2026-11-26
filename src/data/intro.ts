@@ -4,7 +4,7 @@
  */
 
 export const introOpening = {
-  eyebrow: "The Glist Standard",
+  eyebrow: "What is Glist",
   /** The big word. A gold dot is added after it. */
   word: "Clarity",
 } as const;
@@ -14,12 +14,12 @@ export const introOpening = {
  * Keep starred phrases short (one or two words) so they never wrap badly.
  */
 export const introDescription =
-  "Glist Consultants is a professional financial and advisory firm. We partner with individuals, entrepreneurs, and established enterprises to provide *pragmatic* solutions for tax, payroll, registrations, accounting, and property management. We ensure you remain *compliant*, make informed decisions, and maintain focus on *growth*.";
+  "Glist Consultants is a financial advisory firm. We give individuals, entrepreneurs, and growing businesses practical support with tax, payroll, registrations, books, and property. You stay *compliant*, decide with confidence, and get back to doing what you do best.";
 
 export const introGraph = {
   /** Two lines. The second line gets the hand-drawn underline. */
-  taglineTop: "Rigorous compliance,",
-  taglineAccent: "uninterrupted growth.",
+  taglineTop: "Get the numbers right,",
+  taglineAccent: "and growth follows.",
   /** Small caption under the chart. Keep it honest: this chart is an illustration, not real data. */
   caption: "Strategic trajectory",
   srSummary: "Illustrative chart: business revenue rises steadily over five years, dips once, then climbs sharply.",
@@ -50,10 +50,10 @@ export const introGraphPoints: [number, number][] = [
 
 export const introClose = {
   /** No eyebrow on this screen, by design. */
-  title: "Built for enterprises that intend to last.",
+  title: "Built for businesses that plan to last.",
   paragraphs: [
-    "Glist manages the operational and regulatory complexities of your business. From statutory tax compliance and end-to-end payroll administration to corporate registrations, rigorous bookkeeping, and comprehensive property management—our multidisciplinary team operates under one roof.",
-    "We mitigate your risk. You scale your enterprise.",
+    "We take the headaches of tax compliance, payroll, bookkeeping, and property management off your plate. Our team handles the details, so you can make clear decisions and focus on moving your business forward.",
+    "We crunch the numbers. You focus on the big picture.",
   ],
   cta: { label: "About Glist", href: "/about" },
 } as const;

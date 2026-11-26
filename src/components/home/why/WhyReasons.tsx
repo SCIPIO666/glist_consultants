@@ -1,10 +1,10 @@
 "use client";
 
 import { useRef } from "react";
-import { gsap, mq, useGSAP } from "@/lib/gsap";
+import { gsap, ScrollTrigger, mq, useGSAP } from "@/lib/gsap";
 import { Reveal } from "@/components/motion/Reveal";
 import { Button } from "@/components/ui/Button";
-import { ScatterDots } from "@/components/ui/ScatterDots";
+import { DashField } from "@/components/ui/DashField";
 import { whyReasons as copy } from "@/data/whyUs";
 import { WhyReasonCard } from "./WhyReasonCard";
 
@@ -14,10 +14,10 @@ import { WhyReasonCard } from "./WhyReasonCard";
  *   LEFT   minimalist title (no eyebrow, no description) + one CTA at the bottom
  *   RIGHT  four frosted-glass reasons, each split [number | heading + text]
  *   Two faint, purely decorative vertical lines divide the whole section into thirds.
- *   Soft blurred colour orbs and a scatter of gold specks sit behind the glass.
+ *   Soft blurred colour orbs and a field of tiny slanted dashes sit behind the glass.
  *
- * Entry (scroll-triggered, plays ONCE, not reversible): the screen starts with no
- * reasons, then reason 1 arrives from the right, then 2, then 3, then 4.
+ * Entry: each reason has its own scroll trigger and arrives from the right when it
+ * reaches the screen (reversible). Reasons arriving together are staggered.
  */
 export function WhyReasons() {
   const root = useRef<HTMLElement>(null);
@@ -29,31 +29,44 @@ export function WhyReasons() {
       const q = <T extends Element>(sel: string) => gsap.utils.toArray<T>(sel, el);
       const mm = gsap.matchMedia();
 
-      // Phones/tablets: one tall column, so each card arrives as IT reaches the screen.
-      mm.add(`${mq.motionOk} and ${mq.mobile}`, () => {
-        q<HTMLElement>("[data-why-card]").forEach((card) => {
-          const tl = gsap.timeline({ scrollTrigger: { trigger: card, start: "top 88%", once: true } });
-          tl.fromTo(card, { x: 90, opacity: 0 }, { x: 0, opacity: 1, duration: 1, ease: "expo.out" }, 0)
-            .fromTo(card.querySelector("[data-why-num]"), { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 0.3)
-            .fromTo(card.querySelector("[data-why-body]"), { x: 24, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 0.4);
-        });
-      });
-
-      // Desktop: lines fade down first, then reasons 1, 2, 3, 4 arrive one after another from the right.
-      mm.add(`${mq.motionOk} and ${mq.desktop}`, () => {
+      /**
+       * Every reason owns its own ScrollTrigger (via ScrollTrigger.batch): it plays when
+       * THAT card reaches the screen, and reverses when you scroll back above it.
+       * Cards that arrive in the same moment are staggered so they still step in one by one.
+       */
+      const setup = (fromX: number) => {
         const cards = q<HTMLElement>("[data-why-card]");
+        const timelines = new Map<Element, gsap.core.Timeline>();
+
+        cards.forEach((card) => {
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo(card, { x: fromX, opacity: 0 }, { x: 0, opacity: 1, duration: 1.1, ease: "expo.out" }, 0)
+            .fromTo(card.querySelector("[data-why-num]"), { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" }, 0.3)
+            .fromTo(card.querySelector("[data-why-body]"), { x: fromX * 0.15, opacity: 0 }, { x: 0, opacity: 1, duration: 0.7, ease: "power3.out" }, 0.45);
+          timelines.set(card, tl);
+        });
+
+        ScrollTrigger.batch(cards, {
+          start: "top 88%",
+          interval: 0.1,
+          batchMax: cards.length,
+          onEnter: (batch) => batch.forEach((c, k) => timelines.get(c)?.delay(k * 0.2).play()),
+          onLeaveBack: (batch) => batch.forEach((c) => timelines.get(c)?.delay(0).reverse()),
+        });
+      };
+
+      mm.add(`${mq.motionOk} and ${mq.mobile}`, () => setup(90));
+
+      mm.add(`${mq.motionOk} and ${mq.desktop}`, () => {
+        setup(260);
+        // The two faint dividers draw down once as the section arrives.
         const lines = q<HTMLElement>("[data-why-line]");
         gsap.set(lines, { transformOrigin: "50% 0%" });
-
-        const tl = gsap.timeline({ scrollTrigger: { trigger: el, start: "top 55%", once: true } });
-        tl.fromTo(lines, { scaleY: 0 }, { scaleY: 1, duration: 1.6, ease: "power3.inOut", stagger: 0.25 }, 0);
-
-        cards.forEach((card, i) => {
-          const at = 0.9 + i * 0.7; // clear gap between each reason
-          tl.fromTo(card, { x: 260, opacity: 0 }, { x: 0, opacity: 1, duration: 1.15, ease: "expo.out" }, at)
-            .fromTo(card.querySelector("[data-why-num]"), { y: 22, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" }, at + 0.3)
-            .fromTo(card.querySelector("[data-why-body]"), { x: 40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.7, ease: "power3.out" }, at + 0.45);
-        });
+        gsap.fromTo(
+          lines,
+          { scaleY: 0 },
+          { scaleY: 1, duration: 1.6, ease: "power3.inOut", stagger: 0.25, scrollTrigger: { trigger: el, start: "top 70%", once: true } },
+        );
       });
 
       mm.add(mq.reduced, () => {
@@ -72,13 +85,13 @@ export function WhyReasons() {
 
   return (
     <section ref={root} aria-labelledby="why-title" className="relative overflow-hidden bg-mist text-ink">
-      {/* Backdrop for the glass: soft colour orbs + gold specks (decorative) */}
+      {/* Backdrop for the glass: soft colour orbs + dash field (decorative) */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <span className="absolute left-[42%] top-[6%] size-[18rem] rounded-full bg-brand/30 blur-3xl lg:size-[28rem]" />
         <span className="absolute -right-16 top-[36%] size-[16rem] rounded-full bg-gold/40 blur-3xl lg:size-[26rem]" />
         <span className="absolute bottom-[-3rem] left-[28%] size-[16rem] rounded-full bg-brand-soft/35 blur-3xl lg:size-[24rem]" />
       </div>
-      <ScatterDots className="absolute bottom-0 right-0 w-[min(75vw,34rem)] lg:w-[min(46vw,42rem)]" />
+      <DashField focus="bottom-left" className="absolute inset-0 size-full" />
 
       {/* Two faint decorative lines: the section in thirds (desktop only) */}
       <span aria-hidden data-why-line className="pointer-events-none absolute inset-y-0 left-1/3 hidden w-px bg-ink/10 lg:block" />
