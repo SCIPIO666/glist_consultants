@@ -6,10 +6,9 @@ import { Reveal } from "@/components/motion/Reveal";
 import Link from "next/link";
 import { ArrowRight } from "@/components/ui/icons";
 import { QuoteMark } from "@/components/ui/QuoteMark";
-import { reviewsAreSamples, reviewsSection as copy } from "@/data/reviews";
+import { reviewsAreSamples, reviewsSection as copy, type Review } from "@/data/reviews";
 import { ReviewCard } from "./ReviewCard";
 
-const n = copy.items.length;
 const SCROLL_PER_CARD = 60; // svh of scrolling per card
 const HOLD = 50; // svh of rest at the end
 const LEAD = 0.2; // timeline units of rest before the first card moves
@@ -20,8 +19,9 @@ const LEAD = 0.2; // timeline units of rest before the first card moves
  * the bottom and settles one strip lower than the last, so every card's stars
  * stay visible. Fully reversible. Title and CTA stay on the left.
  */
-export function WhyReviews() {
+export function WhyReviews({ items }: { items: Review[] }) {
   const root = useRef<HTMLElement>(null);
+  const n = items.length;
 
   useGSAP(
     () => {
@@ -59,7 +59,7 @@ export function WhyReviews() {
       });
       // Reduced motion: no pinning; cards list one under another (see motion-reduce classes).
     },
-    { scope: root },
+    { scope: root, dependencies: [n] },
   );
 
   const style = {
@@ -109,7 +109,7 @@ export function WhyReviews() {
 
             {/* Right: the stack. Height = one card + one strip per extra card. */}
             <div className="relative max-h-[28rem] min-h-[17rem] w-full flex-1 lg:ml-auto lg:h-[min(74svh,52rem)] lg:max-h-none lg:max-w-[38rem] lg:flex-none flat:h-auto flat:max-h-none flat:min-h-0 flat:flex-none">
-              {copy.items.map((r, i) => (
+              {items.map((r, i) => (
                 <ReviewCard key={r.name} review={r} index={i} />
               ))}
             </div>
@@ -119,7 +119,7 @@ export function WhyReviews() {
             </div>
           </div>
 
-          {process.env.NODE_ENV !== "production" && reviewsAreSamples && (
+          {process.env.NODE_ENV !== "production" && reviewsAreSamples && items === copy.items && (
             <p className="absolute right-[var(--gutter)] top-[calc(var(--header-h)-1rem)] rounded-pill bg-alert-bg px-3 py-1 text-xs font-semibold text-alert">
               Dev note: sample reviews. Replace in src/data/reviews.ts before launch.
             </p>

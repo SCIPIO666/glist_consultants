@@ -78,7 +78,7 @@ export function ServicesListing() {
               >
                 <div>
                   <div className="flex items-start gap-5">
-                    <span aria-hidden data-row-num className="font-display text-2xl font-light text-gold opacity-0">
+                    <span aria-hidden data-row-num className={cn("font-display text-2xl font-light opacity-0", s.slug === "taxation" ? "font-semibold text-kra" : "text-gold")}>
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <h2

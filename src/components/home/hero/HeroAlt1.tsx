@@ -86,7 +86,7 @@ export function HeroAlt1() {
 
       {/* ---- Text loop, opposite direction ---- */}
       <div data-hero="ticker" className="opacity-0">
-        <HeroTicker tone="light" direction="right" />
+        <HeroTicker tone="light" direction="left" />
       </div>
     </section>
   );

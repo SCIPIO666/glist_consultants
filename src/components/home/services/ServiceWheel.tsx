@@ -7,7 +7,7 @@ import { ServiceIcon } from "./ServiceIcon";
 import { arcPath, wedgeCentre, wedgeClip } from "./wheelGeometry";
 
 /** Colours of the arcs around the outside, clockwise from 12 o'clock. */
-const arcColours = ["text-brand-soft", "text-gold", "text-cta", "text-whatsapp", "text-brand", "text-gold", "text-cta"];
+const arcColours = ["text-kra", "text-gold", "text-kra", "text-brand-soft", "text-kra", "text-gold", "text-brand-soft"];
 
 /**
  * The circular services grid. A square box holding seven ring segments, a hub and

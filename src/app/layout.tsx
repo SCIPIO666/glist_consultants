@@ -1,8 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins, Plus_Jakarta_Sans, Caveat } from "next/font/google";
 import "./globals.css";
-import { SmoothScroll } from "@/components/providers/SmoothScroll";
-import { SiteShell } from "@/components/layout/SiteShell";
+import { AppChrome } from "@/components/providers/AppChrome";
 import { site } from "@/lib/site";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -57,9 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${jakarta.variable} ${heading.variable} ${caveat.variable}`}>
       <body>
-        <SmoothScroll>
-          <SiteShell>{children}</SiteShell>
-        </SmoothScroll>
+        <AppChrome>{children}</AppChrome>
       </body>
     </html>
   );

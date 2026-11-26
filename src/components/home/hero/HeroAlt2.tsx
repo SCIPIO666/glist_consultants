@@ -106,7 +106,7 @@ export function HeroAlt2() {
       </div>
 
       <div data-hero="ticker" className="opacity-0">
-        <HeroTicker tone="dark" direction="right" />
+        <HeroTicker tone="dark" direction="left" />
       </div>
     </section>
   );

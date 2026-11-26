@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, type CSSProperties } from "react";
+import { useRef } from "react";
 import { gsap, mq, useGSAP } from "@/lib/gsap";
 import { Reveal } from "@/components/motion/Reveal";
 import { Button } from "@/components/ui/Button";
@@ -10,19 +10,14 @@ import { DonutBackdrop } from "./DonutBackdrop";
 import { ServiceWheel } from "./ServiceWheel";
 
 const n = services.length;
-const SCROLL = 300; // svh of scrolling that builds the wheel
 const LEAD = 0.5; // timeline units before the first wedge starts (the hub comes in first)
 const STEP = 0.55; // timeline units between one wedge and the next
 const DUR = 0.9; // how long one wedge takes to settle
-const HOLD = 0.6; // rest at the end
 
 /**
- * Services section. The section is tall and its content is pinned (CSS sticky) while
- * scrolling plays a scrubbed timeline: the hub pops in, then the wedges sweep in one by
- * one clockwise from 12 o'clock, each with its coloured arc drawing alongside.
- * Scroll back up and it un-builds. The title and button stay fixed on the left.
- *
- * Reduced motion or a very short screen: no pinning; the finished wheel just sits there.
+ * Services section. When it mounts the hub pops in, then the wedges sweep in one by one
+ * clockwise from 12 o'clock, each with its arc drawing alongside. It plays once, on its own
+ * (no scroll trigger, no pinning). Reduced motion: the finished wheel simply shows.
  */
 export function ServicesWheel() {
   const root = useRef<HTMLElement>(null);
@@ -33,7 +28,7 @@ export function ServicesWheel() {
       if (!el) return;
       const mm = gsap.matchMedia();
 
-      mm.add(mq.pin, () => {
+      mm.add(mq.motionOk, () => {
         const wedges = gsap.utils.toArray<HTMLElement>("[data-wedge]", el);
         const arcs = gsap.utils.toArray<SVGPathElement>("[data-arc]", el);
 
@@ -48,17 +43,9 @@ export function ServicesWheel() {
 
         const tl: gsap.core.Timeline = gsap.timeline({
           defaults: { ease: "power2.inOut" },
-          scrollTrigger: {
-            trigger: el,
-            start: "top top",
-            end: "bottom bottom",
-            scrub: 0.6,
-            onUpdate: (self) => {
-              const t = self.progress * tl.duration();
-              const done = wedges.filter((_, i) => t >= LEAD + i * STEP + DUR * 0.7).length;
-              setReady(done);
-            },
-          },
+          onUpdate: () => setReady(wedges.filter((_, i) => tl.time() >= LEAD + i * STEP + DUR * 0.7).length),
+          onComplete: () => setReady(n),
+          delay: 0.3,
         });
 
         tl.fromTo("[data-hub]", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.6)" }, 0);
@@ -72,7 +59,6 @@ export function ServicesWheel() {
           );
           tl.fromTo(arcs[i], { drawSVG: "0%" }, { drawSVG: "100%", duration: DUR, ease: "none" }, at + 0.1);
         });
-        tl.to({}, { duration: HOLD }, LEAD + (n - 1) * STEP + DUR);
 
         return () => {
           wedges.forEach((w) => w.removeAttribute("inert"));
@@ -82,19 +68,16 @@ export function ServicesWheel() {
     { scope: root },
   );
 
-  const style = { "--wheel-h": `calc(100svh + ${SCROLL}svh)` } as CSSProperties;
-
   return (
     <section
       ref={root}
       aria-labelledby="services-title"
-      style={style}
-      className="relative h-[var(--wheel-h)] bg-night text-white flat:h-auto"
+      className="relative bg-night text-white"
     >
-      <div className="sticky top-0 h-svh overflow-hidden flat:static flat:h-auto flat:overflow-hidden">
+      <div className="relative min-h-svh overflow-hidden">
         <DonutBackdrop />
 
-        <div className="wrap-wide relative z-10 flex h-full flex-col items-center justify-between gap-3 pb-5 pt-[calc(var(--header-h)+2.75rem)] lg:grid lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-10 lg:pb-0 lg:pt-[var(--header-h)] flat:min-h-svh flat:justify-center flat:gap-10 flat:py-24">
+        <div className="wrap-wide relative z-10 flex min-h-svh flex-col items-center justify-between gap-3 pb-5 pt-[calc(var(--header-h)+2.75rem)] lg:grid lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-10 lg:pb-0 lg:pt-[var(--header-h)]">
           {/* Fixed left side: title and one button, nothing else */}
           <div className="flex w-full items-end justify-between gap-4 lg:block">
             <Reveal y={40}>
@@ -117,7 +100,7 @@ export function ServicesWheel() {
           </div>
 
           {/* Circular grid */}
-          <ServiceWheel className="w-[min(92vw,calc(100svh-17.5rem))] shrink-0 lg:w-[min(100%,calc(100svh-8rem))] lg:justify-self-center flat:w-[min(92vw,36rem)]" />
+          <ServiceWheel className="w-[min(92vw,calc(100svh-17.5rem))] shrink-0 lg:w-[min(100%,calc(100svh-8rem))] lg:justify-self-center" />
 
           {/* Phone / tablet button (the desktop one sits under the title) */}
           <div className="flex w-full justify-center lg:hidden">

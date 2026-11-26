@@ -7,6 +7,8 @@ const nextConfig: NextConfig = {
   images: {
     // Qualities used by <Image quality={...}> across the site (Next 16 only allows listed values).
     qualities: [55, 60, 70, 75],
+    // Images uploaded in Sanity are served from its CDN.
+    remotePatterns: [{ protocol: "https", hostname: "cdn.sanity.io" }],
   },
   turbopack: {
     rules: {

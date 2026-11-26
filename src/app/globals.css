@@ -28,6 +28,8 @@
   --color-gold: #d9a62e;
 
   /* Action */
+  --color-kra: #e4202b; /* KRA red: tax content + accents */
+  --color-kra-deep: #b3141d;
   --color-cta: #d62828;
   --color-cta-hover: #b01e1e;
   --color-whatsapp: #25d366;

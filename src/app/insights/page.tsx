@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { InsightsExplorer } from "@/components/insights/InsightsExplorer";
 import { insightsMeta } from "@/data/insights";
+import { getInsights } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: insightsMeta.title,
@@ -11,12 +12,13 @@ export const metadata: Metadata = {
 
 /**
  * INSIGHTS (list). One long list of wide article cards with sticky checklist filters.
- * Cards link to /insights/<slug>, which does not exist yet (the article page is a later step).
+ * Articles come from Sanity (static placeholders until it is configured); cards link to /insights/<slug>.
  */
-export default function InsightsPage() {
+export default async function InsightsPage() {
+  const { items, isSample } = await getInsights();
   return (
     <main>
-      <InsightsExplorer />
+      <InsightsExplorer items={items} samples={isSample} />
     </main>
   );
 }

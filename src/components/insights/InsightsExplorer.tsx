@@ -5,8 +5,6 @@ import { ScrollTrigger } from "@/lib/gsap";
 import { Reveal } from "@/components/motion/Reveal";
 import {
   categories,
-  insights,
-  insightsAreSamples,
   insightsPage as copy,
   readingBucketOf,
   readingBuckets,
@@ -15,6 +13,7 @@ import {
 import { services } from "@/data/services";
 import { FilterGroup } from "./InsightsFilters";
 import { InsightCard } from "./InsightCard";
+import { SubscribeForm } from "./SubscribeForm";
 
 type Key = "service" | "category" | "reading";
 type Sel = Record<Key, string[]>;
@@ -35,18 +34,18 @@ function passes(item: Insight, sel: Sel, skip?: Key) {
  * sticky checklist of filters on the left (a collapsible panel on phones).
  * Cards are the minimal teaser-style card (photo, date, title, Read more).
  */
-export function InsightsExplorer() {
+export function InsightsExplorer({ items, samples = false }: { items: Insight[]; samples?: boolean }) {
   const [sel, setSel] = useState<Sel>(EMPTY);
   const [open, setOpen] = useState(false);
 
   const active = sel.service.length + sel.category.length + sel.reading.length;
-  const filtered = useMemo(() => insights.filter((i) => passes(i, sel)), [sel]);
+  const filtered = useMemo(() => items.filter((i) => passes(i, sel)), [items, sel]);
 
   const toggle = (key: Key) => (value: string) =>
     setSel((s) => ({ ...s, [key]: s[key].includes(value) ? s[key].filter((v) => v !== value) : [...s[key], value] }));
 
   // Options with live counts: how many articles each option would show given the OTHER groups.
-  const count = (key: Key, test: (i: Insight) => boolean) => insights.filter((i) => passes(i, sel, key) && test(i)).length;
+  const count = (key: Key, test: (i: Insight) => boolean) => items.filter((i) => passes(i, sel, key) && test(i)).length;
   const serviceOptions = services.map((s) => ({ value: s.slug, label: s.title, count: count("service", (i) => i.service === s.slug) }));
   const categoryOptions = categories.map((c) => ({ value: c.value, label: c.label, count: count("category", (i) => i.category === c.value) }));
   const readingOptions = readingBuckets.map((b) => ({ value: b.value, label: b.label, count: count("reading", (i) => readingBucketOf(i.readMinutes) === b.value) }));
@@ -110,7 +109,7 @@ export function InsightsExplorer() {
             </Reveal>
             <p className="mt-4 max-w-2xl text-lead text-ink-muted">{copy.lead}</p>
             <p role="status" aria-live="polite" className="mt-5 text-sm font-medium text-ink-muted">
-              Showing {filtered.length} of {insights.length} articles
+              Showing {filtered.length} of {items.length} articles
             </p>
           </header>
 
@@ -138,11 +137,13 @@ export function InsightsExplorer() {
             </div>
           )}
 
+          <SubscribeForm />
+
           <p className="mt-10 text-sm text-ink-muted">{copy.disclaimer}</p>
 
-          {process.env.NODE_ENV !== "production" && insightsAreSamples && (
+          {process.env.NODE_ENV !== "production" && samples && (
             <p className="mt-4 w-fit rounded-pill bg-alert-bg px-3 py-1 text-xs font-semibold text-alert">
-              Dev note: sample articles. Replace in src/data/insights.ts before launch.
+              Dev note: showing sample articles because Sanity is not configured yet.
             </p>
           )}
         </div>

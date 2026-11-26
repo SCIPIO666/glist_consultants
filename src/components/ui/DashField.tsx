@@ -93,7 +93,7 @@ export function DashField({
       <g fill="none" strokeWidth={1.8} strokeLinecap="round">
         <path d={gold} stroke="#d9a62e" opacity={0.85} />
         <path d={blue} stroke="#4a90e2" opacity={0.7} />
-        <path d={ink} stroke="#0f2a52" opacity={0.35} />
+        <path d={ink} stroke="#e4202b" opacity={0.4} />
       </g>
     </svg>
   );

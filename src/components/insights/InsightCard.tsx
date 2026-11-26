@@ -46,7 +46,7 @@ export function InsightCard({ item, priority = false }: { item: Insight; priorit
       </div>
 
       <div className="px-5 pb-7 sm:px-2 sm:py-7 sm:pr-9 lg:pr-12">
-        <time dateTime={item.date} className="text-sm font-semibold uppercase tracking-[0.12em] text-brand">
+        <time dateTime={item.date} className={`text-sm font-semibold uppercase tracking-[0.12em] ${item.category === "tax-updates" || item.service === "taxation" ? "text-kra" : "text-brand"}`}>
           {formatInsightMonth(item.date)}
         </time>
         <h3 className="mt-3 max-w-[24ch] font-display text-[clamp(1.5rem,1.1rem+1.6vw,2.6rem)] font-normal leading-[1.12] tracking-[-0.015em]">
