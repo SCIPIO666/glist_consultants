@@ -155,12 +155,17 @@ export function PropertyValue() {
             </ol>
           </div>
 
-          <ul data-pv="cards" className="mt-12 grid gap-4 sm:grid-cols-2 sm:gap-5">
+          <div className="mt-16">
+            <p data-pv="mask" className="text-xs font-semibold uppercase tracking-[0.18em] text-brand opacity-0">{copy.pointsLabel}</p>
+            <h3 data-pv="mask" className="mt-3 max-w-[20ch] text-h3 font-medium text-night opacity-0">{copy.pointsTitle}</h3>
+          </div>
+
+          <ul data-pv="cards" className="mt-8 grid gap-4 sm:grid-cols-2 sm:gap-5">
             {copy.points.map((point, index) => (
               <li
                 key={point.title}
                 data-pv="card"
-                className="group relative flex min-h-[10rem] items-center gap-5 overflow-hidden rounded-[1.5rem] border border-white/80 bg-white/45 p-5 opacity-0 shadow-[0_20px_50px_-28px_rgb(0_32_37/0.4),inset_0_1px_0_rgb(255_255_255/0.9)] backdrop-blur-lg backdrop-saturate-150 transition-[transform,background-color,box-shadow] duration-500 ease-out hover:-translate-y-1 hover:bg-white/65 hover:shadow-[0_28px_60px_-26px_rgb(0_32_37/0.45),inset_0_1px_0_rgb(255_255_255/0.95)] sm:p-6"
+                className="group relative flex min-h-[15rem] flex-col items-start justify-between gap-6 overflow-hidden rounded-[1.5rem] border border-white/80 bg-white/45 p-5 opacity-0 shadow-[0_20px_50px_-28px_rgb(0_32_37/0.4),inset_0_1px_0_rgb(255_255_255/0.9)] backdrop-blur-lg backdrop-saturate-150 transition-[transform,background-color,box-shadow] duration-500 ease-out hover:-translate-y-1 hover:bg-white/65 hover:shadow-[0_28px_60px_-26px_rgb(0_32_37/0.45),inset_0_1px_0_rgb(255_255_255/0.95)] sm:p-6"
               >
                 <ValueDonut index={index} />
                 <div className="min-w-0">

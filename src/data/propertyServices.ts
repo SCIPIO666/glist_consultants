@@ -1,7 +1,7 @@
 /** Property Management, section 3: rental property management services. */
 export const propertyServices = {
   title: "What a good property manager does",
-  text: "A full-service manager covers tenant sourcing and vetting, rent collection and remittance, maintenance coordination, monthly financial reporting and compliance — keeping your property occupied and your income predictable.",
+  text: "A full-service manager covers tenant sourcing and vetting, rent collection and remittance, maintenance coordination, monthly financial reporting and compliance, so your property stays occupied and your income stays predictable.",
   cta: { label: "Book a consultation", href: "/contact?service=property-management" },
   items: [
     { title: "Property marketing and tenant sourcing", text: "We market your rental to reach suitable prospective tenants, manage enquiries and coordinate viewings to help reduce vacancy time." },

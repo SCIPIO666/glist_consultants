@@ -9,9 +9,11 @@ export const propertyValue = {
   intro:
     "Glist manages residential, commercial and estate properties for owners who want steady rental income without the day-to-day work. Whether you own one apartment or a whole block, we handle tenants, rent, repairs and reporting.",
   challenges: [
-    { title: "Legal, tenant and maintenance complexity", text: "Landlord and tenant law has to be followed to the letter, good tenants take marketing and vetting to find, and repairs need trusted vendors on call." },
-    { title: "Pricing that protects your income", text: "Price too high and the unit sits empty; too low and you lose income. We keep rent in line with the market so units fill fast and returns stay steady." },
+    { title: "Legal, tenant and maintenance complexity", text: "Landlord and tenant law has to be followed to the letter. Good tenants take marketing and vetting to find. Repairs need trusted vendors on call." },
+    { title: "Pricing that protects your income", text: "Set the rent too high and the unit sits empty. Set it too low and you lose income. We price to the market, so units fill fast and returns stay steady." },
   ],
+  pointsLabel: "What we take care of",
+  pointsTitle: "Four details that protect your property.",
   points: [
     { title: "Legal compliance", text: "Lease agreements, tenant disputes and landlord-tenant requirements handled correctly." },
     { title: "Maintenance and repairs", text: "Prompt upkeep and trusted vendors, so the property stays in top condition." },
