@@ -19,7 +19,7 @@ export const services: Service[] = [
     title: "Taxation and Tax Compliance",
     short: "Registration, filing, and KRA compliance for individuals and businesses.",
     intro:
-      "We take the stress out of tax. From VAT and PAYE to your annual returns, we make sure you're compliant with KRA and avoid penalties.",
+      "We handle your tax so you do not have to worry about it. From VAT and PAYE to your annual returns, we keep you compliant with KRA and clear of penalties.",
     items: [
       "Value Added Tax (VAT) registration, filing and compliance.",
       "Withholding Tax computations, filing and compliance.",
@@ -37,7 +37,7 @@ export const services: Service[] = [
     title: "Payroll Management Services",
     short: "Accurate monthly payroll, PAYE and statutory remittances.",
     intro:
-      "Payroll management is like a back-office bodyguard. You send us your staff details; we calculate everything correctly and on time, prepare the payslips and file the statutory deductions.",
+      "You send us your staff details. We calculate pay correctly and on time, prepare the payslips and file the statutory deductions.",
     items: [
       "Monthly payroll processing.",
       "PAYE computations and filing.",
@@ -54,7 +54,7 @@ export const services: Service[] = [
     title: "Business and Statutory Registrations",
     short: "KRA PIN, company registration, eGP and IFMIS setup.",
     intro:
-      "Starting something new? We help you cross the starting line. We handle your company registration, KRA PIN, and all the necessary government platform registrations.",
+      "Starting something new? We handle your company registration, your KRA PIN and the government platform registrations you need.",
     items: [
       "KRA PIN registration.",
       "Company registration.",
@@ -69,9 +69,9 @@ export const services: Service[] = [
     slug: "bookkeeping",
     letter: "D",
     title: "Bookkeeping and Accounting",
-    short: "Clean records, reconciliations, and reports you can trust.",
+    short: "Clean records, reconciliations and reports you can read.",
     intro:
-      "Is your business making money? Don't guess, know your numbers. We keep your records accurate, reconcile your bank accounts and give you financial reports you can read.",
+      "Is your business making money? We keep your records accurate, reconcile your bank accounts and give you financial reports you can read.",
     items: [
       "Day-to-day bookkeeping.",
       "Preparation and maintenance of financial records.",
@@ -88,7 +88,7 @@ export const services: Service[] = [
     title: "Stock Taking and Inventory Management",
     short: "Verified stock records and clear reporting on variances.",
     intro:
-      "We do the physical counting so you know exactly what's on your shelves. We'll help you spot discrepancies, track stock movement, and keep accurate inventory records.",
+      "We do the physical counting so you know exactly what is on your shelves. We help you spot differences, track stock movement and keep accurate inventory records.",
     items: [
       "Physical stocktaking.",
       "Inventory verification.",
@@ -105,7 +105,7 @@ export const services: Service[] = [
     title: "Personal Financial Advisory",
     short: "Practical, personalised guidance for everyday money decisions.",
     intro:
-      "We help you get a handle on your personal finances. Whether you're trying to stick to a budget, get out of debt, or plan for the future, we'll give you practical steps to follow.",
+      "We help you take control of your personal finances. Whether you want to stick to a budget, clear debt or plan ahead, we give you practical steps to follow.",
     items: [
       "Personal financial planning.",
       "Budgeting and expenditure management.",
@@ -122,7 +122,7 @@ export const services: Service[] = [
     title: "Rental Property Management",
     short: "Tenants, rent collection, and upkeep handled for you.",
     intro:
-      "Reliable rental property management designed to improve occupancy, streamline rent collection and protect your property's value.",
+      "We keep your units occupied, collect the rent on time and look after the property's value.",
     items: [
       "Tenant sourcing and placement.",
       "Rent collection and monitoring.",

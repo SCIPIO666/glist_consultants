@@ -105,9 +105,9 @@ export function PropertyValue() {
             {copy.intro}
           </p>
 
-          {/* What owners have to navigate: plain typographic rows, no boxes or bars */}
+          {/* What owners have to deal with: plain typographic rows, no boxes or bars */}
           <div className="mt-12">
-            <p data-pv="mask" className="text-xs font-semibold uppercase tracking-[0.18em] text-ink-muted opacity-0">What owners have to navigate</p>
+            <p data-pv="mask" className="text-xs font-semibold uppercase tracking-[0.18em] text-ink-muted opacity-0">What owners have to deal with</p>
             <ol className="mt-4 divide-y divide-ink/12 border-y border-ink/12">
               {copy.challenges.map((c, i) => (
                 <li key={c.title} className="grid gap-x-8 gap-y-2 py-6 sm:grid-cols-[3rem_minmax(0,1fr)] sm:py-7">

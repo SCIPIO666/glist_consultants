@@ -11,7 +11,7 @@ import { insights, formatInsightDate } from "./insights";
 export const propertyMeta = {
   title: "Rental Property Management",
   description:
-    "Rental property management in Kenya: tenant sourcing, rent collection, inspections, maintenance coordination and clear income reporting for landlords.",
+    "Rental property management in Kenya for landlords, covering tenant sourcing, rent collection, inspections, maintenance and clear income reporting.",
 } as const;
 
 export const propertyHero = {

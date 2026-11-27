@@ -11,8 +11,8 @@ export const aboutHero = {
   connector: "in",
   caption: ["of practical", "business, financial", "and property support."],
   groups: [
-    { title: "Tax & compliance", text: "Taxation, payroll, registrations", icon: "tax" },
-    { title: "Accounts & records", text: "Bookkeeping, stock taking", icon: "books" },
+    { title: "Tax and compliance", text: "Taxation, payroll, registrations", icon: "tax" },
+    { title: "Accounts and records", text: "Bookkeeping, stock taking", icon: "books" },
     { title: "Personal advisory", text: "Budgets, savings, debt", icon: "advice" },
     { title: "Property", text: "Rental property management", icon: "property" },
   ],

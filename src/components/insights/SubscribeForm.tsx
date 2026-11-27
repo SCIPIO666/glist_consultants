@@ -38,7 +38,7 @@ export function SubscribeForm() {
     <section aria-labelledby="subscribe-title" className="mt-12 overflow-hidden rounded-card bg-night p-7 text-white shadow-card sm:p-10">
       <div className="grid gap-6 lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-12">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-kra-light">Stay in the loop</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-kra-light">Newsletter</p>
           <h2 id="subscribe-title" className="mt-3 text-[clamp(1.6rem,1.1rem+1.6vw,2.4rem)] font-medium leading-tight">
             Get new tax and money guides by email
           </h2>

@@ -45,7 +45,7 @@ export const readingBuckets: { value: string; label: string; test: (min: number)
 
 export const insightsPage = {
   title: "News and Insights",
-  lead: "Plain-English guides on tax, payroll, bookkeeping, property and personal finance, written to help you decide with confidence.",
+  lead: "Plain-English guides on tax, payroll, bookkeeping, property and personal finance, written to help you make better decisions.",
   filterTitle: "Filter articles",
   groups: { service: "Service", category: "Category", reading: "Reading time" },
   readLabel: "Read more",
@@ -76,7 +76,7 @@ const raw: Insight[] = [
     slug: "mastering-the-art-of-saving-building-your-dream-life-with-financial-discipline",
     title: "Mastering the Art of Saving: Building Your Dream Life with Financial Discipline",
     excerpt:
-      "Practical steps to save for three big milestones: your first car, education and your first home, with advice for common financial goals in Kenya.",
+      "Practical steps to save for your first car, education and your first home, with advice for common financial goals in Kenya.",
     date: "2026-01-28",
     category: "financial-literacy",
     service: "financial-advisory",
@@ -87,7 +87,7 @@ const raw: Insight[] = [
     slug: "simplify-payroll-compliance-and-boost-business-growth-with-glists-accurate-solutions",
     title: "Simplify Payroll Compliance and Boost Business Growth with Glist's Accurate Solutions",
     excerpt:
-      "Accurate payslips, on-time processing and met tax obligations: how outsourcing payroll reduces errors, helps you predict labour costs and gives time back.",
+      "How outsourcing payroll gives you accurate payslips, on-time processing and met tax obligations, and helps you predict labour costs and get your time back.",
     date: "2026-01-27",
     category: "business-tips",
     service: "payroll",
@@ -98,7 +98,7 @@ const raw: Insight[] = [
     slug: "understanding-turnover-tax-kenya-a-comprehensive-guide-for-businesses",
     title: "Understanding Turnover Tax Kenya: A Comprehensive Guide for Businesses",
     excerpt:
-      "How turnover tax works for small businesses in Kenya: who qualifies, how to register and file, and worked examples.",
+      "How turnover tax works for small businesses in Kenya, who qualifies, how to register and file, and worked examples.",
     date: "2026-01-23",
     category: "tax-updates",
     service: "taxation",
@@ -109,7 +109,7 @@ const raw: Insight[] = [
     slug: "maximize-your-real-estate-investments-in-kenya",
     title: "Maximize Your Real Estate Investments in Kenya",
     excerpt:
-      "Essential tips for investors: understand local market trends, choose the right property type and use professional management to protect your returns.",
+      "Tips for investors on reading local market trends, choosing the right property type and using professional management to protect your returns.",
     date: "2026-01-23",
     category: "business-tips",
     service: "property-management",

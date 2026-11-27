@@ -14,7 +14,7 @@ export const introOpening = {
  * Keep starred phrases short (one or two words) so they never wrap badly.
  */
 export const introDescription =
-  "Glist Consultants is a professional business, financial and property consultancy. We give individuals, entrepreneurs, SMEs and established businesses reliable, practical support with tax, payroll, registrations, books and rental property. You stay *compliant*, make informed decisions, and focus on *growth*.";
+  "Glist Consultants is a business, financial and property consultancy. We help individuals, entrepreneurs, SMEs and established businesses with tax, payroll, registrations, books and rental property. You stay *compliant*, make better decisions and spend your time on *growth*.";
 
 export const introGraph = {
   /** Two lines. The second line gets the hand-drawn underline. */
@@ -22,7 +22,7 @@ export const introGraph = {
   taglineAccent: "Know your numbers.",
   /** Small caption under the chart. Keep it honest: this chart is an illustration, not real data. */
   caption: "An illustration of steady growth",
-  srSummary: "Illustrative chart: business revenue rises steadily over five years, dips once, then climbs sharply.",
+  srSummary: "Illustrative chart showing business revenue rising steadily over five years, dipping once, then climbing sharply.",
   /** Bottom to top. */
   yLabels: ["0", "1M", "2M", "3M", "4M"],
   yTitle: "Annual revenue (KSh)",
@@ -52,7 +52,7 @@ export const introClose = {
   /** No eyebrow on this screen, by design. */
   title: "Your success is our business.",
   paragraphs: [
-    "Tax compliance, payroll, registrations, bookkeeping, stock taking, personal financial advice and rental property management: multiple services under one roof, so you deal with one dependable team.",
+    "Tax compliance, payroll, registrations, bookkeeping, stock taking, personal financial advice and rental property management, all under one roof, so you deal with one team.",
     "Experienced. Reliable. Trusted.",
   ],
   cta: { label: "About Glist", href: "/about" },

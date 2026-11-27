@@ -195,16 +195,16 @@ export function PropertyServices() {
           <h2 id="property-services-title" className="mb-5 text-[clamp(1.7rem,3.2vw,3.4rem)] font-medium leading-none tracking-[-0.055em]">
             Property Management Services<span className="text-kra">.</span>
           </h2>
-          <nav aria-label="Rental property management services" className="grid grid-cols-2 gap-x-3 gap-y-1 sm:grid-cols-4 lg:grid-cols-1 lg:gap-y-2">
+          <nav aria-label="Rental property management services" className="grid grid-cols-2 gap-x-4 gap-y-2.5 sm:grid-cols-4 lg:grid-cols-1 lg:gap-y-[clamp(0.55rem,1.7svh,1.15rem)]">
             {copy.items.map((item, index) => (
               <button
                 key={item.title}
                 type="button"
                 onClick={() => jumpTo(index)}
                 aria-current={active === index ? "step" : undefined}
-                className={`group flex min-w-0 items-start gap-2 text-left text-[0.7rem] leading-snug transition-colors duration-300 sm:text-sm lg:text-[clamp(0.82rem,1.05vw,1rem)] ${active === index ? "text-white" : "text-white/45 hover:text-white/85"}`}
+                className={`group flex min-w-0 items-start gap-2.5 text-left text-[0.8rem] leading-snug transition-colors duration-300 sm:text-[0.95rem] lg:text-[clamp(1rem,1.3vw,1.25rem)] ${active === index ? "text-white" : "text-white/45 hover:text-white/85"}`}
               >
-                <span className={`mt-[0.48em] h-px shrink-0 transition-all duration-300 ${active === index ? "w-4 bg-kra" : "w-2 bg-white/30 group-hover:w-3"}`} />
+                <span className={`mt-[0.62em] h-px shrink-0 transition-all duration-300 ${active === index ? "w-5 bg-kra" : "w-3 bg-white/30 group-hover:w-4"}`} />
                 <span>{item.title}</span>
               </button>
             ))}

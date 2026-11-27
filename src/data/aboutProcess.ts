@@ -10,7 +10,7 @@ export const aboutProcess = {
   steps: [
     {
       heading: "Tell us what you need",
-      text: "You share the details: your business, your staff, your property or your records. We take time to understand your situation.",
+      text: "You share the details of your business, your staff, your property or your records. We take time to understand your situation.",
     },
     {
       heading: "We agree the plan",

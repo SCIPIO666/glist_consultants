@@ -16,11 +16,11 @@ export const aboutSections: AboutSectionData[] = [
     items: [
       {
         heading: "Who we are",
-        text: "Glist Consultants is a professional business, financial and property consultancy firm providing reliable, practical and client-focused solutions to individuals, entrepreneurs, startups, SMEs and established businesses.",
+        text: "Glist Consultants is a business, financial and property consultancy in Kenya. We give individuals, entrepreneurs, startups, SMEs and established businesses practical, dependable help.",
       },
       {
         heading: "What we do",
-        text: "We support our clients in navigating financial obligations, meeting statutory compliance requirements, managing business operations and making informed financial decisions.",
+        text: "We help our clients keep up with their financial obligations, meet statutory requirements, run their operations and make sound financial decisions.",
       },
       {
         heading: "Who we serve",
@@ -34,7 +34,7 @@ export const aboutSections: AboutSectionData[] = [
     items: [
       {
         heading: "Reliable support",
-        text: "To give clients dependable, timely help with the obligations that cannot wait: tax, payroll, registrations and records.",
+        text: "To give clients dependable, timely help with the obligations that cannot wait, such as tax, payroll, registrations and records.",
       },
       {
         heading: "Practical solutions",
@@ -42,7 +42,7 @@ export const aboutSections: AboutSectionData[] = [
       },
       {
         heading: "Lasting partnership",
-        text: "To work alongside our clients so that their businesses and portfolios grow on solid foundations.",
+        text: "To work alongside our clients as their businesses and property portfolios grow.",
       },
     ],
   },
@@ -52,7 +52,7 @@ export const aboutSections: AboutSectionData[] = [
     items: [
       {
         heading: "Illuminating paths",
-        text: "To be the consultancy people trust to light the way through financial and statutory complexity.",
+        text: "To be the consultancy people trust to make tax and statutory rules clear.",
       },
       {
         heading: "Sustainable growth",
@@ -64,12 +64,12 @@ export const aboutSections: AboutSectionData[] = [
     id: "values",
     title: "Our values",
     items: [
-      { heading: "Professionalism", text: "We uphold high standards in service delivery." },
-      { heading: "Reliability", text: "We are committed to dependable and timely support." },
-      { heading: "Practical solutions", text: "We provide solutions that address real business and financial needs." },
-      { heading: "Client-focused approach", text: "We take time to understand each client's unique requirements." },
+      { heading: "Professionalism", text: "We keep our standards high." },
+      { heading: "Reliability", text: "We are dependable and we deliver on time." },
+      { heading: "Practical solutions", text: "We solve real business and money problems." },
+      { heading: "Client-focused approach", text: "We take time to understand what each client needs." },
       { heading: "Convenience", text: "Multiple business, financial and property services under one roof." },
-      { heading: "Commitment to growth", text: "We work alongside our clients to support their long-term success." },
+      { heading: "Commitment to growth", text: "We stay alongside our clients as they grow." },
     ],
   },
 ];

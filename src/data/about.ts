@@ -6,7 +6,7 @@ export const aboutHero = {
   breadcrumb: "About Us",
   eyebrow: "About Glist Consultants",
   titleLines: ["Guiding success,", "illuminating paths."],
-  lead: "A professional business, financial and property consultancy providing reliable, practical and client-focused solutions to individuals, entrepreneurs, startups, SMEs and established businesses.",
+  lead: "A business, financial and property consultancy in Kenya. We give individuals, entrepreneurs, startups, SMEs and established businesses practical, dependable help.",
   primaryCta: { label: "Book a consultation", href: "/contact" },
   secondaryCta: { label: "Our services", href: "/services" },
   images: {
@@ -19,7 +19,7 @@ export const aboutHero = {
 export const aboutMeta = {
   title: "About Us",
   description:
-    "Meet Glist Consultants: a professional business, financial and property consultancy in Kenya offering tax, payroll, registration, bookkeeping, stock taking, personal financial advisory and rental property management.",
+    "Glist Consultants is a business, financial and property consultancy in Kenya. We offer tax, payroll, registration, bookkeeping, stock taking, personal financial advisory and rental property management.",
 } as const;
 
 export const aboutBackground = {
@@ -27,8 +27,8 @@ export const aboutBackground = {
   titleBefore: "Your growth. Our commitment.",
   titleMark: "Shared success.",
   paragraphs: [
-    "We support our clients in navigating financial obligations, meeting statutory compliance requirements, managing business operations and making informed financial decisions.",
-    "Our approach is built on professionalism, integrity, reliability and a commitment to helping our clients achieve sustainable growth.",
+    "We help our clients keep up with their financial obligations, meet statutory requirements, run their operations and make sound financial decisions.",
+    "We work with professionalism and integrity, and we want our clients to grow steadily.",
   ],
   clientsHeading: "Who we work with",
   clients: [
@@ -37,7 +37,7 @@ export const aboutBackground = {
     "Small and medium-sized enterprises (SMEs)",
     "Established companies and institutions",
     "Landlords and property investors",
-    "Businesses seeking accounting, payroll and tax compliance support",
+    "Businesses that need accounting, payroll and tax compliance help",
   ],
   image: {
     src: "/pexels-tima-miroshnichenko-6694475.webp",

@@ -4,7 +4,7 @@
  * service-charge angle only; sales and short-stay left out as per the brief).
  */
 export const propertyValue = {
-  title: "Property management without the stress.",
+  title: "Your property, managed properly.",
   image: { src: "/pages/property/pexels-mahmoud-zakariya-2154822140-34224687.webp", alt: "A managed residential estate with well-kept grounds", position: "50% 55%" },
   intro:
     "Glist manages residential, commercial and estate properties for owners who want steady rental income without the day-to-day work. Whether you own one apartment or a whole block, we handle tenants, rent, repairs and reporting.",
@@ -15,9 +15,9 @@ export const propertyValue = {
   pointsLabel: "What we take care of",
   pointsTitle: "Four details that protect your property.",
   points: [
-    { title: "Legal compliance", text: "Lease agreements, tenant disputes and landlord-tenant requirements handled correctly." },
+    { title: "Legal compliance", text: "Lease agreements, tenant disputes and landlord and tenant law, handled correctly." },
     { title: "Maintenance and repairs", text: "Prompt upkeep and trusted vendors, so the property stays in top condition." },
     { title: "Rental income", text: "Competitive rates and consistent rent collection for steady returns." },
-    { title: "Tenant screening", text: "Quality tenants found and placed quickly through thorough vetting and marketing." },
+    { title: "Tenant screening", text: "Good tenants found and placed quickly, through proper vetting and marketing." },
   ],
 } as const;

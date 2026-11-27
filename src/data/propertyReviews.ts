@@ -54,7 +54,7 @@ export const propertyReviews: {
     },
     {
       quote:
-        "When a pipe burst on a Sunday, a vetted plumber was on site within hours and I was kept informed throughout. That is the peace of mind I was paying for.",
+        "When a pipe burst on a Sunday, a vetted plumber was on site within hours and I was kept informed throughout. That is what I was paying for.",
       name: "Brian O.",
       role: "Rental estate owner",
       location: "Syokimau, Machakos",

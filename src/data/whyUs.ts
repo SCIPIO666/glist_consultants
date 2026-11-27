@@ -25,8 +25,8 @@ export const whyReasons: {
   cta: { label: "About us", href: "/about" },
   srListLabel: "Reasons to choose Glist Consultants",
   items: [
-    { title: "Professionalism", text: "High standards in every service we deliver." },
-    { title: "Reliability", text: "Dependable, timely support you can count on." },
+    { title: "Professionalism", text: "We hold every job to a high standard." },
+    { title: "Reliability", text: "Help that arrives on time, every time." },
     { title: "Convenience", text: "Business, financial and property services under one roof." },
     { title: "Client-focused", text: "We take time to understand what you need." },
   ],

@@ -10,7 +10,7 @@ export const hero = {
   /** One entry per line; the second line is styled as the accent. */
   titleLines: ["Guiding ", "Success"],
   lead:
-    "A professional business, financial and property consultancy. Let us handle the numbers, you focus on growth.",
+    "A business, financial and property consultancy. Let us handle the numbers so you can focus on growth.",
   primaryCta: { label: "Book a consultation", href: "/contact" },
   whatsappMessage: "Hello Glist Consultants, I would like to book a consultation.",
 } as const;

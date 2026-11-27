@@ -18,7 +18,7 @@ export const servicesBreakdown: Record<string, TaskBreakdown[]> = {
     { label: "Rental Income Tax", detail: "We register landlords, compute rental income tax and file the returns so property income stays compliant." },
     { label: "Excise Duty", detail: "We advise whether excise duty applies to your goods or services and support correct computation and compliance." },
     { label: "Tax Returns", detail: "We prepare and file annual returns for individuals and businesses, claiming the reliefs and deductions you qualify for." },
-    { label: "KRA Support", detail: "Ongoing help with your KRA account: queries, notices, reconciliations and advice on staying compliant." },
+    { label: "KRA Support", detail: "Ongoing help with your KRA account, including queries, notices, reconciliations and advice on staying compliant." },
   ],
   payroll: [
     { label: "Monthly Payroll", detail: "We compute every employee's pay each month from your attendance and pay data, ready for payday." },
@@ -40,7 +40,7 @@ export const servicesBreakdown: Record<string, TaskBreakdown[]> = {
     { label: "Daily Books", detail: "We record your daily sales, purchases and expenses so your books are always up to date." },
     { label: "Financial Records", detail: "We prepare and maintain complete, orderly records that support your returns and your decisions." },
     { label: "Bank Reconciliations", detail: "We match your books to bank and mobile money statements and chase down any differences." },
-    { label: "Payables & Receivables", detail: "We track what you owe and what you are owed, so you always know your cash position." },
+    { label: "Payables and Receivables", detail: "We track what you owe and what you are owed, so you always know your cash position." },
     { label: "Financial Reports", detail: "Clear financial statements and management reports that you can read and act on." },
     { label: "Records Review", detail: "We review your existing records, correct errors and support you where the books need attention." },
   ],
@@ -55,9 +55,9 @@ export const servicesBreakdown: Record<string, TaskBreakdown[]> = {
   "financial-advisory": [
     { label: "Financial Planning", detail: "We turn your income, goals and obligations into a practical plan you can follow." },
     { label: "Budgeting", detail: "We build a realistic budget and help you keep your spending on track." },
-    { label: "Savings & Investment", detail: "Guidance on building savings and understanding investment options that suit your goals." },
+    { label: "Savings and Investment", detail: "Guidance on building savings and understanding investment options that suit your goals." },
     { label: "Debt Management", detail: "Strategies to prioritise and pay down debt without losing control of your monthly cash flow." },
-    { label: "Financial Literacy", detail: "Plain-language coaching so you understand money decisions, not just follow instructions." },
+    { label: "Financial Literacy", detail: "Coaching in plain language, so you understand your money decisions and do not just follow instructions." },
     { label: "Wealth Guidance", detail: "Guidance on growing and protecting what you have built over the long term." },
   ],
   "property-management": [
@@ -67,8 +67,8 @@ export const servicesBreakdown: Record<string, TaskBreakdown[]> = {
     { label: "Inspections", detail: "Regular property inspections, with the findings reported back to you." },
     { label: "Maintenance", detail: "We coordinate repairs and maintenance with contractors and follow each job through." },
     { label: "Arrears Follow-up", detail: "We monitor late rent and follow up with tenants promptly and professionally." },
-    { label: "Relations", detail: "A professional go-between that keeps landlord and tenant relations smooth." },
-    { label: "Rental Reporting", detail: "Clear rental income records and reports for tax, planning and peace of mind." },
+    { label: "Relations", detail: "A go-between who keeps landlord and tenant relations smooth." },
+    { label: "Rental Reporting", detail: "Clear rental income records and reports for tax and planning." },
   ],
 };
 
