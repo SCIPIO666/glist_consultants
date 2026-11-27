@@ -22,6 +22,7 @@ const jsonLd = {
     telephone: site.phone.tel,
     email: site.email,
     areaServed: "Kenya",
+    sameAs: Object.values(site.social).filter(Boolean),
   },
 };
 

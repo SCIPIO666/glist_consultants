@@ -12,7 +12,7 @@ type Status = "idle" | "sending" | "sent" | "error";
 
 const field =
   "w-full rounded-xl border border-white/15 bg-night/60 px-4 py-3.5 text-base text-white placeholder:text-white/40 " +
-  "transition-[border-color,box-shadow] duration-300 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/30";
+  "transition-[border-color,box-shadow] duration-300 focus:border-kra-light focus:outline-none focus:ring-2 focus:ring-kra-light/30";
 const label = "mb-2 block text-sm font-semibold text-white/80";
 
 export function ContactForm({ defaultService = "" }: { defaultService?: string }) {
@@ -43,7 +43,7 @@ export function ContactForm({ defaultService = "" }: { defaultService?: string }
 
   if (status === "sent") {
     return (
-      <div role="status" className="rounded-2xl border border-gold/30 bg-night/60 p-8">
+      <div role="status" className="rounded-2xl border border-kra-light/30 bg-night/60 p-8">
         <h2 className="font-display text-h3 text-white">{copy.success.title}</h2>
         <p className="mt-3 max-w-md text-white/70">{copy.success.text}</p>
         <div className="mt-6 flex flex-wrap gap-3">

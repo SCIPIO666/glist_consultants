@@ -15,7 +15,7 @@ export function WhyReasonCard({ item, index }: { item: WhyReason; index: number 
     <li className="px-[var(--gap)]">
       <article
         data-why-card
-        className="group relative grid grid-cols-[clamp(4.75rem,7vw,7.5rem)_minmax(0,1fr)] overflow-hidden rounded-[1.75rem] border border-white/80 bg-white/30 opacity-0 shadow-[0_10px_40px_-10px_rgba(15,42,82,0.28),inset_0_1px_0_rgba(255,255,255,0.95),inset_0_-1px_0_rgba(255,255,255,0.35)] backdrop-blur-xl backdrop-saturate-150 transition-[background-color,border-color,box-shadow] duration-500 ease-out-expo hover:border-gold/60 hover:bg-white/50 hover:shadow-[0_18px_50px_-12px_rgba(15,42,82,0.38),inset_0_1px_0_rgba(255,255,255,1)]"
+        className="group relative grid grid-cols-[clamp(4.75rem,7vw,7.5rem)_minmax(0,1fr)] overflow-hidden rounded-[1.75rem] border border-white/80 bg-white/30 opacity-0 shadow-[0_10px_40px_-10px_rgba(15,42,82,0.28),inset_0_1px_0_rgba(255,255,255,0.95),inset_0_-1px_0_rgba(255,255,255,0.35)] backdrop-blur-xl backdrop-saturate-150 transition-[background-color,border-color,box-shadow] duration-500 ease-out-expo hover:border-kra-light/60 hover:bg-white/50 hover:shadow-[0_18px_50px_-12px_rgba(15,42,82,0.38),inset_0_1px_0_rgba(255,255,255,1)]"
       >
         {/* Glass sheen */}
         <span
@@ -41,7 +41,7 @@ export function WhyReasonCard({ item, index }: { item: WhyReason; index: number 
         {/* Underline that grows on hover */}
         <span
           aria-hidden
-          className="absolute inset-x-6 bottom-0 h-0.5 origin-left scale-x-0 rounded-full bg-gold transition-transform duration-500 ease-out-expo group-hover:scale-x-100"
+          className="absolute inset-x-6 bottom-0 h-0.5 origin-left scale-x-0 rounded-full bg-kra-light transition-transform duration-500 ease-out-expo group-hover:scale-x-100"
         />
       </article>
     </li>

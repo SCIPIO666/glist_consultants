@@ -74,7 +74,7 @@ export function AboutProcess() {
           <span
             ref={fill}
             aria-hidden
-            className="absolute bottom-6 right-[1.75rem] top-6 w-0.5 origin-top scale-y-0 bg-gold"
+            className="absolute bottom-6 right-[1.75rem] top-6 w-0.5 origin-top scale-y-0 bg-kra-light"
           />
           {copy.steps.map((s, i) => (
             <li key={s.heading} className="relative grid grid-cols-[1fr_3.5rem] items-start gap-6 sm:gap-10">
@@ -84,7 +84,7 @@ export function AboutProcess() {
               </Reveal>
               <span
                 aria-hidden
-                className="relative z-10 grid size-14 place-items-center rounded-full bg-gold font-display text-2xl font-medium text-night-deep"
+                className="relative z-10 grid size-14 place-items-center rounded-full bg-kra font-display text-2xl font-medium text-white"
               >
                 {i + 1}
               </span>

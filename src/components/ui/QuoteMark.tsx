@@ -5,7 +5,7 @@ const MARK =
   "M4 0H24C26.5 0 28 1.5 28 4V19C28 31 20 38 6 40L3 32.5C12 30 15.5 26 15.5 22.5H4C1.5 22.5 0 21 0 18.5V4C0 1.5 1.5 0 4 0Z";
 
 /**
- * Chunky gradient quotation marks (mint to blue), drawn as SVG so the shape never
+ * Chunky gradient quotation marks (mint, blue, then KRA red), drawn as SVG so the shape never
  * depends on a font.
  *   kind="close"  the closing pair (shape of the right-hand quotes)
  *   kind="open"   the opening pair (the closing pair turned half a turn, so its
@@ -24,7 +24,8 @@ export function QuoteMark({ kind, className }: { kind: "open" | "close"; classNa
       <defs>
         <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor="#7ff0d6" />
-          <stop offset="1" stopColor="#3d6ff0" />
+          <stop offset="0.55" stopColor="#3d6ff0" />
+          <stop offset="1" stopColor="#e4202b" />
         </linearGradient>
       </defs>
       <g fill={`url(#${id})`}>

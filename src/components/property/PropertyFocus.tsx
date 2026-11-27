@@ -22,10 +22,10 @@ export function PropertyFocus() {
               )}
               <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-night-deep/90 via-night/40 to-transparent" />
               <div className="relative p-7">
-                <span className="font-display text-sm font-medium text-gold">{String(i + 1).padStart(2, "0")}</span>
+                <span className="font-display text-sm font-medium text-kra">{String(i + 1).padStart(2, "0")}</span>
                 <h3 className="mt-2 text-h3 font-medium leading-tight">{it.title}</h3>
                 <p className="mt-2 text-white/75">{it.text}</p>
-                <Link href={it.href} className="mt-5 inline-flex items-center gap-2 border-b border-white/60 pb-0.5 text-sm font-semibold uppercase tracking-[0.1em] after:absolute after:inset-0 hover:border-gold">
+                <Link href={it.href} className="mt-5 inline-flex items-center gap-2 border-b border-white/60 pb-0.5 text-sm font-semibold uppercase tracking-[0.1em] after:absolute after:inset-0 hover:border-kra">
                   Read more
                 </Link>
               </div>

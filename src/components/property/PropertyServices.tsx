@@ -193,7 +193,7 @@ export function PropertyServices() {
         >
           <p className="mb-3 font-mono text-[0.62rem] uppercase tracking-[0.24em] text-white/45">Glist Consultants</p>
           <h2 id="property-services-title" className="mb-5 text-[clamp(1.7rem,3.2vw,3.4rem)] font-medium leading-none tracking-[-0.055em]">
-            Property Management Services<span className="text-gold">.</span>
+            Property Management Services<span className="text-kra">.</span>
           </h2>
           <nav aria-label="Rental property management services" className="grid grid-cols-2 gap-x-3 gap-y-1 sm:grid-cols-4 lg:grid-cols-1 lg:gap-y-2">
             {copy.items.map((item, index) => (
@@ -204,7 +204,7 @@ export function PropertyServices() {
                 aria-current={active === index ? "step" : undefined}
                 className={`group flex min-w-0 items-start gap-2 text-left text-[0.7rem] leading-snug transition-colors duration-300 sm:text-sm lg:text-[clamp(0.82rem,1.05vw,1rem)] ${active === index ? "text-white" : "text-white/45 hover:text-white/85"}`}
               >
-                <span className={`mt-[0.48em] h-px shrink-0 transition-all duration-300 ${active === index ? "w-4 bg-gold" : "w-2 bg-white/30 group-hover:w-3"}`} />
+                <span className={`mt-[0.48em] h-px shrink-0 transition-all duration-300 ${active === index ? "w-4 bg-kra" : "w-2 bg-white/30 group-hover:w-3"}`} />
                 <span>{item.title}</span>
               </button>
             ))}
@@ -212,7 +212,7 @@ export function PropertyServices() {
           <div className="mt-4 flex items-center gap-4 lg:mt-8">
             <Button href={copy.cta.href} size="md" arrow>{copy.cta.label}</Button>
             <span className="font-mono text-xs tabular-nums text-white/45">
-              <span className="text-gold">{pad(active + 1)}</span> / {pad(total)}
+              <span className="text-kra">{pad(active + 1)}</span> / {pad(total)}
             </span>
           </div>
         </aside>
@@ -232,6 +232,8 @@ export function PropertyServices() {
             <span className="absolute -top-[10%] left-1/2 size-[46%] -translate-x-1/2 rounded-full" style={{ background: "radial-gradient(closest-side, rgb(217 166 46 / 0.62), rgb(217 166 46 / 0))" }} />
             <span className="absolute -right-[12%] top-1/2 size-[50%] -translate-y-1/2 rounded-full" style={{ background: "radial-gradient(closest-side, rgb(74 144 226 / 0.65), rgb(74 144 226 / 0))" }} />
             <span className="absolute -bottom-[10%] left-1/2 size-[46%] -translate-x-1/2 rounded-full" style={{ background: "radial-gradient(closest-side, rgb(45 190 175 / 0.5), rgb(45 190 175 / 0))" }} />
+            <span className="absolute -right-[4%] -top-[6%] size-[44%] rounded-full blur-2xl" style={{ background: "radial-gradient(closest-side, rgb(228 32 43 / 0.7), rgb(228 32 43 / 0))" }} />
+            <span className="absolute -bottom-[6%] -left-[4%] size-[44%] rounded-full blur-2xl" style={{ background: "radial-gradient(closest-side, rgb(228 32 43 / 0.55), rgb(228 32 43 / 0))" }} />
             <span className="absolute -left-[12%] top-1/2 size-[50%] -translate-y-1/2 rounded-full" style={{ background: "radial-gradient(closest-side, rgb(31 111 214 / 0.6), rgb(31 111 214 / 0))" }} />
           </div>
 
@@ -256,12 +258,12 @@ export function PropertyServices() {
                   }}
                 >
                 <div data-service-content className="relative z-10 mx-auto flex w-full max-w-[28rem] flex-col items-center">
-                  <span className="mb-4 font-mono text-[0.65rem] uppercase tracking-[0.24em] text-gold sm:mb-6">
+                  <span className="mb-4 font-mono text-[0.65rem] uppercase tracking-[0.24em] text-kra sm:mb-6">
                     {pad(index + 1)} <span className="text-white/40">/ {pad(total)}</span>
                   </span>
                   <h3 className="text-[clamp(1.2rem,2.4vw,2.35rem)] font-medium leading-[1.08] tracking-[-0.045em] text-white">{item.title}</h3>
                   <p className="mt-4 max-w-[34ch] text-[clamp(0.86rem,1.08vw,1.04rem)] leading-[1.8] text-white/85 sm:mt-5">{item.text}</p>
-                  <span className="mt-5 inline-flex items-center gap-2 text-[0.58rem] uppercase tracking-[0.2em] text-gold sm:mt-7">
+                  <span className="mt-5 inline-flex items-center gap-2 text-[0.58rem] uppercase tracking-[0.2em] text-kra sm:mt-7">
                     Managed with care <ArrowRight className="size-3" />
                   </span>
                 </div>

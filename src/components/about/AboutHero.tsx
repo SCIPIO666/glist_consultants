@@ -10,7 +10,7 @@ import { aboutHero as copy, type AboutHeroIcon } from "@/data/aboutHero";
 function GroupIcon({ name }: { name: AboutHeroIcon }) {
   const p = { fill: "none", stroke: "currentColor", strokeWidth: 1.7, strokeLinecap: "round", strokeLinejoin: "round" } as const;
   return (
-    <svg viewBox="0 0 24 24" aria-hidden className="size-7 shrink-0 text-gold">
+    <svg viewBox="0 0 24 24" aria-hidden className="size-7 shrink-0 text-kra-light">
       {name === "tax" && (
         <g {...p}>
           <path d="M6 3h9l4 4v14H6z" />
@@ -177,7 +177,7 @@ export function AboutHero() {
           {/* Left: number tile + words */}
           <div className="shrink-0">
             <div className="flex items-end gap-4 sm:gap-6">
-              <div className="grid size-[clamp(9.5rem,7rem+9vw,15rem)] place-items-center bg-gold text-night-deep shadow-lift">
+              <div className="grid size-[clamp(9.5rem,7rem+9vw,15rem)] place-items-center bg-kra text-white shadow-lift">
                 <span className="font-display text-[clamp(6rem,4rem+8vw,11rem)] font-medium leading-none">{copy.number}</span>
               </div>
               <p className="pb-2 font-display text-[clamp(1.5rem,1rem+2vw,2.75rem)] leading-none">
@@ -189,7 +189,7 @@ export function AboutHero() {
               <br />
               <span className="text-white">{copy.caption[1]}</span>
               <br />
-              <span className="text-gold">{copy.caption[2]}</span>
+              <span className="text-kra-light">{copy.caption[2]}</span>
             </p>
           </div>
 
@@ -207,7 +207,7 @@ export function AboutHero() {
                     {g.title}
                   </h2>
                 </div>
-                <p className="mt-2 pl-10 text-base text-gold">{g.text}</p>
+                <p className="mt-2 pl-10 text-base text-kra-light">{g.text}</p>
               </li>
             ))}
           </ul>

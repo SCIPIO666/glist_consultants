@@ -13,7 +13,7 @@ function StatRow({ stat }: { stat: Stat }) {
   return (
     <div className="flex h-[clamp(10rem,32svh,17rem)] items-center gap-6 sm:gap-10 flat:h-auto flat:py-10">
       <p className="shrink-0 font-display text-[clamp(4rem,min(17vw,25svh),11.5rem)] font-light leading-none tracking-[-0.04em] tabular-nums">
-        {stat.prefix && <span className="mr-2 text-[0.38em] tracking-normal text-gold">{stat.prefix}</span>}
+        {stat.prefix && <span className="mr-2 text-[0.38em] tracking-normal text-kra-light">{stat.prefix}</span>}
         <span className="bg-gradient-to-b from-white via-brand-soft to-brand bg-clip-text text-transparent">
           {fmt(stat.value)}
         </span>

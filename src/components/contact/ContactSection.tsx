@@ -20,9 +20,9 @@ export function ContactSection() {
           {/* Form side */}
           <div className="p-6 sm:p-10 lg:p-14">
             <Reveal>
-              <Eyebrow className="text-gold">{copy.eyebrow}</Eyebrow>
+              <Eyebrow className="text-kra-light">{copy.eyebrow}</Eyebrow>
               <h1 className="mt-4 font-display text-h1 text-white">
-                {copy.titleBefore} <span className="text-gold italic">{copy.titleMark}</span>
+                {copy.titleBefore} <span className="text-kra-light italic">{copy.titleMark}</span>
               </h1>
             </Reveal>
             <Reveal className="mt-8 lg:mt-10" delay={0.1}>

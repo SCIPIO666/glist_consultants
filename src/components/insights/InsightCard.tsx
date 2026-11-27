@@ -8,7 +8,7 @@ function LongArrow() {
     <svg
       aria-hidden
       viewBox="0 0 48 12"
-      className="h-3 w-12 shrink-0 text-gold transition-[width] duration-500 ease-out-expo group-hover:w-16"
+      className="h-3 w-12 shrink-0 text-kra transition-[width] duration-500 ease-out-expo group-hover:w-16"
       fill="none"
       stroke="currentColor"
       strokeWidth={1.5}

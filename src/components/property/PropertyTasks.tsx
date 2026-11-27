@@ -26,8 +26,8 @@ export function PropertyTasks() {
         </Reveal>
         <Reveal target="children" stagger={0.08} y={50} as="ul" className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {copy.items.map((it, i) => (
-            <li key={it.title} className="group border border-white/10 bg-night-card/70 p-6 transition-[translate,border-color,background-color] duration-500 ease-out-expo hover:-translate-y-1.5 hover:border-gold/50 hover:bg-night-card">
-              <svg viewBox="0 0 24 24" aria-hidden className="size-9 text-gold transition-transform duration-500 ease-out-expo group-hover:scale-110">{icons[i]}</svg>
+            <li key={it.title} className="group border border-white/10 bg-night-card/70 p-6 transition-[translate,border-color,background-color] duration-500 ease-out-expo hover:-translate-y-1.5 hover:border-kra-light/50 hover:bg-night-card">
+              <svg viewBox="0 0 24 24" aria-hidden className="size-9 text-kra-light transition-transform duration-500 ease-out-expo group-hover:scale-110">{icons[i]}</svg>
               <h3 className="mt-5 text-lg font-semibold leading-snug">{it.title}</h3>
               <p className="mt-2 text-sm text-white/70">{it.text}</p>
             </li>

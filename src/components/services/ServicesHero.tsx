@@ -49,7 +49,7 @@ export function ServicesHero() {
             />
           </div>
           <div className="absolute inset-0 bg-linear-to-b from-night-deep/80 via-night/70 to-night/85" />
-          <div className="pointer-events-none absolute inset-x-5 top-0 bottom-5 rounded-b-[50%_100%] border-x border-b border-gold/25" />
+          <div className="pointer-events-none absolute inset-x-5 top-0 bottom-5 rounded-b-[50%_100%] border-x border-b border-kra-light/25" />
 
           <div className="relative flex w-[min(100cqw,50rem)] flex-col items-center px-6 text-center text-white">
             <h1 data-sh="item" className="text-display opacity-0">

@@ -71,13 +71,13 @@ export function PropertyHero() {
   );
 
   return (
-    <section ref={root} aria-labelledby="property-title" className="relative isolate overflow-hidden bg-night text-white">
+    <section ref={root} aria-labelledby="property-title" className="relative isolate overflow-hidden bg-night bg-[radial-gradient(46rem_34rem_at_100%_0%,rgb(228_32_43/0.26),transparent_68%)] text-white">
       {/* Background circle: its CSS position is where it settles (bottom-left) */}
     <div
       data-ph="orb"
       aria-hidden
       className="pointer-events-none absolute -bottom-[16%] -left-[7%] -z-10 aspect-square w-[clamp(15rem,32vw,30rem)] rounded-full border border-white/25 opacity-0"
-      style={{ background: "radial-gradient(circle at 32% 28%, rgb(255 255 255 / 0.5), rgb(255 255 255 / 0.22) 52%, rgb(0 32 37 / 0) 74%)" }}
+      style={{ background: "radial-gradient(circle at 32% 28%, rgb(255 255 255 / 0.42), rgb(228 32 43 / 0.34) 52%, rgb(228 32 43 / 0) 74%)" }}
     />
 
       <div className="wrap-wide relative grid min-h-[clamp(36rem,100svh,58rem)] items-center gap-10 pt-[calc(var(--header-h)+2.5rem)] pb-14 lg:grid-cols-[1.1fr_1fr] lg:gap-0 lg:pb-16">
@@ -137,7 +137,7 @@ export function PropertyHero() {
                   style={{ objectPosition: copy.side.position }}
                 />
               </div>
-              <span data-ph="dot" aria-hidden className="absolute -left-1 top-[4%] size-[18%] rounded-full bg-gold" />
+              <span data-ph="dot" aria-hidden className="absolute -left-1 top-[4%] size-[18%] rounded-full bg-kra-light" />
             </div>
           </div>
 
@@ -147,7 +147,7 @@ export function PropertyHero() {
           <p className="font-display text-xl font-medium leading-snug lg:text-2xl">{copy.more.title}</p>
           <Link
             href={copy.more.href}
-            className="mt-3 inline-block border-b border-white/70 pb-0.5 text-sm font-semibold uppercase tracking-[0.12em] transition-colors hover:border-gold hover:text-gold"
+            className="mt-3 inline-block border-b border-white/70 pb-0.5 text-sm font-semibold uppercase tracking-[0.12em] transition-colors hover:border-kra-light hover:text-kra-light"
           >
             {copy.more.label}
           </Link>

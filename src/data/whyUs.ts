@@ -4,8 +4,8 @@
  * (professionalism, reliability, practical solutions, client focus, convenience, growth).
  * Keep claims honest: no invented statistics or client counts.
  *
- * The reasons screen is minimal on purpose: a title and one button on the left,
- * four numbered reasons on the right. No eyebrow, no description.
+ * Keep each `text` under about 55 characters: it sits in a compact pill (two lines).
+ * End a title line with "?" to have the question mark drawn in red.
  */
 export type WhyReason = {
   title: string;
@@ -13,31 +13,21 @@ export type WhyReason = {
 };
 
 export const whyReasons: {
+  srLabel: string;
   /** One entry per line of the big title. */
   titleLines: string[];
   cta: { label: string; href: string };
   srListLabel: string;
   items: WhyReason[];
 } = {
-  titleLines: ["Why", "choose", "us"],
+  srLabel: "Why choose Glist Consultants",
+  titleLines: ["Why", "choose", "us?"],
   cta: { label: "About us", href: "/about" },
   srListLabel: "Reasons to choose Glist Consultants",
   items: [
-    {
-      title: "Advice you can act on",
-      text: "We solve the problem in front of you: the return to file, the payroll to run, the tenant to find. Plain language, clear next steps.",
-    },
-    {
-      title: "Deadlines kept, records straight",
-      text: "Statutory dates do not move, so we plan around them. Dependable, timely support delivered to professional standards.",
-    },
-    {
-      title: "One roof, seven services",
-      text: "Tax, payroll, registrations, books, stock, personal finance and rentals, with one team that already knows your business.",
-    },
-    {
-      title: "Built around you",
-      text: "We take the time to understand your situation before we advise, then work alongside you as you grow.",
-    },
+    { title: "Advice you can act on", text: "Plain language and clear next steps." },
+    { title: "Deadlines kept", text: "We plan around statutory dates, so nothing slips." },
+    { title: "One roof, seven services", text: "Tax, payroll, books, stock and rentals together." },
+    { title: "Built around you", text: "We understand your situation before we advise." },
   ],
 };

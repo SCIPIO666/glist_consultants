@@ -107,7 +107,7 @@ export function AboutGlance() {
         </Reveal>
 
         <div aria-hidden className="relative mt-6 h-px w-full bg-ink/20">
-          <span ref={bar} className="absolute inset-y-0 left-0 block h-[3px] -translate-y-px bg-gold" style={{ width: "100%" }} />
+          <span ref={bar} className="absolute inset-y-0 left-0 block h-[3px] -translate-y-px bg-kra-light" style={{ width: "100%" }} />
         </div>
       </div>
     </section>

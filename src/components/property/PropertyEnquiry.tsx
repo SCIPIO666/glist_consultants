@@ -12,7 +12,7 @@ export function PropertyEnquiry() {
     <section id={copy.id} aria-labelledby="enquire-title" className="scroll-mt-24 bg-night py-[clamp(4rem,10svh,7rem)] text-white">
       <div className="wrap-wide grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
         <Reveal y={40}>
-          <Eyebrow className="text-gold">{copy.eyebrow}</Eyebrow>
+          <Eyebrow className="text-kra-light">{copy.eyebrow}</Eyebrow>
           <h2 id="enquire-title" className="mt-4 text-h2 font-medium">{copy.title}</h2>
           <p className="mt-5 max-w-sm text-lead text-white/75">{copy.text}</p>
         </Reveal>

@@ -45,7 +45,7 @@ export function AboutBackground() {
                 <li key={c} className="flex items-start gap-3">
                   <span
                     aria-hidden
-                    className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-gold/20 text-gold"
+                    className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-kra-light/20 text-kra-light"
                   >
                     <svg viewBox="0 0 24 24" className="size-3.5" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round">
                       <path d="m5 12 5 5 9-10" />
@@ -77,7 +77,7 @@ export function AboutBackground() {
               <div aria-hidden className="absolute inset-0 bg-linear-to-t from-night-deep/70 via-transparent to-transparent" />
               <PixelCorner corner="tr" cells={6} colorClass="text-paper" />
               <p className="absolute inset-x-5 bottom-5 rounded-card border border-white/20 bg-night/60 px-5 py-4 font-display text-lg text-white backdrop-blur-md sm:inset-x-7 sm:bottom-7">
-                <span className="mr-2 inline-block size-2 rounded-full bg-gold align-middle" />
+                <span className="mr-2 inline-block size-2 rounded-full bg-kra-light align-middle" />
                 {copy.badge}
               </p>
             </div>

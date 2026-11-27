@@ -14,7 +14,7 @@ export function PropertyPillars() {
           {copy.items.map((it) => (
             <li key={it.word} className="flex flex-col bg-sand p-8 lg:p-10">
               <span className="font-display text-[clamp(2.6rem,1.6rem+3.2vw,4.4rem)] font-medium leading-none tracking-[-0.03em] text-brand">{it.word}</span>
-              <span className="mt-4 text-sm font-bold uppercase tracking-[0.12em] text-gold">{it.label}</span>
+              <span className="mt-4 text-sm font-bold uppercase tracking-[0.12em] text-kra">{it.label}</span>
               <p className="mt-4 text-ink-muted">{it.text}</p>
             </li>
           ))}

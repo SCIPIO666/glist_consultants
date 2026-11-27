@@ -22,7 +22,7 @@ export function PropertyNews() {
                 <time className="text-xs font-bold uppercase tracking-[0.12em] text-brand">{it.date}</time>
                 <h3 className="mt-3 text-xl font-semibold leading-snug">{it.title}</h3>
                 <p className="mt-3 flex-1 text-ink-muted">{it.excerpt}</p>
-                <ArrowRight className="mt-6 size-6 text-gold transition-transform duration-300 group-hover:translate-x-2" />
+                <ArrowRight className="mt-6 size-6 text-kra transition-transform duration-300 group-hover:translate-x-2" />
               </Link>
             </li>
           ))}

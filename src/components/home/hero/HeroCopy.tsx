@@ -15,12 +15,12 @@ export function HeroCopy({ align = "center", size = "display" }: { align?: "cent
   return (
     <div className={cn("flex flex-col", center ? "items-center text-center" : "items-start text-left")}>
       <div data-hero="item" className="opacity-0">
-        <Eyebrow className="whitespace-nowrap text-gold max-sm:text-[0.7rem] max-sm:tracking-[0.1em]">{hero.eyebrow}</Eyebrow>
+        <Eyebrow className="whitespace-nowrap text-kra-light max-sm:text-[0.7rem] max-sm:tracking-[0.1em]">{hero.eyebrow}</Eyebrow>
       </div>
 
       <h1 className={cn("mt-5 text-white", size === "display" ? "text-display" : "text-h1")}>
         {hero.titleLines.map((line, i) => (
-          <span key={line} data-hero="item" className={cn("block opacity-0", i === 1 && "italic text-gold")}>
+          <span key={line} data-hero="item" className={cn("block opacity-0", i === 1 && "italic text-kra-light")}>
             {line}
           </span>
         ))}

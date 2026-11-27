@@ -96,7 +96,7 @@ export function WhyReviews({ items }: { items: Review[] }) {
                   className="text-[clamp(1.65rem,0.9rem+3.7vw,4.25rem)] font-medium leading-[1.05] tracking-[-0.025em]"
                 >
                   {copy.heading}{" "}
-                  <span className="bg-linear-to-r from-gold via-[#f1d27a] to-brand-soft bg-clip-text text-transparent">
+                  <span className="bg-linear-to-r from-kra-light via-[#ff9aa0] to-brand-soft bg-clip-text text-transparent">
                     {copy.headingAccent}
                   </span>
                 </h2>
@@ -134,7 +134,7 @@ function CtaLink() {
   return (
     <Link
       href={copy.cta.href}
-      className="group inline-flex h-14 items-center gap-2.5 rounded-pill bg-linear-to-r from-gold to-[#f3d98b] px-7 font-semibold text-night-deep transition-[filter,transform] duration-300 hover:brightness-105 active:scale-[0.98]"
+      className="group inline-flex h-14 items-center gap-2.5 rounded-pill bg-linear-to-r from-kra to-kra-light px-7 font-semibold text-white transition-[filter,transform] duration-300 hover:brightness-105 active:scale-[0.98]"
     >
       {copy.cta.label}
       <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />

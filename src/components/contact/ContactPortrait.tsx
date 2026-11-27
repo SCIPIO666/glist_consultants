@@ -35,7 +35,7 @@ export function ContactPortrait() {
       <div
         data-ring
         aria-hidden
-        className="absolute left-1/2 top-[8%] aspect-square w-[92%] max-w-[34rem] -translate-x-1/2 rounded-full border border-gold/35 opacity-0"
+        className="absolute left-1/2 top-[8%] aspect-square w-[92%] max-w-[34rem] -translate-x-1/2 rounded-full border border-kra-light/35 opacity-0"
       />
       {/* Main circle */}
       <div

@@ -38,7 +38,7 @@ export function ReviewCard({ review, index }: { review: Review; index: number })
           &ldquo;{review.quote}&rdquo;
         </blockquote>
         <footer className="flex items-end justify-between gap-4 text-xs font-bold uppercase tracking-[0.1em] sm:text-sm">
-          <span className="text-gold">
+          <span className="text-kra-light">
             {review.name}
             <span className="ml-2 font-medium normal-case tracking-normal text-white/70">{review.role}</span>
           </span>

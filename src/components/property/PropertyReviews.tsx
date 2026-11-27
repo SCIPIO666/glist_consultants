@@ -137,7 +137,7 @@ export function PropertyReviews() {
     >
       {/* Glows in the brand family */}
       <div aria-hidden className="pointer-events-none absolute -left-[12%] -top-[18%] -z-10 size-[44rem] rounded-full bg-brand/25 blur-[7rem]" />
-      <div aria-hidden className="pointer-events-none absolute -bottom-[22%] -right-[10%] -z-10 size-[40rem] rounded-full bg-gold/15 blur-[7rem]" />
+      <div aria-hidden className="pointer-events-none absolute -bottom-[22%] -right-[10%] -z-10 size-[40rem] rounded-full bg-kra-light/15 blur-[7rem]" />
 
       {/* Orbit rings centred on the text (desktop) */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 hidden items-center justify-center lg:flex">
@@ -153,11 +153,11 @@ export function PropertyReviews() {
       {/* Loose dots */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 hidden lg:block">
         {[
-          ["8%", "58%", "size-3 bg-gold"],
+          ["8%", "58%", "size-3 bg-kra-light"],
           ["46%", "10%", "size-2.5 bg-brand-soft"],
-          ["62%", "90%", "size-4 border border-gold/70"],
+          ["62%", "90%", "size-4 border border-kra-light/70"],
           ["93%", "48%", "size-3 bg-white/40"],
-          ["34%", "86%", "size-2 bg-gold"],
+          ["34%", "86%", "size-2 bg-kra-light"],
           ["70%", "14%", "size-2 bg-white/50"],
         ].map(([l, t, c]) => (
           <span key={l + t} data-pr="dot" className={cn("absolute rounded-full opacity-0", c)} style={{ left: l, top: t }} />
@@ -240,10 +240,10 @@ export function PropertyReviews() {
           onPointerEnter={() => pause(true)}
           onPointerLeave={() => pause(false)}
         >
-          <p data-pr="copy" className="eyebrow text-gold opacity-0">{copy.label}</p>
+          <p data-pr="copy" className="eyebrow text-kra-light opacity-0">{copy.label}</p>
           <h2 data-pr="copy" id="prv-title" className="mt-4 text-h3 font-medium opacity-0">
             {copy.heading}{" "}
-            <span className="bg-linear-to-r from-gold via-[#f1d27a] to-brand-soft bg-clip-text text-transparent">{copy.headingAccent}</span>
+            <span className="bg-linear-to-r from-kra-light via-[#ff9aa0] to-brand-soft bg-clip-text text-transparent">{copy.headingAccent}</span>
           </h2>
 
           <div data-pr="copy" className="mt-7 opacity-0">

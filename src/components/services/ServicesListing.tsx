@@ -57,7 +57,7 @@ export function ServicesListing() {
   );
 
   return (
-    <section ref={root} id="service-list" aria-label={listingCopy.srLabel} className="bg-night-deep pb-[clamp(4rem,10svh,8rem)] pt-[clamp(2rem,6svh,4rem)] text-white">
+    <section ref={root} id="service-list" aria-label={listingCopy.srLabel} className="bg-night-deep bg-[radial-gradient(60rem_42rem_at_100%_0%,rgb(228_32_43/0.30),transparent_65%),radial-gradient(52rem_40rem_at_0%_55%,rgb(228_32_43/0.18),transparent_65%),radial-gradient(56rem_40rem_at_100%_100%,rgb(228_32_43/0.24),transparent_65%)] pb-[clamp(4rem,10svh,8rem)] pt-[clamp(2rem,6svh,4rem)] text-white">
       <ol className="wrap-wide">
         {services.map((s, i) => {
           const img = listingImages[s.slug] ?? { src: s.image, alt: "" };
@@ -94,7 +94,7 @@ export function ServicesListing() {
                   <Link
                     data-row-mid
                     href={`/contact?service=${s.slug}`}
-                    className="group mt-7 inline-flex items-center gap-2 border-b-2 border-white pb-1 text-sm font-semibold opacity-0 transition-colors hover:border-gold hover:text-gold"
+                    className="group mt-7 inline-flex items-center gap-2 border-b-2 border-white pb-1 text-sm font-semibold opacity-0 transition-colors hover:border-kra-light hover:text-kra-light"
                   >
                     {listingCopy.enquire}
                     <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />

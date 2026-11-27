@@ -25,7 +25,7 @@ export function PropertyAbout() {
         <Image src={mission.image} alt="" fill sizes="100vw" quality={60} className="-z-20 object-cover" />
         <div aria-hidden className="absolute inset-0 -z-10 bg-night/80" />
         <Reveal y={40} className="wrap-wide text-center">
-          <p className="text-sm font-bold uppercase tracking-[0.18em] text-gold">{mission.label}</p>
+          <p className="text-sm font-bold uppercase tracking-[0.18em] text-kra-light">{mission.label}</p>
           <p className="mx-auto mt-6 max-w-[34ch] font-display text-[clamp(1.6rem,1rem+2.4vw,3rem)] leading-snug">{mission.text}</p>
         </Reveal>
       </section>

@@ -236,7 +236,7 @@ export function ServiceDonut({ slug, title, image, tasks, shape }: Props) {
                 data-seg-label
                 className={cn(
                   "absolute max-w-[7rem] text-xs font-medium leading-tight transition-colors duration-300 lg:text-[0.8rem]",
-                  active === i ? "text-gold" : "text-white/75",
+                  active === i ? "text-kra-light" : "text-white/75",
                   rightSide && "-translate-y-1/2 text-left",
                   leftSide && "-translate-x-full -translate-y-1/2 text-right",
                   !rightSide && !leftSide && (cy > 0 ? "-translate-x-1/2 -translate-y-full text-center" : "-translate-x-1/2 text-center"),
@@ -272,7 +272,7 @@ export function ServiceDonut({ slug, title, image, tasks, shape }: Props) {
 
       {/* Link line + end dots (in px of the area box) */}
       <svg aria-hidden className="pointer-events-none absolute inset-0 z-20 size-full overflow-visible">
-        <line ref={line} stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" className="text-gold opacity-0" />
+        <line ref={line} stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" className="text-kra-light opacity-0" />
         <circle data-link-dot r={4} className="fill-gold opacity-0" />
         <circle data-link-dot r={4} className="fill-gold opacity-0" />
       </svg>
@@ -289,12 +289,12 @@ export function ServiceDonut({ slug, title, image, tasks, shape }: Props) {
       >
         {current && active !== null && (
           <>
-            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-gold">{donutCopy.position(active, n)}</p>
+            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-kra-light">{donutCopy.position(active, n)}</p>
             <h4 className="mt-1.5 font-display text-xl font-medium leading-tight sm:text-2xl">{current.label}</h4>
             <p className="mt-2.5 text-sm leading-relaxed text-white/90">{current.detail}</p>
             <Link
               href={`/contact?service=${slug}`}
-              className="group mt-4 inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-gold"
+              className="group mt-4 inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-kra-light"
             >
               {donutCopy.enquire}
               <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />

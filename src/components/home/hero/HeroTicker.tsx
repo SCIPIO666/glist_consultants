@@ -35,7 +35,7 @@ export function HeroTicker({ tone = "light", direction = "right", className }: P
           <span
             key={`${word}-dot`}
             aria-hidden
-            className="grid size-9 place-items-center rounded-full bg-gold font-display text-lg leading-none text-night-deep sm:size-12 sm:text-2xl"
+            className="grid size-9 place-items-center rounded-full bg-kra font-display text-lg leading-none text-white sm:size-12 sm:text-2xl"
           >
             G
           </span>,

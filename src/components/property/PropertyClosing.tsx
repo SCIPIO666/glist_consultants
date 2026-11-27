@@ -25,11 +25,11 @@ export function PropertyClosing() {
         </div>
       </section>
 
-      <section aria-labelledby="pm-question-title" className="bg-night-deep py-[clamp(3rem,7svh,5rem)] text-white">
+      <section aria-labelledby="pm-question-title" className="bg-gradient-to-r from-kra-deep via-[#7a0f18] to-[#2a0a10] py-[clamp(3rem,7svh,5rem)] text-white">
         <div className="wrap-wide flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
           <div>
             <h2 id="pm-question-title" className="text-h3 font-medium">{copy.question.title}</h2>
-            <p className="mt-2 text-white/70">{copy.question.text}</p>
+            <p className="mt-2 text-white/85">{copy.question.text}</p>
           </div>
           <div className="flex flex-wrap gap-3">
             <Button href={`tel:${site.phone.tel}`} variant="ghost-light" icon={<Phone />}>{site.phone.display}</Button>

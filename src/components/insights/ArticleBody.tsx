@@ -7,11 +7,11 @@ const components: PortableTextComponents = {
     h2: ({ children }) => <h2 className="mt-14 font-display text-h3 font-medium text-night">{children}</h2>,
     h3: ({ children }) => <h3 className="mt-10 font-display text-xl font-medium text-night sm:text-2xl">{children}</h3>,
     blockquote: ({ children }) => (
-      <blockquote className="mt-8 border-l-2 border-gold pl-6 font-display text-xl leading-snug text-night sm:text-2xl">{children}</blockquote>
+      <blockquote className="mt-8 border-l-2 border-kra pl-6 font-display text-xl leading-snug text-night sm:text-2xl">{children}</blockquote>
     ),
   },
   list: {
-    bullet: ({ children }) => <ul className="mt-5 list-disc space-y-2 pl-6 text-lg leading-[1.8] text-ink marker:text-gold">{children}</ul>,
+    bullet: ({ children }) => <ul className="mt-5 list-disc space-y-2 pl-6 text-lg leading-[1.8] text-ink marker:text-kra">{children}</ul>,
     number: ({ children }) => <ol className="mt-5 list-decimal space-y-2 pl-6 text-lg leading-[1.8] text-ink marker:font-semibold marker:text-brand">{children}</ol>,
   },
   marks: {

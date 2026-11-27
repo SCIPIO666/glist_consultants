@@ -17,11 +17,11 @@ export const site = {
   email: "glist.consultants@gmail.com",
   /** Fill these in when the client supplies them; empty ones are skipped. */
   social: {
-    facebook: "",
+    facebook: "https://www.facebook.com/GlistHubCity",
     instagram: "",
     linkedin: "",
     x: "",
-    tiktok: "",
+    tiktok: "https://www.tiktok.com/@glist.consultants",
   },
 } as const;
 

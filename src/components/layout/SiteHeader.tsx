@@ -34,7 +34,7 @@ export function SiteHeader() {
 
   const isCurrent = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
   // "Home" is the logo's job in the bar; the menu overlay still lists it.
-  const links = nav.filter((l) => l.href !== "/");
+  const links = nav; // Home is listed too, so wide screens get a Home link
 
   return (
     <>

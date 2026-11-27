@@ -3,7 +3,7 @@ import { propertyWhy as copy } from "@/data/propertyManagement";
 
 function Check() {
   return (
-    <svg viewBox="0 0 24 24" aria-hidden className="size-7 text-gold" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round">
+    <svg viewBox="0 0 24 24" aria-hidden className="size-7 text-kra" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round">
       <circle cx="12" cy="12" r="9.5" />
       <path d="m8 12.5 2.8 2.8L16 9.5" />
     </svg>

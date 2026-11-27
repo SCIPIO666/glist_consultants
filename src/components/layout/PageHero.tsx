@@ -48,7 +48,7 @@ export function PageHero({ breadcrumb, eyebrow, titleLines, lead, primaryCta, se
   );
 
   return (
-    <section ref={root} aria-labelledby={id} className="relative overflow-hidden bg-night text-white">
+    <section ref={root} aria-labelledby={id} className="relative overflow-hidden bg-night bg-[radial-gradient(48rem_36rem_at_90%_0%,rgb(228_32_43/0.28),transparent_68%),radial-gradient(36rem_28rem_at_0%_100%,rgb(228_32_43/0.12),transparent_70%)] text-white">
       {/* soft glow */}
       <div aria-hidden className="absolute -right-1/4 top-0 size-[46rem] rounded-full bg-brand/20 blur-3xl" />
 

@@ -40,7 +40,7 @@ export function SiteFooter() {
               <p className="eyebrow text-kra-light">Let&apos;s talk</p>
               <h2 className="mt-4 text-h2">
                 Let us handle the numbers.
-                <span className="block font-display italic text-brand-soft">You focus on growth.</span>
+                <span className="block w-fit pr-[0.12em] font-display italic bg-linear-to-r from-kra-light via-kra to-[#ff8a5c] bg-clip-text text-transparent">You focus on growth.</span>
               </h2>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row lg:flex-col lg:items-start xl:flex-row">
