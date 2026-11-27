@@ -3,6 +3,8 @@ import { Poppins, Plus_Jakarta_Sans, Caveat } from "next/font/google";
 import "./globals.css";
 import { AppChrome } from "@/components/providers/AppChrome";
 import { site } from "@/lib/site";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { organizationJsonLd } from "@/lib/seo";
 
 const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
@@ -35,6 +37,21 @@ export const metadata: Metadata = {
   },
   description: site.description,
   applicationName: site.name,
+  keywords: [
+    "tax compliance Kenya",
+    "KRA returns",
+    "VAT registration Kenya",
+    "payroll services Kenya",
+    "business registration Kenya",
+    "bookkeeping Kenya",
+    "rental property management Kenya",
+    "financial advisory Nairobi",
+    "Glist Consultants",
+  ],
+  authors: [{ name: site.name }],
+  creator: site.name,
+  formatDetection: { telephone: false },
+  verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION } : undefined,
   openGraph: {
     type: "website",
     siteName: site.name,
@@ -42,7 +59,7 @@ export const metadata: Metadata = {
     title: `${site.name} | ${site.tagline}`,
     description: site.description,
   },
-  twitter: { card: "summary_large_image" },
+  twitter: { card: "summary_large_image", title: `${site.name} | ${site.tagline}`, description: site.description },
   robots: { index: true, follow: true },
 };
 
@@ -56,6 +73,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${jakarta.variable} ${heading.variable} ${caveat.variable}`}>
       <body>
+        <JsonLd data={organizationJsonLd()} />
         <AppChrome>{children}</AppChrome>
       </body>
     </html>

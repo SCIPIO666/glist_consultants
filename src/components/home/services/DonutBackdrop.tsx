@@ -51,28 +51,30 @@ function Donut({ segs }: { segs: Seg[] }) {
 }
 
 type Props = {
-  /** Donut diameter as a share of the section height. 0.7 matches the design sketch. */
+  /**
+   * Donut diameter as a share of the section height. Each donut is centred exactly on its edge,
+   * so half of it shows. 0.96 leaves a thin gap where the two halves meet in the middle; use 1 for
+   * the halves to touch, or more to overlap them.
+   */
   size?: number;
-  /** Visible gap between the two donuts, as a share of the section height. */
-  gap?: number;
   /** Sideways nudge in % of the width: the top donut goes left, the bottom one right. */
   shift?: number;
   className?: string;
 };
 
 /**
- * Reusable background: two big donuts stacked one above the other, centred, with a
- * visible gap between them. Each hangs off its own edge of the section (the top one
- * off the top, the bottom one off the bottom), so only the part inside the section
- * shows. They turn in opposite directions and pause while off-screen.
+ * Reusable background: two big donuts stacked one above the other, centred. Each is
+ * centred on its own edge of the section (the top one on the top edge, the bottom one
+ * on the bottom edge), so exactly half of each shows, as two half-donuts facing each
+ * other. They turn in opposite directions and pause while off-screen.
  *
  * Drop it as the first child of a `relative` box that has a definite height:
  *   <div className="relative h-svh"><DonutBackdrop />...</div>
  */
-export function DonutBackdrop({ size = 0.7, gap = 0.02, shift = 3, className }: Props) {
+export function DonutBackdrop({ size = 0.96, shift = 3, className }: Props) {
   const root = useRef<HTMLDivElement>(null);
-  // How far each donut hangs past its edge, as a share of the height.
-  const over = (2 * size + gap - 1) / 2;
+  // Each donut hangs half its own height past its edge, so its centre sits ON the edge: exactly half shows.
+  const over = size / 2;
   const d = `${size * 100}%`;
 
   useGSAP(

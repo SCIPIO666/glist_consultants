@@ -11,8 +11,8 @@ const SECONDS_PER_STAT = 6;
 
 function StatRow({ stat }: { stat: Stat }) {
   return (
-    <div className="flex h-[clamp(10rem,32svh,17rem)] items-center gap-6 sm:gap-10 flat:h-auto flat:py-10">
-      <p className="shrink-0 font-display text-[clamp(4rem,min(17vw,25svh),11.5rem)] font-light leading-none tracking-[-0.04em] tabular-nums">
+    <div className="flex h-[clamp(9rem,26svh,15rem)] items-center gap-6 sm:gap-10 flat:h-auto flat:py-10">
+      <p className="shrink-0 font-display text-[clamp(3.75rem,min(17vw,21svh),10rem)] font-light leading-none tracking-[-0.04em] tabular-nums">
         {stat.prefix && <span className="mr-2 text-[0.38em] tracking-normal text-kra-light">{stat.prefix}</span>}
         <span className="bg-gradient-to-b from-white via-brand-soft to-brand bg-clip-text text-transparent">
           {fmt(stat.value)}
@@ -28,7 +28,7 @@ function StatRow({ stat }: { stat: Stat }) {
 }
 
 /**
- * Why us, part 2 of 3: a full-height night screen with an inset shadow, a wavy line-graph
+ * Why us, part 2 of 3: a night screen (about 60% of the viewport height) with an inset shadow, a wavy line-graph
  * pattern, and the stats as huge numbers scrolling upward on a loop, like movie credits.
  * The list is rendered twice and shifted by exactly half, so the loop has no seam; it pauses
  * while off-screen. Reduced motion: no loop, the stats simply stack.
@@ -89,7 +89,7 @@ export function WhyStats() {
         <div
           aria-hidden
           className={cn(
-            "relative h-svh overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,#000_16%,#000_84%,transparent)]",
+            "relative h-[clamp(24rem,62svh,40rem)] overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,#000_16%,#000_84%,transparent)]",
             "flat:h-auto flat:overflow-visible flat:py-20 flat:[mask-image:none]",
           )}
         >

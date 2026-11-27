@@ -17,7 +17,10 @@ export async function sanityFetch<T>({
 }): Promise<T | null> {
   if (!isSanityConfigured) return null;
   try {
-    return await client.fetch<T>(query, params, { next: { revalidate: 3600, tags } });
+    // Production: cached for an hour, refreshed instantly by the publish webhook.
+    // Development: no caching, so an edit in the Studio shows on the next reload.
+    const revalidate = process.env.NODE_ENV === "production" ? 3600 : 0;
+    return await client.fetch<T>(query, params, { next: { revalidate, tags } });
   } catch (error) {
     console.error("[sanity] fetch failed, using static content:", error);
     return null;

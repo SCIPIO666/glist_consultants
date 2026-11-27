@@ -8,6 +8,8 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { categories, formatInsightDate, insightsPage } from "@/data/insights";
 import { getInsight, getInsightSlugs } from "@/lib/content";
 import { site } from "@/lib/site";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { absoluteUrl, breadcrumbJsonLd } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -23,7 +25,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: post.title,
     description: post.excerpt,
     alternates: { canonical: `/insights/${post.slug}` },
-    openGraph: { title: post.title, description: post.excerpt, url: `/insights/${post.slug}`, type: "article", publishedTime: post.date, images: [post.image.src] },
+    openGraph: { title: post.title, description: post.excerpt, url: `/insights/${post.slug}`, type: "article", publishedTime: post.date, authors: [site.name], images: [{ url: post.image.src, alt: post.image.alt }] },
+    twitter: { card: "summary_large_image", title: post.title, description: post.excerpt, images: [post.image.src] },
   };
 }
 
@@ -39,14 +42,19 @@ export default async function InsightPage({ params }: Props) {
     headline: post.title,
     description: post.excerpt,
     datePublished: post.date,
-    image: post.image.src,
-    author: { "@type": "Organization", name: site.name },
-    publisher: { "@type": "Organization", name: site.name },
+    dateModified: post.date,
+    image: [absoluteUrl(post.image.src)],
+    articleSection: category,
+    inLanguage: "en-KE",
+    mainEntityOfPage: { "@type": "WebPage", "@id": absoluteUrl(`/insights/${post.slug}`) },
+    author: { "@type": "Organization", name: site.name, url: absoluteUrl("/") },
+    publisher: { "@type": "Organization", name: site.name, logo: { "@type": "ImageObject", url: absoluteUrl("/logo/logo-full.png") } },
   };
+  const crumbs = breadcrumbJsonLd([["Home", "/"], ["Insights", "/insights"], [post.title, `/insights/${post.slug}`]]);
 
   return (
     <main>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
+      <JsonLd data={[jsonLd, crumbs]} />
 
       {/* Dark page-top so the transparent header stays readable */}
       <header className="bg-night pb-[clamp(2.5rem,6vw,4.5rem)] pt-[calc(var(--header-h)+clamp(2rem,5vw,4rem))] text-white">

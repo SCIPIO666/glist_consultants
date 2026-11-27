@@ -14,9 +14,12 @@ import { cn } from "@/lib/cn";
 /**
  * Fixed top bar, conventional layout:
  *  - left: compact logo (GC mark + name)
- *  - centre/right (wide screens): the page links from 1024px up, with the current page marked
- *  - right: "Book a consultation" (hidden at 1024-1279px to make room) and the circular menu button (always available)
- * The bar is clear at the top of the page and turns dark teal once you scroll.
+ *  - centre/right (from 1100px): the page links with icon + text, one line each, never wrapping.
+ *    1100-1279px uses a slightly tighter size so it also fits a laptop at 110-125% browser zoom.
+ *  - right: the circular menu button (always available). "Book a consultation" shows only below 1100px, where the
+ *    links give way to the menu and there is room. On desktop that space belongs to the links
+ *    ("Contact Us" is one of them, and the footer and every page carry their own enquiry buttons).
+ * The bar is solid dark teal at all times and gets a little translucent once you scroll.
  */
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -51,19 +54,19 @@ export function SiteHeader() {
               <LogoLockup priority />
             </Link>
 
-            <nav aria-label="Main" className="ml-auto hidden lg:block">
-              <ul className="flex items-center gap-5 xl:gap-8">
+            <nav aria-label="Main" className="ml-auto hidden min-[1100px]:block">
+              <ul className="flex items-center gap-4 xl:gap-6 min-[1440px]:gap-8">
                 {links.map((l) => (
                   <li key={l.href}>
                     <Link
                       href={l.href}
                       aria-current={isCurrent(l.href) ? "page" : undefined}
                       className={cn(
-                        "group relative inline-flex items-center gap-2 py-2 text-sm font-semibold text-white/85 transition-colors hover:text-white",
+                        "group relative inline-flex items-center gap-1.5 whitespace-nowrap py-2 text-[0.8rem] font-semibold xl:gap-2 xl:text-sm text-white/85 transition-colors hover:text-white",
                         isCurrent(l.href) && "text-white",
                       )}
                     >
-                      <NavIcon href={l.href} className={cn("text-[1.05rem] transition-colors duration-300 group-hover:text-gold", isCurrent(l.href) ? "text-gold" : "text-white/60")} />
+                      <NavIcon href={l.href} className={cn("shrink-0 text-base transition-colors xl:text-[1.05rem] duration-300 group-hover:text-gold", isCurrent(l.href) ? "text-gold" : "text-white/60")} />
                       {l.label}
                       <span
                         aria-hidden
@@ -78,9 +81,9 @@ export function SiteHeader() {
               </ul>
             </nav>
 
-            <div className="flex items-center gap-3 max-lg:ml-auto">
-              <div className="hidden sm:block lg:hidden xl:block">
-                <Button href="/contact" variant="cta" size="md" arrow>
+            <div className="flex shrink-0 items-center gap-3 max-[1099px]:ml-auto">
+              <div className="hidden sm:block min-[1100px]:hidden">
+                <Button href="/contact" variant="cta" size="md" arrow className="whitespace-nowrap">
                   Book a consultation
                 </Button>
               </div>

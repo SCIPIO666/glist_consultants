@@ -8,6 +8,9 @@ import { PropertyReviews } from "@/components/property/PropertyReviews";
 import { PropertyNews } from "@/components/property/PropertyNews";
 import { PropertyClosing } from "@/components/property/PropertyClosing";
 import { propertyMeta } from "@/data/propertyManagement";
+import { propertyServices } from "@/data/propertyServices";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbJsonLd, serviceJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: propertyMeta.title,
@@ -26,6 +29,17 @@ export const metadata: Metadata = {
 export default function PropertyManagementPage() {
   return (
     <main>
+      <JsonLd
+        data={[
+          serviceJsonLd({
+            name: "Rental Property Management",
+            description: propertyMeta.description,
+            path: "/property-management",
+            offers: propertyServices.items.map((i) => i.title),
+          }),
+          breadcrumbJsonLd([["Home", "/"], ["Property Management", "/property-management"]]),
+        ]}
+      />
       <PropertyHero />
       <PropertyIntro />
       <PropertyServices />
