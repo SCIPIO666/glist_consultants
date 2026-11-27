@@ -45,7 +45,7 @@ export const readingBuckets: { value: string; label: string; test: (min: number)
 
 export const insightsPage = {
   title: "News and Insights",
-  lead: "Plain-English guides on tax, payroll, bookkeeping, property and personal finance, written to help you make better decisions.",
+  lead: "Articles and guides on tax, payroll, bookkeeping, property and personal finance, written to help you make better decisions.",
   filterTitle: "Filter articles",
   groups: { service: "Service", category: "Category", reading: "Reading time" },
   readLabel: "Read more",
