@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { LogoLockup } from "./Logo";
+import { NavIcon } from "./NavIcons";
 import { MenuOverlay } from "./MenuOverlay";
 import { ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { nav } from "@/lib/site";
@@ -58,10 +59,11 @@ export function SiteHeader() {
                       href={l.href}
                       aria-current={isCurrent(l.href) ? "page" : undefined}
                       className={cn(
-                        "group relative py-2 text-sm font-semibold text-white/85 transition-colors hover:text-white",
+                        "group relative inline-flex items-center gap-2 py-2 text-sm font-semibold text-white/85 transition-colors hover:text-white",
                         isCurrent(l.href) && "text-white",
                       )}
                     >
+                      <NavIcon href={l.href} className={cn("text-[1.05rem] transition-colors duration-300 group-hover:text-gold", isCurrent(l.href) ? "text-gold" : "text-white/60")} />
                       {l.label}
                       <span
                         aria-hidden

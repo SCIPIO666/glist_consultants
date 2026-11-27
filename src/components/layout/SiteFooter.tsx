@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
-import { ArrowUpRight, Mail, Phone, WhatsApp } from "@/components/ui/icons";
+import { Mail, Phone, WhatsApp } from "@/components/ui/icons";
 import { Logo } from "./Logo";
+import { SocialLinks } from "./SocialLinks";
 import { services } from "@/data/services";
 import { nav, site, whatsappUrl } from "@/lib/site";
 
@@ -14,8 +15,6 @@ import { nav, site, whatsappUrl } from "@/lib/site";
  * ever cut off.
  */
 export function SiteFooter() {
-  const socials = Object.entries(site.social).filter(([, url]) => url);
-
   return (
     <footer
       className="relative bg-night-deep text-white reveal:h-svh reveal:[clip-path:polygon(0_0,100%_0,100%_100%,0_100%)]"
@@ -56,6 +55,7 @@ export function SiteFooter() {
             <div className="max-w-xs">
               <Logo variant="full" sizes="96px" className="h-auto w-20" />
               <p className="mt-3 text-sm text-white/70">{site.tagline}</p>
+              <SocialLinks className="mt-5" />
             </div>
 
             <FooterCol title="Explore">
@@ -85,13 +85,6 @@ export function SiteFooter() {
                   <Mail className="shrink-0 text-gold" /> {site.email}
                 </a>
               </li>
-              {socials.map(([name, url]) => (
-                <li key={name}>
-                  <a href={url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 capitalize text-white/80 transition-colors hover:text-gold">
-                    {name} <ArrowUpRight />
-                  </a>
-                </li>
-              ))}
             </FooterCol>
           </div>
 

@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { ChevronRight, Close, WhatsApp } from "@/components/ui/icons";
 import { Logo } from "./Logo";
+import { NavIcon } from "./NavIcons";
 import { useSmoothScroll } from "@/components/providers/SmoothScroll";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { nav, site, whatsappUrl } from "@/lib/site";
@@ -130,7 +131,7 @@ export function MenuOverlay({
               returnFocusTo.current?.focus({ preventScroll: true });
             }}
             aria-label="Close menu"
-            className="grid size-14 shrink-0 place-items-center rounded-full bg-white/10 text-2xl text-white transition-[background-color,transform] duration-300 hover:bg-kra-light hover:text-night-deep hover:rotate-90"
+            className="grid size-14 shrink-0 place-items-center rounded-full bg-white/10 text-2xl text-white transition-[background-color,transform] duration-300 hover:bg-gold hover:text-night-deep hover:rotate-90"
           >
             <Close />
           </button>
@@ -147,12 +148,21 @@ export function MenuOverlay({
                     href={item.href}
                     data-menu-row
                     aria-current={active ? "page" : undefined}
-                    className="group flex items-center justify-between py-3 font-display text-[clamp(1.625rem,1.1rem+2vw,2.75rem)] leading-tight transition-colors hover:text-kra-light sm:py-4"
+                    className="group flex items-center justify-between py-3 font-display text-[clamp(1.625rem,1.1rem+2vw,2.75rem)] leading-tight transition-colors hover:text-gold sm:py-4"
                   >
-                    <span className={cn("transition-transform duration-500 ease-out-expo group-hover:translate-x-3", active && "text-kra-light")}>
+                    <span className={cn("flex items-center gap-4 transition-transform duration-500 ease-out-expo group-hover:translate-x-3 sm:gap-5", active && "text-gold")}>
+                      <span
+                        aria-hidden
+                        className={cn(
+                          "grid size-10 shrink-0 place-items-center rounded-full border text-[1.15rem] transition-colors duration-300 sm:size-12 sm:text-[1.3rem]",
+                          active ? "border-gold bg-gold text-night-deep" : "border-white/25 text-white/80 group-hover:border-gold group-hover:text-gold",
+                        )}
+                      >
+                        <NavIcon href={item.href} />
+                      </span>
                       {item.label}
                     </span>
-                    <ChevronRight className="text-xl text-white/60 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-kra-light" />
+                    <ChevronRight className="text-xl text-white/60 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-gold" />
                   </Link>
                   <div data-menu-line className="h-px bg-white/25" />
                 </li>
@@ -171,9 +181,9 @@ export function MenuOverlay({
             </Button>
           </div>
           <p data-menu-foot className="text-sm text-white/70">
-            <a href={`tel:${site.phone.tel}`} className="hover:text-kra-light">{site.phone.display}</a>
+            <a href={`tel:${site.phone.tel}`} className="hover:text-gold">{site.phone.display}</a>
             <span className="mx-3 text-white/30">|</span>
-            <a href={`mailto:${site.email}`} className="hover:text-kra-light">{site.email}</a>
+            <a href={`mailto:${site.email}`} className="hover:text-gold">{site.email}</a>
           </p>
         </div>
       </div>

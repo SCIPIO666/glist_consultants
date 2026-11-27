@@ -1,6 +1,7 @@
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/motion/Reveal";
 import { ContactForm } from "./ContactForm";
+import { SocialLinks } from "@/components/layout/SocialLinks";
 import { ContactPortrait } from "./ContactPortrait";
 import { contactForm as copy } from "@/data/contact";
 
@@ -27,6 +28,10 @@ export function ContactSection() {
             </Reveal>
             <Reveal className="mt-8 lg:mt-10" delay={0.1}>
               <ContactForm />
+            </Reveal>
+            <Reveal className="mt-8 border-t border-white/10 pt-6 lg:mt-10" delay={0.2}>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/60">Follow us</p>
+              <SocialLinks className="mt-4" size="lg" />
             </Reveal>
           </div>
 
