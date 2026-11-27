@@ -18,7 +18,7 @@ export const aboutGlance: { title: string; items: GlanceItem[] } = {
     {
       id: "background",
       title: "Background",
-      text: "A business, financial and property consultancy for individuals, startups, SMEs and established companies.",
+      text: "A  financial and property consultancy for individuals, startups, SMEs and established companies.",
       image: { src: "/pages/about/glance/pexels-2160634325-41167700.webp", alt: "Sunlit modern building corner against a blue sky" },
       href: "#background",
     },

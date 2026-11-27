@@ -6,7 +6,7 @@ export const aboutHero = {
   breadcrumb: "About Us",
   eyebrow: "About Glist Consultants",
   titleLines: ["Guiding success,", "illuminating paths."],
-  lead: "A business, financial and property consultancy in Kenya. We give individuals, entrepreneurs, startups, SMEs and established businesses practical, dependable help.",
+  lead: "A  financial and property consultancy in Kenya. We give individuals, entrepreneurs, startups, SMEs and established businesses practical, dependable help.",
   primaryCta: { label: "Book a consultation", href: "/contact" },
   secondaryCta: { label: "Our services", href: "/services" },
   images: {
@@ -19,12 +19,12 @@ export const aboutHero = {
 export const aboutMeta = {
   title: "About Us",
   description:
-    "Glist Consultants is a business, financial and property consultancy in Kenya. We offer tax, payroll, registration, bookkeeping, stock taking, personal financial advisory and rental property management.",
+    "Glist Consultants is a  financial and property consultancy business in Kenya. We offer tax, payroll, registration, bookkeeping, stock taking, personal financial advisory and rental property management.",
 } as const;
 
 export const aboutBackground = {
   eyebrow: "Who we are",
-  titleBefore: "Your growth. Our commitment.",
+  titleBefore: "Committed to your growth",
   titleMark: "Shared success.",
   paragraphs: [
     "We help our clients keep up with their financial obligations, meet statutory requirements, run their operations and make sound financial decisions.",

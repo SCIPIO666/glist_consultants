@@ -5,7 +5,7 @@
  */
 export const aboutOpening = {
   /** Light-blue part, then the last words in white. */
-  titleLight: "Experienced. Reliable. Trusted.",
+  titleLight: "Tried Proven and Trusted.",
   titleWhite: "Your success is our business.",
   paragraph:
     "Glist Consultants supports individuals, entrepreneurs, SMEs and established companies with tax compliance, payroll, registrations, bookkeeping, stock taking, personal financial advice and rental property management. We serve clients in Nairobi, Nakuru, Ruiru, Kiambu, Githunguri, Kagwe and Kimende.",

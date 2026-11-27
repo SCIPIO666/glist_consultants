@@ -5,7 +5,7 @@
  */
 export const aboutProcess = {
   title: "How we work",
-  lead: "Whether it is one tax return or a whole payroll, you tell us what you need and we take it from there.",
+  lead: "From tax returns to payrolls, you tell us what you need and we take it from there.",
   image: { src: "/pages/about/process.webp", alt: "Financial papers, a phone and a calculator on a desk" },
   steps: [
     {
