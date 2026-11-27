@@ -8,18 +8,18 @@ type Seg = { pct: number; cls: string };
 
 /** Multi-colour "money analytics" palettes. Percentages add up to 100. */
 const donutA: Seg[] = [
-  { pct: 26, cls: "text-brand opacity-50" },
-  { pct: 17, cls: "text-kra opacity-55" },
-  { pct: 21, cls: "text-night-card opacity-90" },
-  { pct: 14, cls: "text-whatsapp opacity-30" },
-  { pct: 22, cls: "text-brand-soft opacity-35" },
+  { pct: 26, cls: "text-brand opacity-28" },
+  { pct: 17, cls: "text-kra opacity-30" },
+  { pct: 21, cls: "text-night-card opacity-60" },
+  { pct: 14, cls: "text-whatsapp opacity-14" },
+  { pct: 22, cls: "text-brand-soft opacity-18" },
 ];
 const donutB: Seg[] = [
-  { pct: 19, cls: "text-gold opacity-45" },
-  { pct: 27, cls: "text-night-card opacity-90" },
-  { pct: 16, cls: "text-kra opacity-55" },
-  { pct: 23, cls: "text-brand opacity-50" },
-  { pct: 15, cls: "text-brand-soft opacity-35" },
+  { pct: 19, cls: "text-gold opacity-24" },
+  { pct: 27, cls: "text-night-card opacity-60" },
+  { pct: 16, cls: "text-kra opacity-30" },
+  { pct: 23, cls: "text-brand opacity-28" },
+  { pct: 15, cls: "text-brand-soft opacity-18" },
 ];
 
 const GAP = 0.9; // visible gap between segments, in % of the ring

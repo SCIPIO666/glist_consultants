@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/Button";
 import { Mail, Phone, WhatsApp } from "@/components/ui/icons";
 import { Logo } from "./Logo";
 import { SocialLinks } from "./SocialLinks";
+import { SubscribeCompact } from "@/components/insights/SubscribeForm";
 import { services } from "@/data/services";
 import { nav, site, whatsappUrl } from "@/lib/site";
 
@@ -84,6 +85,9 @@ export function SiteFooter() {
                 <a href={`mailto:${site.email}`} className="inline-flex items-center gap-2.5 break-all text-white/80 transition-colors hover:text-gold">
                   <Mail className="shrink-0 text-gold" /> {site.email}
                 </a>
+              </li>
+              <li className="pt-3">
+                <SubscribeCompact />
               </li>
             </FooterCol>
           </div>

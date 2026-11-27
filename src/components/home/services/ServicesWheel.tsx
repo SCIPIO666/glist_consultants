@@ -77,13 +77,13 @@ export function ServicesWheel() {
       <div className="relative min-h-svh overflow-hidden">
         <DonutBackdrop />
 
-        <div className="wrap-wide relative z-10 flex min-h-svh flex-col items-center justify-between gap-3 pb-5 pt-[calc(var(--header-h)+2.75rem)] lg:grid lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-10 lg:pb-0 lg:pt-[var(--header-h)]">
+        <div className="wrap-wide relative z-10 flex min-h-svh flex-col items-center justify-between gap-3 pb-5 pt-[calc(var(--header-h)+2.75rem)] lg:grid lg:grid-cols-[0.78fr_1.22fr] lg:items-center lg:gap-10 lg:pb-0 lg:pt-[var(--header-h)]">
           {/* Fixed left side: title and one button, nothing else */}
           <div className="flex w-full items-end justify-between gap-4 lg:block">
             <Reveal y={40}>
               <h2
                 id="services-title"
-                className="text-[clamp(2.25rem,1.2rem+4.8vw,7.25rem)] font-medium leading-[0.95] tracking-[-0.03em]"
+                className="text-[clamp(2.25rem,1.2rem+4.2vw,6.25rem)] font-medium leading-[0.95] tracking-[-0.03em]"
               >
                 {copy.titleLines[0]}
                 <span className="max-lg:ml-[0.25em] lg:block">
@@ -100,7 +100,7 @@ export function ServicesWheel() {
           </div>
 
           {/* Circular grid */}
-          <ServiceWheel className="w-[min(92vw,calc(100svh-17.5rem))] shrink-0 lg:w-[min(100%,calc(100svh-8rem))] lg:justify-self-center" />
+          <ServiceWheel className="w-[min(96vw,calc(100svh-15rem))] shrink-0 lg:w-[min(100%,calc(100svh-3rem))] lg:justify-self-center" />
 
           {/* Phone / tablet button (the desktop one sits under the title) */}
           <div className="flex w-full justify-center lg:hidden">

@@ -1,11 +1,12 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { cn } from "@/lib/cn";
 
 type State = "idle" | "sending" | "done" | "error";
 
-/** Newsletter sign-up for the Insights page (posts to /api/subscribe). */
-export function SubscribeForm() {
+/** Shared sign-up logic: posts to /api/subscribe. `source` says which form it came from. */
+function useSubscribe(source: string) {
   const [state, setState] = useState<State>("idle");
   const [msg, setMsg] = useState("");
 
@@ -17,7 +18,7 @@ export function SubscribeForm() {
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: data.get("email"), website: data.get("website") }),
+        body: JSON.stringify({ email: data.get("email"), website: data.get("website"), source }),
       });
       if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error ?? "error");
       setState("done");
@@ -26,6 +27,12 @@ export function SubscribeForm() {
       setState("error");
     }
   }
+  return { state, msg, onSubmit };
+}
+
+/** Newsletter sign-up for the Insights page: the full banner. */
+export function SubscribeForm() {
+  const { state, msg, onSubmit } = useSubscribe("insights");
 
   return (
     <section aria-labelledby="subscribe-title" className="mt-12 overflow-hidden rounded-card bg-night p-7 text-white shadow-card sm:p-10">
@@ -69,5 +76,46 @@ export function SubscribeForm() {
         )}
       </div>
     </section>
+  );
+}
+
+/** Small version for the footer: one line, label on top, email box with a round button. */
+export function SubscribeCompact({ className }: { className?: string }) {
+  const { state, msg, onSubmit } = useSubscribe("footer");
+
+  return (
+    <div className={cn("max-w-xs", className)}>
+      <p id="footer-sub-label" className="font-sans text-xs font-semibold uppercase tracking-[0.16em] text-kra-light">New guides by email</p>
+      {state === "done" ? (
+        <p role="status" className="mt-3 text-sm text-white/85">Thank you, you are subscribed.</p>
+      ) : (
+        <form onSubmit={onSubmit} noValidate aria-labelledby="footer-sub-label" className="mt-3">
+          <div className="flex items-center rounded-pill bg-white/10 p-1 ring-1 ring-white/20 focus-within:ring-gold">
+            <label htmlFor="footer-sub-email" className="sr-only">Email address</label>
+            <input
+              id="footer-sub-email"
+              name="email"
+              type="email"
+              required
+              autoComplete="email"
+              placeholder="Your email"
+              className="min-w-0 flex-1 bg-transparent px-4 py-2 text-sm text-white placeholder:text-white/50 focus:outline-none"
+            />
+            <input name="website" tabIndex={-1} autoComplete="off" aria-hidden className="absolute -left-[9999px] h-0 w-0 opacity-0" />
+            <button
+              type="submit"
+              disabled={state === "sending"}
+              aria-label="Subscribe"
+              className="grid size-9 shrink-0 place-items-center rounded-full bg-gold text-night-deep transition-transform hover:scale-105 disabled:opacity-60"
+            >
+              {state === "sending" ? <span className="size-3 animate-pulse rounded-full bg-night-deep" /> : (
+                <svg aria-hidden viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+              )}
+            </button>
+          </div>
+          {state === "error" && <p role="alert" className="mt-2 text-xs text-white">{msg}</p>}
+        </form>
+      )}
+    </div>
   );
 }
