@@ -7,33 +7,11 @@ import { DashField } from "@/components/ui/DashField";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { propertyValue as copy } from "@/data/propertyValue";
 
-const rings = [
-  "conic-gradient(from -42deg, #d9a62e 0deg 94deg, #1f6fd6 94deg 174deg, #0b3a41 174deg 258deg, #dce5e8 258deg 360deg)",
-  "conic-gradient(from 18deg, #1f6fd6 0deg 88deg, #d9a62e 88deg 176deg, #0b3a41 176deg 264deg, #dce5e8 264deg 360deg)",
-  "conic-gradient(from 76deg, #0b3a41 0deg 92deg, #d9a62e 92deg 180deg, #1f6fd6 180deg 270deg, #dce5e8 270deg 360deg)",
-  "conic-gradient(from 132deg, #d9a62e 0deg 86deg, #0b3a41 86deg 178deg, #1f6fd6 178deg 268deg, #dce5e8 268deg 360deg)",
-];
-
-/** A small donut chart that carries the card number. */
-function ValueDonut({ index }: { index: number }) {
-  return (
-    <div
-      aria-hidden
-      data-pv="donut"
-      className="grid size-[4.5rem] shrink-0 place-items-center rounded-full p-[6px] transition-transform duration-700 ease-out group-hover:rotate-[-14deg] group-hover:scale-105 sm:size-20"
-      style={{ background: rings[index % rings.length] }}
-    >
-      <div className="grid size-full place-items-center rounded-full bg-white/80 shadow-[inset_0_2px_8px_rgb(0_32_37/0.1)] backdrop-blur-sm">
-        <span className="font-mono text-sm font-semibold text-night-card">{String(index + 1).padStart(2, "0")}</span>
-      </div>
-    </div>
-  );
-}
-
 /**
  * PROPERTY VALUE PROPOSITION.
  * Left (sticky on desktop): title + photo, both animate in. Right: the paragraph reveals
- * line by line through a mask, then four minimal glass cards each carry a donut.
+ * line by line through a mask, then the two challenges as plain rows.
+ * (The four "what we take care of" cards moved to their own centred section: PropertyPoints.)
  * Corner patterns top-right and bottom-left. All scroll-triggered and reversible.
  */
 export function PropertyValue() {
@@ -75,22 +53,10 @@ export function PropertyValue() {
           { scale: 1.25 },
           { scale: 1, duration: 1.8, ease: "power2.out", scrollTrigger: { trigger: "[data-pv=photo]", start: "top 85%", toggleActions: "play none none reverse" } },
         );
-
-        // Glass cards step in one after another
-        gsap.fromTo(
-          "[data-pv=card]",
-          { opacity: 0, y: 56, scale: 0.96 },
-          { opacity: 1, y: 0, scale: 1, duration: 1, ease: "expo.out", stagger: 0.14, scrollTrigger: { trigger: "[data-pv=cards]", start: "top 85%", toggleActions: "play none none reverse" } },
-        );
-        gsap.fromTo(
-          "[data-pv=donut]",
-          { rotation: -140, scale: 0.6 },
-          { rotation: 0, scale: 1, duration: 1.4, ease: "power3.out", stagger: 0.14, scrollTrigger: { trigger: "[data-pv=cards]", start: "top 85%", toggleActions: "play none none reverse" } },
-        );
       });
 
       mm.add(mq.reduced, () => {
-        gsap.set("[data-pv=mask], [data-pv=card]", { opacity: 1 });
+        gsap.set("[data-pv=mask]", { opacity: 1 });
       });
     },
     { scope: root },
@@ -154,27 +120,6 @@ export function PropertyValue() {
               ))}
             </ol>
           </div>
-
-          <div className="mt-16">
-            <p data-pv="mask" className="text-xs font-semibold uppercase tracking-[0.18em] text-brand opacity-0">{copy.pointsLabel}</p>
-            <h3 data-pv="mask" className="mt-3 max-w-[20ch] text-h3 font-medium text-night opacity-0">{copy.pointsTitle}</h3>
-          </div>
-
-          <ul data-pv="cards" className="mt-8 grid gap-4 sm:grid-cols-2 sm:gap-5">
-            {copy.points.map((point, index) => (
-              <li
-                key={point.title}
-                data-pv="card"
-                className="group relative flex min-h-[15rem] flex-col items-start justify-between gap-6 overflow-hidden rounded-[1.5rem] border border-white/80 bg-white/45 p-5 opacity-0 shadow-[0_20px_50px_-28px_rgb(0_32_37/0.4),inset_0_1px_0_rgb(255_255_255/0.9)] backdrop-blur-lg backdrop-saturate-150 transition-[transform,background-color,box-shadow] duration-500 ease-out hover:-translate-y-1 hover:bg-white/65 hover:shadow-[0_28px_60px_-26px_rgb(0_32_37/0.45),inset_0_1px_0_rgb(255_255_255/0.95)] sm:p-6"
-              >
-                <ValueDonut index={index} />
-                <div className="min-w-0">
-                  <h4 className="font-display text-lg font-medium leading-snug text-night">{point.title}</h4>
-                  <p className="mt-1.5 text-sm leading-[1.65] text-ink-muted">{point.text}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
     </section>

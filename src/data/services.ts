@@ -37,7 +37,7 @@ export const services: Service[] = [
     title: "Payroll Management Services",
     short: "Accurate monthly payroll, PAYE and statutory remittances.",
     intro:
-      "We handle your monthly payroll from start to finish. Your staff gets paid accurately and on time, and all statutory deductions are filed and remitted correctly.",
+      "Payroll management is like a back-office bodyguard. You send us your staff details; we calculate everything correctly and on time, prepare the payslips and file the statutory deductions.",
     items: [
       "Monthly payroll processing.",
       "PAYE computations and filing.",
@@ -71,7 +71,7 @@ export const services: Service[] = [
     title: "Bookkeeping and Accounting",
     short: "Clean records, reconciliations, and reports you can trust.",
     intro:
-      "You can't run a business if you don't know your numbers. We keep your records clean, reconcile your bank accounts, and give you clear financial reports you can actually understand.",
+      "Is your business making money? Don't guess, know your numbers. We keep your records accurate, reconcile your bank accounts and give you financial reports you can read.",
     items: [
       "Day-to-day bookkeeping.",
       "Preparation and maintenance of financial records.",
@@ -122,7 +122,7 @@ export const services: Service[] = [
     title: "Rental Property Management",
     short: "Tenants, rent collection, and upkeep handled for you.",
     intro:
-      "Your property should be an asset, not a headache. We find good tenants, collect the rent, manage the upkeep, and keep you updated with clear monthly reports.",
+      "Reliable rental property management designed to improve occupancy, streamline rent collection and protect your property's value.",
     items: [
       "Tenant sourcing and placement.",
       "Rent collection and monitoring.",

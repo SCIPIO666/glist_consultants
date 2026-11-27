@@ -1,9 +1,10 @@
 /**
- * Insights (news and guides). IMPORTANT: every article below is a SAMPLE
- * PLACEHOLDER written to show the layout. Titles, descriptions and dates are
- * stand-ins, and nothing here states real tax rates, deadlines or legal rules.
- * Replace with the client's real articles (or Sanity) before launch, then set
- * `insightsAreSamples` to false.
+ * Insights (news and guides). These are the client's own four articles, moved over from
+ * their Wix blog (full text lives in data/insightBodies.ts). Insurance content is left out
+ * on purpose: insurance will be a separate business and website.
+ *
+ * Dates: the Wix blog showed only "Jan 23 / Jan 27 / Jan 28" with no year, so 2026 is assumed.
+ * Cover photos are stock images already in the project (the Wix photos were not supplied).
  *
  * Contracts used elsewhere on the site (keep them stable):
  *   - category values: tax-updates | compliance-reminders | financial-literacy | business-tips
@@ -26,7 +27,7 @@ export type Insight = {
   readMinutes: number;
 };
 
-export const insightsAreSamples = true;
+export const insightsAreSamples = false;
 
 export const categories: { value: InsightCategory; label: string }[] = [
   { value: "tax-updates", label: "Tax updates" },
@@ -72,110 +73,48 @@ export function formatInsightMonth(iso: string) {
 
 const raw: Insight[] = [
   {
-    slug: "staying-ahead-of-kra-deadlines",
-    title: "Staying ahead of KRA deadlines: a simple filing calendar",
+    slug: "mastering-the-art-of-saving-building-your-dream-life-with-financial-discipline",
+    title: "Mastering the Art of Saving: Building Your Dream Life with Financial Discipline",
     excerpt:
-      "A simple way to list the filings and payments your business repeats every month and every year, so none of them sneaks up on you.",
-    date: "2026-11-12",
-    category: "compliance-reminders",
-    service: "taxation",
-    image: { src: "/pexels-artempodrez-6779714.webp", alt: "Accounting papers, a calculator and charts laid out on a desk" },
-    readMinutes: 6,
-  },
-  {
-    slug: "reading-a-tax-change-without-the-jargon",
-    title: "How to read a tax change without the jargon",
-    excerpt:
-      "New rules can sound alarming. Here is a calm way to work out whether a change affects you, and what to ask before you act.",
-    date: "2026-10-28",
-    category: "tax-updates",
-    service: "taxation",
-    image: { src: "/kelly-sikkema-M98NRBuzbpc-unsplash.webp", alt: "A tax form, calculator and coffee on a dark desk" },
-    readMinutes: 5,
-  },
-  {
-    slug: "payroll-basics-every-employer-should-know",
-    title: "Payroll basics every employer should know",
-    excerpt:
-      "From contracts to payslips to monthly statutory payments: the building blocks of a payroll you can trust.",
-    date: "2026-10-14",
-    category: "business-tips",
-    service: "payroll",
-    image: { src: "/pexels-tima-miroshnichenko-6694475.webp", alt: "A man organising paperwork at a desk beside a tablet" },
-    readMinutes: 7,
-  },
-  {
-    slug: "questions-to-ask-before-you-register-a-business",
-    title: "Questions to ask before you register a business",
-    excerpt:
-      "Name, structure, tax registrations and licences: the questions worth answering first so your launch is tidy.",
-    date: "2026-09-30",
-    category: "business-tips",
-    service: "registrations",
-    image: { src: "/pexels-gustavo-fring-5934189.webp", alt: "A smiling business owner holding an open-for-business sign", focus: "50% 18%" },
-    readMinutes: 5,
-  },
-  {
-    slug: "monthly-bookkeeping-beats-the-year-end-scramble",
-    title: "Why monthly bookkeeping beats the year-end scramble",
-    excerpt: "Small, regular updates keep your books accurate, your decisions informed and your year-end calm.",
-    date: "2026-09-16",
-    category: "business-tips",
-    service: "bookkeeping",
-    image: { src: "/pexels-tima-miroshnichenko-6694569.webp", alt: "Cash, receipts, a calculator and a laptop on a busy desk" },
-    readMinutes: 4,
-  },
-  {
-    slug: "stock-counts-that-match-your-books",
-    title: "Stock counts that actually match your books",
-    excerpt: "How a regular, well-planned count exposes shrinkage early and keeps your stock figures honest.",
-    date: "2026-09-02",
-    category: "business-tips",
-    service: "stock-taking",
-    image: { src: "/cytonn-photography-l3MMvRYdPhc-unsplash.webp", alt: "A person typing on a laptop beside a phone" },
-    readMinutes: 6,
-  },
-  {
-    slug: "a-simple-monthly-budget-for-irregular-income",
-    title: "A simple monthly budget for irregular income",
-    excerpt:
-      "When income moves around, a budget built on your lowest month gives you a steady floor to plan from.",
-    date: "2026-08-19",
+      "Practical steps to save for three big milestones: your first car, education and your first home, with advice for common financial goals in Kenya.",
+    date: "2026-01-28",
     category: "financial-literacy",
     service: "financial-advisory",
     image: { src: "/micheile-henderson-SoT4-mZhyhE-unsplash.webp", alt: "A seedling growing from a jar of coins" },
-    readMinutes: 8,
-  },
-  {
-    slug: "rental-income-records-every-landlord-should-keep",
-    title: "Rental income: the records every landlord should keep",
-    excerpt: "Receipts, statements and tenancy papers that make rental accounting, and tax time, far easier.",
-    date: "2026-08-05",
-    category: "compliance-reminders",
-    service: "property-management",
-    image: { src: "/pexels-towfiqu-barbhuiya-3440682-8732777.webp", alt: "A model house held in a hand beside a calculator" },
-    readMinutes: 5,
-  },
-  {
-    slug: "preparing-for-your-first-meeting-with-an-accountant",
-    title: "How to prepare for your first meeting with an accountant",
-    excerpt: "A short list of documents and questions that makes a first consultation faster and far more useful.",
-    date: "2026-07-22",
-    category: "business-tips",
-    service: "financial-advisory",
-    image: { src: "/christina-wocintechchat-com-m-rg1y72eKw6o-unsplash.webp", alt: "A team meeting around a table in a bright office" },
     readMinutes: 3,
   },
   {
-    slug: "saving-with-a-purpose",
-    title: "Saving with a purpose: three goals worth their own account",
+    slug: "simplify-payroll-compliance-and-boost-business-growth-with-glists-accurate-solutions",
+    title: "Simplify Payroll Compliance and Boost Business Growth with Glist's Accurate Solutions",
     excerpt:
-      "An emergency fund, short-term plans and long-term growth: keeping them apart makes progress easy to see.",
-    date: "2026-07-08",
-    category: "financial-literacy",
-    service: "financial-advisory",
-    image: { src: "/towfiqu-barbhuiya-nApaSgkzaxg-unsplash.webp", alt: "A person reviewing charts on a tablet with a calculator nearby" },
-    readMinutes: 9,
+      "Accurate payslips, on-time processing and met tax obligations: how outsourcing payroll reduces errors, helps you predict labour costs and gives time back.",
+    date: "2026-01-27",
+    category: "business-tips",
+    service: "payroll",
+    image: { src: "/pexels-tima-miroshnichenko-6694475.webp", alt: "A man organising paperwork at a desk beside a tablet" },
+    readMinutes: 3,
+  },
+  {
+    slug: "understanding-turnover-tax-kenya-a-comprehensive-guide-for-businesses",
+    title: "Understanding Turnover Tax Kenya: A Comprehensive Guide for Businesses",
+    excerpt:
+      "How turnover tax works for small businesses in Kenya: who qualifies, how to register and file, and worked examples.",
+    date: "2026-01-23",
+    category: "tax-updates",
+    service: "taxation",
+    image: { src: "/pexels-artempodrez-6779714.webp", alt: "Accounting papers, a calculator and charts laid out on a desk" },
+    readMinutes: 4,
+  },
+  {
+    slug: "maximize-your-real-estate-investments-in-kenya",
+    title: "Maximize Your Real Estate Investments in Kenya",
+    excerpt:
+      "Essential tips for investors: understand local market trends, choose the right property type and use professional management to protect your returns.",
+    date: "2026-01-23",
+    category: "business-tips",
+    service: "property-management",
+    image: { src: "/pexels-towfiqu-barbhuiya-3440682-8732777.webp", alt: "A model house held in a hand beside a calculator" },
+    readMinutes: 2,
   },
 ];
 

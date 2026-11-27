@@ -3,6 +3,7 @@ import { PropertyHero } from "@/components/property/PropertyHero";
 import { PropertyIntro } from "@/components/property/PropertyIntro";
 import { PropertyServices } from "@/components/property/PropertyServices";
 import { PropertyValue } from "@/components/property/PropertyValue";
+import { PropertyPoints } from "@/components/property/PropertyPoints";
 import { PropertyReviews } from "@/components/property/PropertyReviews";
 import { PropertyNews } from "@/components/property/PropertyNews";
 import { PropertyClosing } from "@/components/property/PropertyClosing";
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
 
 /**
  * PROPERTY MANAGEMENT, rebuilt section by section from the redesign brief.
- * Done:  1 hero (unchanged) -> 2 mask-gradient intro -> 3 services listing -> 4 value proposition
+ * Done:  1 hero (unchanged) -> 2 mask-gradient intro -> 3 services listing -> 4 value proposition + four-petal "what we take care of"
  *        -> 5 circular reviews
  * Kept:  recent news, final CTA + question strip
  * Next:  6 decorative CTA (background images, overlays, looping image visibility)
@@ -29,6 +30,7 @@ export default function PropertyManagementPage() {
       <PropertyIntro />
       <PropertyServices />
       <PropertyValue />
+      <PropertyPoints />
       <PropertyReviews />
       {/* 6 decorative CTA goes here */}
       <PropertyNews />

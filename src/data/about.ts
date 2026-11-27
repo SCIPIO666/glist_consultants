@@ -5,8 +5,8 @@
 export const aboutHero = {
   breadcrumb: "About Us",
   eyebrow: "About Glist Consultants",
-  titleLines: ["The team behind", "your numbers."],
-  lead: "We are a business, financial, and property consultancy for individuals, startups, and established companies. We give you straightforward, reliable advice so you can make confident financial decisions.",
+  titleLines: ["Guiding success,", "illuminating paths."],
+  lead: "A professional business, financial and property consultancy providing reliable, practical and client-focused solutions to individuals, entrepreneurs, startups, SMEs and established businesses.",
   primaryCta: { label: "Book a consultation", href: "/contact" },
   secondaryCta: { label: "Our services", href: "/services" },
   images: {
@@ -24,20 +24,20 @@ export const aboutMeta = {
 
 export const aboutBackground = {
   eyebrow: "Who we are",
-  titleBefore: "A consultancy built around the people it",
-  titleMark: "serves.",
+  titleBefore: "Your growth. Our commitment.",
+  titleMark: "Shared success.",
   paragraphs: [
-    "Navigating taxes, payroll, and business operations can be overwhelming. We take that weight off your shoulders by handling the compliance and keeping your records straight.",
-    "We believe in doing things right. That means treating your business with integrity, meeting your deadlines, and giving you advice you can actually use.",
+    "We support our clients in navigating financial obligations, meeting statutory compliance requirements, managing business operations and making informed financial decisions.",
+    "Our approach is built on professionalism, integrity, reliability and a commitment to helping our clients achieve sustainable growth.",
   ],
   clientsHeading: "Who we work with",
   clients: [
     "Individuals and salaried professionals",
     "Entrepreneurs and startups",
-    "Small and medium-sized businesses (SMEs)",
-    "Established companies",
+    "Small and medium-sized enterprises (SMEs)",
+    "Established companies and institutions",
     "Landlords and property investors",
-    "Anyone who needs a reliable hand with their books and taxes",
+    "Businesses seeking accounting, payroll and tax compliance support",
   ],
   image: {
     src: "/pexels-tima-miroshnichenko-6694475.webp",

@@ -4,9 +4,9 @@
  */
 
 export const introOpening = {
-  eyebrow: "What is Glist",
+  eyebrow: "Guiding success, illuminating paths",
   /** The big word. A gold dot is added after it. */
-  word: "Clarity",
+  word: "Growth",
 } as const;
 
 /**
@@ -14,14 +14,14 @@ export const introOpening = {
  * Keep starred phrases short (one or two words) so they never wrap badly.
  */
 export const introDescription =
-  "Glist Consultants is a financial advisory firm. We give individuals, entrepreneurs, and growing businesses practical support with tax, payroll, registrations, books, and property. You stay *compliant*, decide with confidence, and get back to doing what you do best.";
+  "Glist Consultants is a professional business, financial and property consultancy. We give individuals, entrepreneurs, SMEs and established businesses reliable, practical support with tax, payroll, registrations, books and rental property. You stay *compliant*, make informed decisions, and focus on *growth*.";
 
 export const introGraph = {
   /** Two lines. The second line gets the hand-drawn underline. */
-  taglineTop: "Get the numbers right,",
-  taglineAccent: "and growth follows.",
+  taglineTop: "Don't guess.",
+  taglineAccent: "Know your numbers.",
   /** Small caption under the chart. Keep it honest: this chart is an illustration, not real data. */
-  caption: "Strategic trajectory",
+  caption: "An illustration of steady growth",
   srSummary: "Illustrative chart: business revenue rises steadily over five years, dips once, then climbs sharply.",
   /** Bottom to top. */
   yLabels: ["0", "1M", "2M", "3M", "4M"],
@@ -50,10 +50,10 @@ export const introGraphPoints: [number, number][] = [
 
 export const introClose = {
   /** No eyebrow on this screen, by design. */
-  title: "Built for businesses that plan to last.",
+  title: "Your success is our business.",
   paragraphs: [
-    "We take the headaches of tax compliance, payroll, bookkeeping, and property management off your plate. Our team handles the details, so you can make clear decisions and focus on moving your business forward.",
-    "We crunch the numbers. You focus on the big picture.",
+    "Tax compliance, payroll, registrations, bookkeeping, stock taking, personal financial advice and rental property management: multiple services under one roof, so you deal with one dependable team.",
+    "Experienced. Reliable. Trusted.",
   ],
   cta: { label: "About Glist", href: "/about" },
 } as const;

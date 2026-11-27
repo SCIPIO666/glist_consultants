@@ -7,14 +7,14 @@
  */
 export const servicesHero = {
   title: "Our services",
-  lead: "Explore our expertise.",
+  lead: "Multiple business, financial and property services under one roof.",
   cta: { label: "Book a consultation", href: "/contact" },
   image: "/pages/services/hero/hero.webp",
 } as const;
 
 export const servicesIntro = {
-  title: "We keep the work behind your money in order",
-  lead: "Tax, payroll, registrations, books, stock, personal finance and rentals, all in one place.",
+  title: "Let us handle the numbers",
+  lead: "Tax compliance, payroll, registrations, bookkeeping, stock taking, personal financial advisory and rental property management.",
   link: { label: "Explore our services", href: "#service-list" },
   srRailLabel: "Jump to a service",
 } as const;

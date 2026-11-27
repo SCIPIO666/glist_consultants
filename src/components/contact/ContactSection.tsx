@@ -2,6 +2,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/motion/Reveal";
 import { ContactForm } from "./ContactForm";
 import { SocialLinks } from "@/components/layout/SocialLinks";
+import { coverage } from "@/data/contactCoverage";
 import { ContactPortrait } from "./ContactPortrait";
 import { contactForm as copy } from "@/data/contact";
 
@@ -32,6 +33,18 @@ export function ContactSection() {
             <Reveal className="mt-8 border-t border-white/10 pt-6 lg:mt-10" delay={0.2}>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/60">Follow us</p>
               <SocialLinks className="mt-4" size="lg" />
+            </Reveal>
+
+            <Reveal className="mt-8" delay={0.3}>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/60">{coverage.label}</p>
+              <ul role="list" className="mt-4 flex flex-wrap gap-2">
+                {coverage.places.map((p) => (
+                  <li key={p} className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-sm text-white/85">
+                    <span aria-hidden className="size-1.5 rounded-full bg-gold" />
+                    {p}
+                  </li>
+                ))}
+              </ul>
             </Reveal>
           </div>
 

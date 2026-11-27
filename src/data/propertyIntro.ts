@@ -4,5 +4,5 @@
  */
 export const propertyIntro = {
   label: "Rental property management",
-  text: "Owning a rental should feel like owning an *asset*, not holding a second job. Glist takes on the daily work of letting, collecting and maintaining, so your property stays occupied, your income stays *predictable* and your evenings stay yours.",
+  text: "Glist gives property owners and landlords reliable rental property management, designed to improve *occupancy*, streamline rent collection and protect property *value*. You stay the owner; we handle the daily work.",
 } as const;

@@ -25,9 +25,9 @@ export const whyReasons: {
   cta: { label: "About us", href: "/about" },
   srListLabel: "Reasons to choose Glist Consultants",
   items: [
-    { title: "Advice you can act on", text: "Plain language and clear next steps." },
-    { title: "Deadlines kept", text: "We plan around statutory dates, so nothing slips." },
-    { title: "One roof, seven services", text: "Tax, payroll, books, stock and rentals together." },
-    { title: "Built around you", text: "We understand your situation before we advise." },
+    { title: "Professionalism", text: "High standards in every service we deliver." },
+    { title: "Reliability", text: "Dependable, timely support you can count on." },
+    { title: "Convenience", text: "Business, financial and property services under one roof." },
+    { title: "Client-focused", text: "We take time to understand what you need." },
   ],
 };

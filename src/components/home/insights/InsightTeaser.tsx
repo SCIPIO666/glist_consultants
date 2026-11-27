@@ -17,9 +17,12 @@ function LineArrow() {
  * Home insights: one teaser card, laid out like the reference. A heading, a small
  * "latest insights" link, then a white card with the photo on the left and the
  * topic/date, title and "read more" on the right. Whole card is one link.
+ * Pass `card` to show the newest article; without it the hand-written card in data/insightsLink.ts is used.
  */
-export function InsightTeaser() {
-  const c = copy.card;
+type Card = { image: string; imageAlt: string; topic: string; date: string; title: string; href: string };
+
+export function InsightTeaser({ card }: { card?: Card } = {}) {
+  const c = { ...copy.card, ...card };
   return (
     <section aria-labelledby="insights-title" className="relative isolate overflow-hidden bg-linear-to-br from-night-card via-[#0d4452] to-[#14396a] text-white">
       {/* deep teal-to-navy, soft facets and a fine dot grid */}

@@ -3,9 +3,11 @@
  * section by section, with Glist's own wording. The eight tasks come from the brief
  * (data/services.ts, "property-management"); the blurbs below explain each in one line.
  *
- * SAMPLE CONTENT (flagged): the testimonials and the three news items are placeholders
- * to show the layout. Replace them with real ones before launch.
+ * SAMPLE CONTENT (flagged): the testimonials are placeholders to show the layout.
+ * Replace them with real ones before launch. The news cards come from the real articles.
  */
+import { insights, formatInsightDate } from "./insights";
+
 export const propertyMeta = {
   title: "Rental Property Management",
   description:
@@ -120,16 +122,17 @@ export const propertyTestimonials = {
   ],
 } as const;
 
-/** Section 10: recent news (SAMPLE titles, replace with real insights). */
+/** Section 10: recent news. Real articles from data/insights.ts: the property one first, then the newest others. */
+const newsPicks = [
+  ...insights.filter((i) => i.service === "property-management"),
+  ...insights.filter((i) => i.service !== "property-management"),
+].slice(0, 3);
+
 export const propertyNews = {
   title: "Recent news",
   all: { label: "All news", href: "/insights" },
-  items: [
-    { title: "What a good tenancy agreement should cover", excerpt: "The clauses landlords most often wish they had written down.", date: "20 November 2026", href: "/insights" },
-    { title: "Handling rent arrears without losing the tenant", excerpt: "A calm, step-by-step approach to late payment.", date: "12 November 2026", href: "/insights" },
-    { title: "Keeping rental income records ready for tax", excerpt: "What to keep, and when, so filing is quick.", date: "4 November 2026", href: "/insights" },
-  ],
-} as const;
+  items: newsPicks.map((i) => ({ title: i.title, excerpt: i.excerpt, date: formatInsightDate(i.date), href: `/insights/${i.slug}` })),
+};
 
 /** Section 11 and 12: final call to action and quick question strip. */
 export const propertyClosing = {

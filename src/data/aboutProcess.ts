@@ -5,24 +5,24 @@
  */
 export const aboutProcess = {
   title: "How we work",
-  lead: "Whether it's a single tax return or managing your whole portfolio, we follow the same simple, reliable process.",
+  lead: "Whether it is one tax return or a whole payroll, you tell us what you need and we take it from there.",
   image: { src: "/pages/about/process.webp", alt: "Financial papers, a phone and a calculator on a desk" },
   steps: [
     {
-      heading: "We listen first",
-      text: "We sit down with you to understand your business, your obligations, and where you want to go.",
+      heading: "Tell us what you need",
+      text: "You share the details: your business, your staff, your property or your records. We take time to understand your situation.",
     },
     {
-      heading: "We make a plan",
-      text: "We agree on what needs to be done, who's doing it, and the dates that matter, so nothing slips through the cracks.",
+      heading: "We agree the plan",
+      text: "We agree what needs to be done and the statutory dates that matter, so nothing is missed.",
     },
     {
-      heading: "We do the work",
-      text: "We prepare, file, and manage everything on your behalf, to a professional standard.",
+      heading: "We handle the numbers",
+      text: "We calculate, prepare, file and keep the records, to a professional standard and on time.",
     },
     {
-      heading: "We stick around",
-      text: "We give you clear reports and practical advice as your business or property portfolio grows.",
+      heading: "You focus on growth",
+      text: "You get clear reports and practical advice, and we stay alongside you as you grow.",
     },
   ],
 } as const;
