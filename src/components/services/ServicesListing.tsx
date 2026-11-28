@@ -1,9 +1,9 @@
 "use client";
 
 import { useRef } from "react";
-import Link from "next/link";
 import { gsap, mq, useGSAP } from "@/lib/gsap";
-import { ArrowRight, WhatsApp } from "@/components/ui/icons";
+import { Button } from "@/components/ui/Button";
+import { WhatsApp } from "@/components/ui/icons";
 import { cn } from "@/lib/cn";
 import { services } from "@/data/services";
 import { serviceWhatsappUrl } from "@/data/whatsappTemplates";
@@ -93,13 +93,9 @@ export function ServicesListing() {
                     {s.intro}
                   </p>
                   <div data-row-mid className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3 opacity-0">
-                    <Link
-                      href={`/contact?service=${s.slug}`}
-                      className="group inline-flex items-center gap-2 border-b-2 border-white pb-1 text-sm font-semibold transition-colors hover:border-kra-light hover:text-kra-light"
-                    >
+                    <Button href={`/contact?service=${s.slug}`} size="lg" arrow>
                       {listingCopy.enquire}
-                      <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
-                    </Link>
+                    </Button>
                     <a
                       href={serviceWhatsappUrl(s.slug)}
                       target="_blank"

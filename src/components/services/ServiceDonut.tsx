@@ -2,9 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { ArrowRight, WhatsApp } from "@/components/ui/icons";
+import { Button } from "@/components/ui/Button";
+import { WhatsApp } from "@/components/ui/icons";
 import { cn } from "@/lib/cn";
 import { donutCopy } from "@/data/servicesBreakdown";
 import { serviceWhatsappUrl } from "@/data/whatsappTemplates";
@@ -294,13 +294,9 @@ export function ServiceDonut({ slug, title, image, tasks, shape }: Props) {
             <h4 className="mt-1.5 font-display text-xl font-medium leading-tight sm:text-2xl">{current.label}</h4>
             <p className="mt-2.5 text-sm leading-relaxed text-white/90">{current.detail}</p>
             <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-3">
-              <Link
-                href={`/contact?service=${slug}`}
-                className="group inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-kra-light"
-              >
+              <Button href={`/contact?service=${slug}`} size="sm" arrow>
                 {donutCopy.enquire}
-                <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </Link>
+              </Button>
               <a
                 href={serviceWhatsappUrl(slug, current.label)}
                 target="_blank"
