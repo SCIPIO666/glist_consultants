@@ -181,7 +181,7 @@ export function AboutHero() {
                 <span className="font-display text-[clamp(6rem,4rem+8vw,11rem)] font-medium leading-none">{copy.number}</span>
               </div>
               <p className="pb-2 font-display text-[clamp(1.5rem,1rem+2vw,2.75rem)] leading-none">
-                {copy.numberLabel} <span className="ml-2 text-white/70">{copy.connector}</span>
+                {copy.numberLabel}{copy.connector ? <span className="ml-2 text-white/70">{copy.connector}</span> : null}
               </p>
             </div>
             <p className="mt-6 text-lg font-semibold leading-snug sm:text-xl">

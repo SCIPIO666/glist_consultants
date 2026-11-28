@@ -8,8 +8,8 @@ export const aboutHero = {
   h1: "About Glist Consultants",
   number: "7",
   numberLabel: "services",
-  connector: "in",
-  caption: ["of practical", "business, financial", "and property support."],
+  connector: "",
+  caption: ["to support your", " financial", " needs."],
   groups: [
     { title: "Tax and compliance", text: "Taxation, payroll, registrations", icon: "tax" },
     { title: "Accounts and records", text: "Bookkeeping, stock taking", icon: "books" },
