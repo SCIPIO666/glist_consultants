@@ -4,9 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { ArrowRight } from "@/components/ui/icons";
+import { ArrowRight, WhatsApp } from "@/components/ui/icons";
 import { cn } from "@/lib/cn";
 import { donutCopy } from "@/data/servicesBreakdown";
+import { serviceWhatsappUrl } from "@/data/whatsappTemplates";
 import { R_MID, R_OUT, R_IN, SHAPES, pointAt, segMid, segPath, type Shape } from "./donutGeometry";
 
 export type DonutTask = { label: string; detail: string };
@@ -292,13 +293,24 @@ export function ServiceDonut({ slug, title, image, tasks, shape }: Props) {
             <p className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-kra-light">{donutCopy.position(active, n)}</p>
             <h4 className="mt-1.5 font-display text-xl font-medium leading-tight sm:text-2xl">{current.label}</h4>
             <p className="mt-2.5 text-sm leading-relaxed text-white/90">{current.detail}</p>
-            <Link
-              href={`/contact?service=${slug}`}
-              className="group mt-4 inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-kra-light"
-            >
-              {donutCopy.enquire}
-              <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
+            <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-3">
+              <Link
+                href={`/contact?service=${slug}`}
+                className="group inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-kra-light"
+              >
+                {donutCopy.enquire}
+                <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+              <a
+                href={serviceWhatsappUrl(slug, current.label)}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Chat on WhatsApp about ${current.label}`}
+                className="inline-flex size-10 items-center justify-center rounded-full bg-whatsapp text-xl text-night-deep shadow-lift transition-transform duration-300 hover:scale-110"
+              >
+                <WhatsApp />
+              </a>
+            </div>
           </>
         )}
       </div>

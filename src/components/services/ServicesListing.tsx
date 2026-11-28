@@ -3,9 +3,10 @@
 import { useRef } from "react";
 import Link from "next/link";
 import { gsap, mq, useGSAP } from "@/lib/gsap";
-import { ArrowRight } from "@/components/ui/icons";
+import { ArrowRight, WhatsApp } from "@/components/ui/icons";
 import { cn } from "@/lib/cn";
 import { services } from "@/data/services";
+import { serviceWhatsappUrl } from "@/data/whatsappTemplates";
 import { listingCopy, listingImages } from "@/data/servicesPage";
 import { donutShapes, servicesBreakdown } from "@/data/servicesBreakdown";
 import { ServiceDonut } from "./ServiceDonut";
@@ -91,14 +92,24 @@ export function ServicesListing() {
                   <p data-row-mid className="mt-6 max-w-[46ch] text-white/75 opacity-0">
                     {s.intro}
                   </p>
-                  <Link
-                    data-row-mid
-                    href={`/contact?service=${s.slug}`}
-                    className="group mt-7 inline-flex items-center gap-2 border-b-2 border-white pb-1 text-sm font-semibold opacity-0 transition-colors hover:border-kra-light hover:text-kra-light"
-                  >
-                    {listingCopy.enquire}
-                    <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
-                  </Link>
+                  <div data-row-mid className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3 opacity-0">
+                    <Link
+                      href={`/contact?service=${s.slug}`}
+                      className="group inline-flex items-center gap-2 border-b-2 border-white pb-1 text-sm font-semibold transition-colors hover:border-kra-light hover:text-kra-light"
+                    >
+                      {listingCopy.enquire}
+                      <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
+                    </Link>
+                    <a
+                      href={serviceWhatsappUrl(s.slug)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Chat on WhatsApp about ${s.title}`}
+                      className="inline-flex size-11 items-center justify-center rounded-full bg-whatsapp text-2xl text-night-deep shadow-lift transition-transform duration-300 hover:scale-110"
+                    >
+                      <WhatsApp />
+                    </a>
+                  </div>
                 </div>
 
                 <ServiceDonut slug={s.slug} title={s.title} image={img} tasks={tasks} shape={donutShapes[s.slug] ?? "top"} />
