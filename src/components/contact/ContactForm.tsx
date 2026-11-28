@@ -1,10 +1,12 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { WhatsApp } from "@/components/ui/icons";
 import { services } from "@/data/services";
 import { contactForm as copy } from "@/data/contact";
+import { emailTemplates, serviceWhatsappUrl } from "@/data/whatsappTemplates";
 import { whatsappUrl } from "@/lib/site";
 import { cn } from "@/lib/cn";
 
@@ -15,7 +17,20 @@ const field =
   "transition-[border-color,box-shadow] duration-300 focus:border-kra-light focus:outline-none focus:ring-2 focus:ring-kra-light/30";
 const label = "mb-2 block text-sm font-semibold text-white/80";
 
+const titleOf = (slug: string) => services.find((s) => s.slug === slug)?.title ?? "";
+const slugOf = (title: string) => services.find((s) => s.title === title)?.slug ?? "";
+
+/**
+ * Arrive from a service (/contact?service=payroll) and the Service box and the message are
+ * already filled in with that service's template. Name, email and phone are left for the visitor.
+ */
 export function ContactForm({ defaultService = "" }: { defaultService?: string }) {
+  const params = useSearchParams();
+  // ?service=<slug> wins; otherwise a service title passed in by the page (e.g. Property management)
+  const startSlug = params.get("service") ?? slugOf(defaultService);
+  const startTitle = titleOf(startSlug) || defaultService;
+  const [service, setService] = useState(startTitle);
+  const [message, setMessage] = useState(emailTemplates[startSlug] ?? "");
   const [status, setStatus] = useState<Status>("idle");
   const [waMessage, setWaMessage] = useState<string | undefined>();
 
@@ -35,6 +50,8 @@ export function ContactForm({ defaultService = "" }: { defaultService?: string }
       });
       if (!res.ok) throw new Error(String(res.status));
       form.reset();
+      setService("");
+      setMessage("");
       setStatus("sent");
     } catch {
       setStatus("error");
@@ -60,6 +77,14 @@ export function ContactForm({ defaultService = "" }: { defaultService?: string }
 
   const sending = status === "sending";
 
+  // Changing the service swaps the template, unless the visitor has already written their own text.
+  function onServiceChange(title: string) {
+    const oldTemplate = emailTemplates[slugOf(service)] ?? "";
+    const untouched = message.trim() === "" || message === oldTemplate;
+    setService(title);
+    if (untouched) setMessage(emailTemplates[slugOf(title)] ?? "");
+  }
+
   return (
     <form onSubmit={onSubmit} noValidate={false} className="grid gap-5" aria-busy={sending}>
       <div className="grid gap-5 sm:grid-cols-2">
@@ -80,7 +105,7 @@ export function ContactForm({ defaultService = "" }: { defaultService?: string }
         </div>
         <div>
           <label htmlFor="c-service" className={label}>{copy.fields.service.label}</label>
-          <select id="c-service" name="service" defaultValue={defaultService} className={cn(field, "appearance-none bg-[length:1.1rem] bg-[right_1rem_center] bg-no-repeat pr-11")}
+          <select id="c-service" name="service" value={service} onChange={(e) => onServiceChange(e.target.value)} className={cn(field, "appearance-none bg-[length:1.1rem] bg-[right_1rem_center] bg-no-repeat pr-11")}
             style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d9a62e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")" }}>
             <option value="" disabled>{copy.fields.service.placeholder}</option>
             {services.map((s) => (
@@ -93,7 +118,7 @@ export function ContactForm({ defaultService = "" }: { defaultService?: string }
 
       <div>
         <label htmlFor="c-message" className={label}>{copy.fields.message.label}</label>
-        <textarea id="c-message" name="message" required minLength={10} maxLength={3000} rows={5} placeholder={copy.fields.message.placeholder} className={cn(field, "resize-y")} />
+        <textarea id="c-message" name="message" required minLength={10} maxLength={3000} rows={message.includes("\n") ? 9 : 5} value={message} onChange={(e) => setMessage(e.target.value)} placeholder={copy.fields.message.placeholder} className={cn(field, "resize-y")} />
       </div>
 
       {/* Honeypot: hidden from people, bots fill it in */}
@@ -111,7 +136,7 @@ export function ContactForm({ defaultService = "" }: { defaultService?: string }
         <Button type="submit" variant="cta" size="lg" arrow disabled={sending} className={sending ? "opacity-70" : undefined}>
           {sending ? copy.sending : copy.submit}
         </Button>
-        <Button href={whatsappUrl()} variant="whatsapp" size="lg" icon={<WhatsApp className="text-xl" />}>
+        <Button href={slugOf(service) ? serviceWhatsappUrl(slugOf(service)) : whatsappUrl()} variant="whatsapp" size="lg" icon={<WhatsApp className="text-xl" />}>
           {copy.whatsapp}
         </Button>
       </div>

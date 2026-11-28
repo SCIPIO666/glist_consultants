@@ -103,6 +103,7 @@ export function SiteFooter() {
             <div className="mt-5 flex flex-col items-center justify-between gap-2 text-xs text-white/60 sm:flex-row">
               <p>&copy; {new Date().getFullYear()} {site.name}. All rights reserved.</p>
               {/* Plain <a>, not <Link>: it should not preload the whole editing app for every visitor */}
+              {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
               <a href="/studio" rel="nofollow" className="transition-colors hover:text-gold">Editor login</a>
               <p>Website by <span className="text-white/80">Zama Systems</span></p>
             </div>

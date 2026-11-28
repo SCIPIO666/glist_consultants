@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Reveal } from "@/components/motion/Reveal";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { ContactForm } from "@/components/contact/ContactForm";
@@ -17,7 +18,9 @@ export function PropertyEnquiry() {
           <p className="mt-5 max-w-sm text-lead text-white/75">{copy.text}</p>
         </Reveal>
         <Reveal y={50} delay={0.1} className="rounded-[1.5rem] border border-white/10 bg-night-card p-6 sm:p-10">
-          <ContactForm defaultService={defaultService} />
+          <Suspense fallback={<div className="min-h-[28rem]" aria-hidden />}>
+            <ContactForm defaultService={defaultService} />
+          </Suspense>
         </Reveal>
       </div>
     </section>

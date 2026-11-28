@@ -1,6 +1,8 @@
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/motion/Reveal";
+import { Suspense } from "react";
 import { ContactForm } from "./ContactForm";
+import { SubscribeForm } from "@/components/insights/SubscribeForm";
 import { SocialLinks } from "@/components/layout/SocialLinks";
 import { coverage } from "@/data/contactCoverage";
 import { ContactPortrait } from "./ContactPortrait";
@@ -28,7 +30,9 @@ export function ContactSection() {
               </h1>
             </Reveal>
             <Reveal className="mt-8 lg:mt-10" delay={0.1}>
-              <ContactForm />
+              <Suspense fallback={<div className="min-h-[28rem]" aria-hidden />}>
+                <ContactForm />
+              </Suspense>
             </Reveal>
             <Reveal className="mt-8 border-t border-white/10 pt-6 lg:mt-10" delay={0.2}>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/60">Follow us</p>
@@ -52,6 +56,11 @@ export function ContactSection() {
           <div className="relative overflow-hidden border-t border-white/10 bg-night/50 px-6 pt-10 sm:px-10 lg:border-l lg:border-t-0 lg:px-8 lg:pt-14">
             <ContactPortrait />
           </div>
+        </div>
+
+        {/* Newsletter sign-up, the same component as on the Insights page */}
+        <div className="[&>section]:border [&>section]:border-white/10">
+          <SubscribeForm />
         </div>
       </div>
     </section>

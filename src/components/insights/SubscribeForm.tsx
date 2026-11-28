@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, type FormEvent } from "react";
+import { useId, useState, type FormEvent } from "react";
 
 type State = "idle" | "sending" | "done" | "error";
 
@@ -34,13 +34,16 @@ function useSubscribe() {
 /** Full-width sign-up block for the Insights page. */
 export function SubscribeForm() {
   const { state, msg, onSubmit } = useSubscribe();
+  const uid = useId();
+  const titleId = `${uid}-title`;
+  const emailId = `${uid}-email`;
 
   return (
-    <section aria-labelledby="subscribe-title" className="mt-12 overflow-hidden rounded-card bg-night p-7 text-white shadow-card sm:p-10">
+    <section aria-labelledby={titleId} className="mt-12 overflow-hidden rounded-card bg-night p-7 text-white shadow-card sm:p-10">
       <div className="grid gap-6 lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-12">
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.14em] text-kra-light">Stay in the loop</p>
-          <h2 id="subscribe-title" className="mt-3 text-[clamp(1.6rem,1.1rem+1.6vw,2.4rem)] font-medium leading-tight">
+          <h2 id={titleId} className="mt-3 text-[clamp(1.6rem,1.1rem+1.6vw,2.4rem)] font-medium leading-tight">
             Get new tax and money guides by email
           </h2>
           <p className="mt-3 text-white/70">One short email when we publish. No spam. Unsubscribe in one click, any time.</p>
@@ -52,9 +55,9 @@ export function SubscribeForm() {
           </p>
         ) : (
           <form onSubmit={onSubmit} noValidate className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <label htmlFor="sub-email" className="sr-only">Email address</label>
+            <label htmlFor={emailId} className="sr-only">Email address</label>
             <input
-              id="sub-email"
+              id={emailId}
               name="email"
               type="email"
               required
