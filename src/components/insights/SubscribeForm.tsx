@@ -1,12 +1,12 @@
 "use client";
 
+import Link from "next/link";
 import { useState, type FormEvent } from "react";
-import { cn } from "@/lib/cn";
 
 type State = "idle" | "sending" | "done" | "error";
 
-/** Shared sign-up logic: posts to /api/subscribe. `source` says which form it came from. */
-function useSubscribe(source: string) {
+/** Shared sign-up logic (posts to /api/subscribe; explicit consent is required). */
+function useSubscribe() {
   const [state, setState] = useState<State>("idle");
   const [msg, setMsg] = useState("");
 
@@ -18,7 +18,7 @@ function useSubscribe(source: string) {
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: data.get("email"), website: data.get("website"), source }),
+        body: JSON.stringify({ email: data.get("email"), website: data.get("website"), consent: data.get("consent") === "on" }),
       });
       if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error ?? "error");
       setState("done");
@@ -27,22 +27,23 @@ function useSubscribe(source: string) {
       setState("error");
     }
   }
+
   return { state, msg, onSubmit };
 }
 
-/** Newsletter sign-up for the Insights page: the full banner. */
+/** Full-width sign-up block for the Insights page. */
 export function SubscribeForm() {
-  const { state, msg, onSubmit } = useSubscribe("insights");
+  const { state, msg, onSubmit } = useSubscribe();
 
   return (
     <section aria-labelledby="subscribe-title" className="mt-12 overflow-hidden rounded-card bg-night p-7 text-white shadow-card sm:p-10">
       <div className="grid gap-6 lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-12">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-kra-light">Newsletter</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-kra-light">Stay in the loop</p>
           <h2 id="subscribe-title" className="mt-3 text-[clamp(1.6rem,1.1rem+1.6vw,2.4rem)] font-medium leading-tight">
             Get new tax and money guides by email
           </h2>
-          <p className="mt-3 text-white/70">One short email when we publish. No spam, unsubscribe any time.</p>
+          <p className="mt-3 text-white/70">One short email when we publish. No spam. Unsubscribe in one click, any time.</p>
         </div>
 
         {state === "done" ? (
@@ -69,6 +70,13 @@ export function SubscribeForm() {
             >
               {state === "sending" ? "Sending…" : "Subscribe"}
             </button>
+            <label className="flex basis-full items-start gap-3 text-sm text-white/80">
+              <input type="checkbox" name="consent" required className="mt-1 size-4 shrink-0 accent-[#e4202b]" />
+              <span>
+                Yes, I agree to receive news and tax updates from Glist Consultants by email. I can unsubscribe at any time using the link in every email. See our{" "}
+                <Link href="/privacy" className="underline underline-offset-2 hover:text-white">privacy notice</Link>.
+              </span>
+            </label>
             {state === "error" && (
               <p role="alert" className="text-sm text-white sm:basis-full">{msg}</p>
             )}
@@ -79,43 +87,49 @@ export function SubscribeForm() {
   );
 }
 
-/** Small version for the footer: one line, label on top, email box with a round button. */
-export function SubscribeCompact({ className }: { className?: string }) {
-  const { state, msg, onSubmit } = useSubscribe("footer");
+/** Small sign-up for the footer (dark background). */
+export function SubscribeCompact() {
+  const { state, msg, onSubmit } = useSubscribe();
+
+  if (state === "done") {
+    return (
+      <p role="status" className="text-sm font-medium text-white">
+        Thank you, you are subscribed.
+      </p>
+    );
+  }
 
   return (
-    <div className={cn("max-w-xs", className)}>
-      <p id="footer-sub-label" className="font-sans text-xs font-semibold uppercase tracking-[0.16em] text-kra-light">New guides by email</p>
-      {state === "done" ? (
-        <p role="status" className="mt-3 text-sm text-white/85">Thank you, you are subscribed.</p>
-      ) : (
-        <form onSubmit={onSubmit} noValidate aria-labelledby="footer-sub-label" className="mt-3">
-          <div className="flex items-center rounded-pill bg-white/10 p-1 ring-1 ring-white/20 focus-within:ring-gold">
-            <label htmlFor="footer-sub-email" className="sr-only">Email address</label>
-            <input
-              id="footer-sub-email"
-              name="email"
-              type="email"
-              required
-              autoComplete="email"
-              placeholder="Your email"
-              className="min-w-0 flex-1 bg-transparent px-4 py-2 text-sm text-white placeholder:text-white/50 focus:outline-none"
-            />
-            <input name="website" tabIndex={-1} autoComplete="off" aria-hidden className="absolute -left-[9999px] h-0 w-0 opacity-0" />
-            <button
-              type="submit"
-              disabled={state === "sending"}
-              aria-label="Subscribe"
-              className="grid size-9 shrink-0 place-items-center rounded-full bg-gold text-night-deep transition-transform hover:scale-105 disabled:opacity-60"
-            >
-              {state === "sending" ? <span className="size-3 animate-pulse rounded-full bg-night-deep" /> : (
-                <svg aria-hidden viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-              )}
-            </button>
-          </div>
-          {state === "error" && <p role="alert" className="mt-2 text-xs text-white">{msg}</p>}
-        </form>
-      )}
-    </div>
+    <form onSubmit={onSubmit} noValidate className="max-w-xs space-y-3">
+      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-kra-light">Get our updates</p>
+      <div className="flex gap-2">
+        <label htmlFor="footer-sub-email" className="sr-only">Email address</label>
+        <input
+          id="footer-sub-email"
+          name="email"
+          type="email"
+          required
+          autoComplete="email"
+          placeholder="you@example.com"
+          className="min-h-11 min-w-0 flex-1 rounded-pill bg-white px-4 text-sm text-ink placeholder:text-ink-muted/70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+        />
+        <input name="website" tabIndex={-1} autoComplete="off" aria-hidden className="absolute -left-[9999px] h-0 w-0 opacity-0" />
+        <button
+          type="submit"
+          disabled={state === "sending"}
+          className="min-h-11 shrink-0 rounded-pill bg-kra px-5 text-xs font-semibold uppercase tracking-[0.1em] text-white transition-colors hover:bg-kra-deep disabled:opacity-60"
+        >
+          {state === "sending" ? "…" : "Join"}
+        </button>
+      </div>
+      <label className="flex items-start gap-2.5 text-xs leading-snug text-white/70">
+        <input type="checkbox" name="consent" required className="mt-0.5 size-4 shrink-0 accent-[#e4202b]" />
+        <span>
+          I agree to receive emails from Glist Consultants and can unsubscribe at any time.{" "}
+          <Link href="/privacy" className="underline underline-offset-2 hover:text-white">Privacy notice</Link>.
+        </span>
+      </label>
+      {state === "error" && <p role="alert" className="text-xs text-white">{msg}</p>}
+    </form>
   );
 }

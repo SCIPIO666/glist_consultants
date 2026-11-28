@@ -1,15 +1,9 @@
 /**
  * POST /api/subscribe
- * Newsletter sign-up (Insights page banner + the small footer form).
- *
- * What happens to an address:
- *  1. An email "New newsletter subscriber" is sent to CONTACT_TO_EMAIL (default: the firm's address) through
- *     Resend, with the sign-up source (insights / footer). Nothing is stored on the website itself.
- *  2. OPTIONAL: if RESEND_AUDIENCE_ID is also set, the address is added to that Resend audience, which gives
- *     you a real, private list to send newsletters to. If that call fails the sign-up still counts.
- * Without RESEND_API_KEY it answers 503 and the form shows an error.
- *
- * Emails are deliberately NOT saved in Sanity: a Sanity dataset is public to read by default.
+ * Newsletter sign-up from the Insights page. Needs explicit consent.
+ * With BREVO_API_KEY + BREVO_LIST_ID the address goes into that Brevo list; otherwise it is
+ * emailed to the firm through Resend (same env vars as /api/contact), else 503.
+ * Later you can swap the fetch for Mailchimp, Brevo, Sanity or any list provider.
  */
 import { site } from "@/lib/site";
 
@@ -27,36 +21,44 @@ export async function POST(req: Request) {
 
   const email = clean(body.email, 160);
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return Response.json({ error: "Please enter a valid email" }, { status: 422 });
-  const source = clean(body.source, 20) === "footer" ? "the website footer" : "the Insights page";
 
+  // Explicit, unticked-by-default consent is required (Kenya Data Protection Act, 2019)
+  if (body.consent !== true) return Response.json({ error: "Please tick the box to agree to receive emails" }, { status: 422 });
+  const consentAt = new Date().toISOString();
+
+  // Preferred: Brevo list. Brevo adds the unsubscribe link to every campaign automatically.
+  const brevoKey = process.env.BREVO_API_KEY;
+  const brevoList = Number(process.env.BREVO_LIST_ID);
+  if (brevoKey && brevoList) {
+    const r = await fetch("https://api.brevo.com/v3/contacts", {
+      method: "POST",
+      headers: { "api-key": brevoKey, "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({ email, listIds: [brevoList], updateEnabled: true }),
+    });
+    if (r.ok || r.status === 204) return Response.json({ ok: true });
+    // Brevo's reason shows in the server terminal / Vercel logs (never sent to the visitor)
+    console.error("[subscribe] Brevo refused:", r.status, await r.text().catch(() => ""));
+    return Response.json({ error: "Could not subscribe" }, { status: 502 });
+  }
+
+  // Fallback: email the address (with proof of consent) to the firm through Resend.
   const key = process.env.RESEND_API_KEY;
   if (!key) return Response.json({ error: "Email is not configured" }, { status: 503 });
-  const headers = { Authorization: `Bearer ${key}`, "Content-Type": "application/json" };
 
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
-    headers,
+    headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
     body: JSON.stringify({
       from: process.env.CONTACT_FROM ?? `${site.name} <onboarding@resend.dev>`,
       to: [process.env.CONTACT_TO_EMAIL ?? site.email],
       reply_to: email,
       subject: "New newsletter subscriber",
-      html: `<h2>New newsletter subscriber</h2><p>${esc(email)}</p><p>Signed up from ${source}.</p>`,
+      html: `<h2>New newsletter subscriber</h2><p>${esc(email)}</p><p>Added from the Insights page. Consent given: yes, at ${consentAt}.</p>`,
     }),
   });
-  if (!res.ok) return Response.json({ error: "Could not subscribe" }, { status: 502 });
-
-  const audience = process.env.RESEND_AUDIENCE_ID;
-  if (audience) {
-    try {
-      await fetch(`https://api.resend.com/audiences/${encodeURIComponent(audience)}/contacts`, {
-        method: "POST",
-        headers,
-        body: JSON.stringify({ email, unsubscribed: false }),
-      });
-    } catch {
-      /* the notification already went out; the list add is a bonus */
-    }
+  if (!res.ok) {
+    console.error("[subscribe] Resend refused:", res.status, await res.text().catch(() => ""));
+    return Response.json({ error: "Could not subscribe" }, { status: 502 });
   }
   return Response.json({ ok: true });
 }
